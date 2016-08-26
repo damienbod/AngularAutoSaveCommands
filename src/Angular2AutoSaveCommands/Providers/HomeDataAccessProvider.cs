@@ -18,7 +18,7 @@ namespace Angular2AutoSaveCommands.Providers
 
         public void AddHomeData(HomeData homeData)
         {
-            _context.HomeData.Attach(homeData);
+            _context.HomeData.Add(homeData);
         }
 
         public void DeleteHomeData(HomeData homeData)

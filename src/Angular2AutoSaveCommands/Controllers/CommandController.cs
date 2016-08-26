@@ -1,6 +1,7 @@
 ﻿using Angular2AutoSaveCommands.Models;
 using Angular2AutoSaveCommands.Providers;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace Angular2AutoSaveCommands.Controllers
 {
@@ -16,12 +17,12 @@ namespace Angular2AutoSaveCommands.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]CommandDto value)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest("Model is invalid");
             }
 
-            if(!validateCommandType(value))
+            if (!validateCommandType(value))
             {
                 return BadRequest($"CommandType: {value.CommandType} is invalid");
             }
@@ -43,6 +44,20 @@ namespace Angular2AutoSaveCommands.Controllers
         private bool validatePayloadType(CommandDto value)
         {
             return true;
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var about = new AboutData();
+            about.Description = "test data";
+
+            var command = new CommandDto();
+            command.ActualClientRoute = "http://daminbod.com";
+            command.CommandType = CommandTypes.ADD;
+            command.PayloadType = PayloadTypes.ABOUT;
+            command.Payload = JObject.FromObject(about);
+            return Ok(command);
         }
     }
 }

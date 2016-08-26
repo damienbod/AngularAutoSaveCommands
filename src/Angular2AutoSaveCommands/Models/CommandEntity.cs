@@ -1,9 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json.Linq;
 
 namespace Angular2AutoSaveCommands.Models
 {
     public class CommandEntity
     {
+        [Key]
         public long Id { get; set; }
 
         public string CommandType { get; set; }
@@ -20,7 +23,10 @@ namespace Angular2AutoSaveCommands.Models
             commandEntity.ActualClientRoute = commandDto.ActualClientRoute;
             commandEntity.CommandType = commandDto.CommandType;
             commandEntity.PayloadType = commandDto.PayloadType;
-            commandEntity.Payload = commandDto.Payload.ToString();
+            if(commandDto.Payload != null)
+            {
+                commandEntity.Payload = commandDto.Payload.ToString();
+            }
 
             return commandEntity;
         }
@@ -32,7 +38,10 @@ namespace Angular2AutoSaveCommands.Models
             commandDto.ActualClientRoute = ActualClientRoute;
             commandDto.CommandType = CommandType;
             commandDto.PayloadType = PayloadType;
-            commandDto.Payload = JObject.Parse(Payload);
+            if(Payload != null)
+            {
+                commandDto.Payload = JObject.Parse(Payload);
+            }
 
             return commandDto;
         }

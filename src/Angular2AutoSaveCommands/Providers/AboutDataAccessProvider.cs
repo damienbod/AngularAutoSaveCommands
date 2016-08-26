@@ -18,7 +18,7 @@ namespace Angular2AutoSaveCommands.Providers
 
         public void AddAboutData(AboutData aboutData)
         {
-            _context.AboutData.Attach(aboutData);
+            _context.AboutData.Add(aboutData);
         }
 
         public void DeleteAboutData(AboutData aboutData)

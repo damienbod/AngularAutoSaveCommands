@@ -8,7 +8,7 @@ using Angular2AutoSaveCommands;
 namespace Angular2AutoSaveCommands.Migrations
 {
     [DbContext(typeof(DomainModelMsSqlServerContext))]
-    [Migration("20160826134428_CommandsAutoSave")]
+    [Migration("20160826200226_CommandsAutoSave")]
     partial class CommandsAutoSave
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

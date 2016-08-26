@@ -19,7 +19,7 @@ namespace Angular2AutoSaveCommands.Providers
 
         public void AddCommand(CommandEntity command)
         {
-            _context.CommandEntity.Attach(command);
+            _context.CommandEntity.Add(command);
 
             //var lastAdded = _context.CommandEntity
             //           .OrderByDescending(p => p.Id)
@@ -31,7 +31,7 @@ namespace Angular2AutoSaveCommands.Providers
             //    _context.CommandEntity.RemoveRange(itemsToDelete);
             //}
 
-            _context.Attach(command);
+            _context.Add(command);
         }
 
         public void Redo()
