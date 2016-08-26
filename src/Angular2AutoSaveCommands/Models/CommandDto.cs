@@ -4,6 +4,8 @@ namespace Angular2AutoSaveCommands.Models
 {
     public class CommandDto
     {
+        public long Id { get; set; }
+
         public string CommandType { get; set; }
 
         public string PayloadType { get; set; }

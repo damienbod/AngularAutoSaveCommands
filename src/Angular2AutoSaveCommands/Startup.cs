@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Angular2AutoSaveCommands.Providers;
+using Microsoft.EntityFrameworkCore;
 
 namespace Angular2AutoSaveCommands
 {
@@ -24,11 +25,17 @@ namespace Angular2AutoSaveCommands
 
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
+            var sqlConnectionString = Configuration["DataAccessMsSqlServerProvider:ConnectionString"];
+
+            services.AddDbContext<DomainModelMsSqlServerContext>(options =>
+                options.UseSqlServer(  sqlConnectionString )
+            );
+
             services.AddMvc();
+
+            services.AddTransient<IDataAccessProvider, DataAccessMsSqlServerProvider>();
             services.AddTransient<ICommandHandler, CommandHandler>();
         }
 
