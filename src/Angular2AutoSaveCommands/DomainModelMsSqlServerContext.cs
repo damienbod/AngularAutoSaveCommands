@@ -14,13 +14,13 @@ namespace Angular2AutoSaveCommands
 
         public DbSet<HomeData> HomeDataItems { get; set; }
 
-        public DbSet<CommandDto> CommandDtoItems { get; set; }
+        public DbSet<CommandEntity> CommandDtoItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<AboutData>().HasKey(m => m.Id);
             builder.Entity<HomeData>().HasKey(m => m.Id);
-            builder.Entity<CommandDto>().HasKey(m => m.Id);
+            builder.Entity<CommandEntity>().HasKey(m => m.Id);
 
             base.OnModelCreating(builder);
         } 
