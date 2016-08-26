@@ -35,8 +35,10 @@ namespace Angular2AutoSaveCommands
 
             services.AddMvc();
 
-            services.AddTransient<ICommandDataAccessProvider, CommandDataAccessProvider>();
-            services.AddTransient<ICommandHandler, CommandHandler>();
+            services.AddScoped<IAboutDataAccessProvider, AboutDataAccessProvider>();
+            services.AddScoped<IHomeDataAccessProvider, HomeDataAccessProvider>();
+            services.AddScoped<ICommandDataAccessProvider, CommandDataAccessProvider>();
+            services.AddScoped<ICommandHandler, CommandHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

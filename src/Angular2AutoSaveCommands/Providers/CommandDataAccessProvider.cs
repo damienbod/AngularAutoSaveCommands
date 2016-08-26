@@ -27,7 +27,7 @@ namespace Angular2AutoSaveCommands.Providers
 
         public void Save()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
 
         public void Undo()
