@@ -1,11 +1,13 @@
 ﻿using System;
 using Angular2AutoSaveCommands.Models;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace Angular2AutoSaveCommands.Providers
 {
     public class CommandDataAccessProvider : ICommandDataAccessProvider
     {
+        public static long ActiveCommand = 0;
         private readonly DomainModelMsSqlServerContext _context;
         private readonly ILogger _logger;
 
@@ -17,7 +19,19 @@ namespace Angular2AutoSaveCommands.Providers
 
         public void AddCommand(CommandEntity command)
         {
-            throw new NotImplementedException();
+            _context.CommandEntity.Attach(command);
+
+            //var lastAdded = _context.CommandEntity
+            //           .OrderByDescending(p => p.Id)
+            //           .FirstOrDefault();
+
+            //if (lastAdded != null && lastAdded.Id != ActiveCommand)
+            //{
+            //    var itemsToDelete = _context.CommandEntity.Where(s => s.Id > 0);
+            //    _context.CommandEntity.RemoveRange(itemsToDelete);
+            //}
+
+            _context.Attach(command);
         }
 
         public void Redo()
