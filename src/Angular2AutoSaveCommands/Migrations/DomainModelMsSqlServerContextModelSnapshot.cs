@@ -21,11 +21,13 @@ namespace Angular2AutoSaveCommands.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Deleted");
+
                     b.Property<string>("Description");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AboutDataItems");
+                    b.ToTable("AboutData");
                 });
 
             modelBuilder.Entity("Angular2AutoSaveCommands.Models.CommandEntity", b =>
@@ -43,7 +45,7 @@ namespace Angular2AutoSaveCommands.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CommandDtoItems");
+                    b.ToTable("CommandEntity");
                 });
 
             modelBuilder.Entity("Angular2AutoSaveCommands.Models.HomeData", b =>
@@ -51,11 +53,13 @@ namespace Angular2AutoSaveCommands.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Deleted");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("HomeDataItems");
+                    b.ToTable("HomeData");
                 });
         }
     }

@@ -10,20 +10,21 @@ namespace Angular2AutoSaveCommands.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AboutDataItems",
+                name: "AboutData",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Deleted = table.Column<bool>(nullable: false),
                     Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AboutDataItems", x => x.Id);
+                    table.PrimaryKey("PK_AboutData", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CommandDtoItems",
+                name: "CommandEntity",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
@@ -35,33 +36,34 @@ namespace Angular2AutoSaveCommands.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CommandDtoItems", x => x.Id);
+                    table.PrimaryKey("PK_CommandEntity", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "HomeDataItems",
+                name: "HomeData",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Deleted = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HomeDataItems", x => x.Id);
+                    table.PrimaryKey("PK_HomeData", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AboutDataItems");
+                name: "AboutData");
 
             migrationBuilder.DropTable(
-                name: "CommandDtoItems");
+                name: "CommandEntity");
 
             migrationBuilder.DropTable(
-                name: "HomeDataItems");
+                name: "HomeData");
         }
     }
 }

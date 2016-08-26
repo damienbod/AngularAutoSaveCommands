@@ -10,11 +10,11 @@ namespace Angular2AutoSaveCommands
         public DomainModelMsSqlServerContext(DbContextOptions<DomainModelMsSqlServerContext> options) : base(options)
         { }
 
-        public DbSet<AboutData> AboutDataItems { get; set; }
+        public DbSet<AboutData> AboutData { get; set; }
 
-        public DbSet<HomeData> HomeDataItems { get; set; }
+        public DbSet<HomeData> HomeData { get; set; }
 
-        public DbSet<CommandEntity> CommandDtoItems { get; set; }
+        public DbSet<CommandEntity> CommandEntity { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
