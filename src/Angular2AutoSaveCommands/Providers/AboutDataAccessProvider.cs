@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Angular2AutoSaveCommands.Models;
 using Microsoft.Extensions.Logging;
 
@@ -17,17 +18,20 @@ namespace Angular2AutoSaveCommands.Providers
 
         public void AddAboutData(AboutData aboutData)
         {
-            throw new NotImplementedException();
+            _context.AboutData.Attach(aboutData);
         }
 
         public void DeleteAboutData(AboutData aboutData)
         {
-            throw new NotImplementedException();
+            var entity = _context.AboutData.First(t => t.Id == aboutData.Id);
+            entity.Deleted = true;
         }
 
         public void UpdateAboutData(AboutData aboutData)
         {
-            throw new NotImplementedException();
+            var entity = _context.AboutData.First(t => t.Id == aboutData.Id);
+            entity.Description = aboutData.Description;
+            entity.Deleted = aboutData.Deleted;
         }
     }
 }

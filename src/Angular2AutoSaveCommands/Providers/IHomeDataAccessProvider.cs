@@ -4,8 +4,8 @@ namespace Angular2AutoSaveCommands.Providers
 {
     public interface IHomeDataAccessProvider
     {
-        void AddHomeData(AboutData aboutData);
-        void UpdateHometData(AboutData aboutData);
-        void DeleteHomeData(AboutData aboutData);
+        void AddHomeData(HomeData homeData);
+        void UpdateHomeData(HomeData homeData);
+        void DeleteHomeData(HomeData homeData);
     }
 }

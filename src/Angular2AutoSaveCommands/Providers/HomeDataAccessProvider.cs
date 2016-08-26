@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Angular2AutoSaveCommands.Models;
 using Microsoft.Extensions.Logging;
 
@@ -15,19 +16,22 @@ namespace Angular2AutoSaveCommands.Providers
             _logger = loggerFactory.CreateLogger("DataAccessMsSqlServerProvider");
         }
 
-        public void AddHomeData(AboutData aboutData)
+        public void AddHomeData(HomeData homeData)
         {
-            throw new NotImplementedException();
+            _context.HomeData.Attach(homeData);
         }
 
-        public void DeleteHomeData(AboutData aboutData)
+        public void DeleteHomeData(HomeData homeData)
         {
-            throw new NotImplementedException();
+            var entity = _context.HomeData.First(t => t.Id == homeData.Id);
+            entity.Deleted = true;
         }
 
-        public void UpdateHometData(AboutData aboutData)
+        public void UpdateHomeData(HomeData homeData)
         {
-            throw new NotImplementedException();
+            var entity = _context.HomeData.First(t => t.Id == homeData.Id);
+            entity.Name = homeData.Name;
+            entity.Deleted = homeData.Deleted;
         }
     }
 }
