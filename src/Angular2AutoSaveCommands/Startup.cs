@@ -35,7 +35,7 @@ namespace Angular2AutoSaveCommands
 
             services.AddMvc();
 
-            services.AddTransient<IDataAccessProvider, DataAccessMsSqlServerProvider>();
+            services.AddTransient<ICommandDataAccessProvider, CommandDataAccessProvider>();
             services.AddTransient<ICommandHandler, CommandHandler>();
         }
 

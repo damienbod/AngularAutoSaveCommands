@@ -5,9 +5,9 @@ namespace Angular2AutoSaveCommands.Providers
 {
     public class CommandHandler : ICommandHandler
     {
-        private readonly IDataAccessProvider _dataAccessProvider;
+        private readonly ICommandDataAccessProvider _dataAccessProvider;
 
-        public CommandHandler(IDataAccessProvider dataAccessProvider)
+        public CommandHandler(ICommandDataAccessProvider dataAccessProvider)
         {
             _dataAccessProvider = dataAccessProvider;
         }
