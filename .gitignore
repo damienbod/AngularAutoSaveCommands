@@ -3,3 +3,4 @@ src/Angular2AutoSaveCommands/bin
 src/Angular2AutoSaveCommands/obj
 .vs/Angular2AutoSaveCommands/v14/.suo
 .vs
+src/Angular2AutoSaveCommands/project.lock.json
