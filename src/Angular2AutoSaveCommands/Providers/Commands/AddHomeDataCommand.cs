@@ -2,35 +2,41 @@
 using System.Linq;
 using Angular2AutoSaveCommands.Models;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 
 namespace Angular2AutoSaveCommands.Providers.Commands
 {
-    public class AddHomeDataCommand : ICommand
+    public class AddHomeDataCommand : ICommandAdd
     {
-        private readonly DomainModelMsSqlServerContext _context;
         private readonly ILogger _logger;
         private readonly CommandDto _commandDto;
 
-        public AddHomeDataCommand(DomainModelMsSqlServerContext context, ILoggerFactory loggerFactory, CommandDto commandDto)
+        private HomeData _homeData;
+
+        public AddHomeDataCommand(ILoggerFactory loggerFactory, CommandDto commandDto)
         {
-            _context = context;
             _logger = loggerFactory.CreateLogger("AddHomeDataCommand");
             _commandDto = commandDto;
         }
 
-        public void Execute()
+        public void Execute(DomainModelMsSqlServerContext context)
         {
-            var homeData = _commandDto.Payload.ToObject<HomeData>();
-            _context.HomeData.Add(homeData);
+            _homeData = _commandDto.Payload.ToObject<HomeData>();
+            context.HomeData.Add(_homeData);
             _logger.LogDebug("Executed");
         }
 
-        public void UnExecute()
+        public void UnExecute(DomainModelMsSqlServerContext context)
         {
-            var homeData = _commandDto.Payload.ToObject<HomeData>();
-            var entity = _context.HomeData.First(t => t.Id == homeData.Id);
+            _homeData = _commandDto.Payload.ToObject<HomeData>();
+            var entity = context.HomeData.First(t => t.Id == _homeData.Id);
             entity.Deleted = true;
             _logger.LogDebug("Unexecuted");
+        }
+
+        public void UpdateIdforNewItems()
+        {
+            _commandDto.Payload = JObject.FromObject(_homeData);
         }
     }
 }

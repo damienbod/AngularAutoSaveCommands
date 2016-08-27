@@ -2,35 +2,41 @@
 using System.Linq;
 using Angular2AutoSaveCommands.Models;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 
 namespace Angular2AutoSaveCommands.Providers.Commands
 {
-    public class AddAboutDataCommand : ICommand
+    public class AddAboutDataCommand : ICommandAdd
     {
-        private readonly DomainModelMsSqlServerContext _context;
         private readonly ILogger _logger;
         private readonly CommandDto _commandDto;
 
-        public AddAboutDataCommand(DomainModelMsSqlServerContext context, ILoggerFactory loggerFactory, CommandDto commandDto)
+        private AboutData _aboutData;
+
+        public AddAboutDataCommand(ILoggerFactory loggerFactory, CommandDto commandDto)
         {
-            _context = context;
             _logger = loggerFactory.CreateLogger("AddAboutDataCommand");
             _commandDto = commandDto;
         }
 
-        public void Execute()
+        public void Execute(DomainModelMsSqlServerContext context)
         {
-            var aboutData = _commandDto.Payload.ToObject<AboutData>();
-            _context.AboutData.Add(aboutData);
+            _aboutData = _commandDto.Payload.ToObject<AboutData>();
+            context.AboutData.Add(_aboutData);
             _logger.LogDebug("Executed");
         }
 
-        public void UnExecute()
+        public void UnExecute(DomainModelMsSqlServerContext context)
         {
-            var aboutData = _commandDto.Payload.ToObject<AboutData>();
-            var entity = _context.AboutData.First(t => t.Id == aboutData.Id);
+            _aboutData = _commandDto.Payload.ToObject<AboutData>();
+            var entity = context.AboutData.First(t => t.Id == _aboutData.Id);
             entity.Deleted = true;
             _logger.LogDebug("Unexecuted");
+        }
+
+        public void UpdateIdforNewItems()
+        {
+            _commandDto.Payload = JObject.FromObject(_aboutData);
         }
     }
 }

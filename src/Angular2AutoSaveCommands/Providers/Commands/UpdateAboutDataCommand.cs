@@ -7,24 +7,22 @@ namespace Angular2AutoSaveCommands.Providers.Commands
 {
     public class UpdateAboutDataCommand : ICommand
     {
-        private readonly DomainModelMsSqlServerContext _context;
         private readonly ILogger _logger;
         private readonly CommandDto _commandDto;
         private AboutData _previousAboutData;
 
-        public UpdateAboutDataCommand(DomainModelMsSqlServerContext context, ILoggerFactory loggerFactory, CommandDto commandDto)
+        public UpdateAboutDataCommand(ILoggerFactory loggerFactory, CommandDto commandDto)
         {
-            _context = context;
             _logger = loggerFactory.CreateLogger("UpdateAboutDataCommand");
             _commandDto = commandDto;
         }
 
-        public void Execute()
+        public void Execute(DomainModelMsSqlServerContext context)
         {
             _previousAboutData = new AboutData();
 
             var aboutData = _commandDto.Payload.ToObject<AboutData>();
-            var entity = _context.AboutData.First(t => t.Id == aboutData.Id);
+            var entity = context.AboutData.First(t => t.Id == aboutData.Id);
 
             _previousAboutData.Description = entity.Description;
             _previousAboutData.Deleted = entity.Deleted;
@@ -34,10 +32,10 @@ namespace Angular2AutoSaveCommands.Providers.Commands
             _logger.LogDebug("Executed");
         }
 
-        public void UnExecute()
+        public void UnExecute(DomainModelMsSqlServerContext context)
         {
             var aboutData = _commandDto.Payload.ToObject<AboutData>();
-            var entity = _context.AboutData.First(t => t.Id == aboutData.Id);
+            var entity = context.AboutData.First(t => t.Id == aboutData.Id);
 
             entity.Description = _previousAboutData.Description;
             entity.Deleted = _previousAboutData.Deleted;

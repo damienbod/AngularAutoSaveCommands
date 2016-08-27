@@ -55,7 +55,8 @@ namespace Angular2AutoSaveCommands.Providers
                 if (_undocommands.TryPop(out command))
                 {
                     _redocommands.Push(command);
-                    command.UnExecute();
+                    command.UnExecute(_context);
+                    _commandDataAccessProvider.Save();
                 }   
             }
         }
@@ -68,7 +69,8 @@ namespace Angular2AutoSaveCommands.Providers
                 if(_redocommands.TryPop(out command))
                 {
                     _undocommands.Push(command);
-                    command.Execute();
+                    command.Execute(_context);
+                    _commandDataAccessProvider.Save();
                 }
             }
         }
@@ -77,55 +79,63 @@ namespace Angular2AutoSaveCommands.Providers
         {
             if (commandDto.CommandType == CommandTypes.ADD)
             {
-                ICommand command = new AddHomeDataCommand(_context, _loggerFactory, commandDto);
-                command.Execute();
+                ICommandAdd command = new AddHomeDataCommand(_loggerFactory, commandDto);
+                command.Execute(_context);
+                _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
+                _commandDataAccessProvider.Save();
+                command.UpdateIdforNewItems();
                 _undocommands.Push(command);
             }
 
             if (commandDto.CommandType == CommandTypes.UPDATE)
             {
-                ICommand command = new UpdateHomeDataCommand(_context, _loggerFactory, commandDto);
-                command.Execute();
+                ICommand command = new UpdateHomeDataCommand(_loggerFactory, commandDto);
+                command.Execute(_context);
+                _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
+                _commandDataAccessProvider.Save();
                 _undocommands.Push(command);
             }
 
             if (commandDto.CommandType == CommandTypes.DELETE)
             {
-                ICommand command = new DeleteHomeDataCommand(_context, _loggerFactory, commandDto);
-                command.Execute();
+                ICommand command = new DeleteHomeDataCommand(_loggerFactory, commandDto);
+                command.Execute(_context);
+                _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
+                _commandDataAccessProvider.Save();
                 _undocommands.Push(command);
             }
-
-            _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
-            _commandDataAccessProvider.Save();
         }
+
 
         private void ExecuteAboutDataCommand(CommandDto commandDto)
         {
             if(commandDto.CommandType == CommandTypes.ADD)
             {
-                ICommand command = new AddAboutDataCommand(_context, _loggerFactory, commandDto);
-                command.Execute();
+                ICommandAdd command = new AddAboutDataCommand(_loggerFactory, commandDto);
+                command.Execute(_context);
+                _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
+                _commandDataAccessProvider.Save();
+                command.UpdateIdforNewItems();
                 _undocommands.Push(command);
             }
 
             if (commandDto.CommandType == CommandTypes.UPDATE)
             {
-                ICommand command = new UpdateAboutDataCommand(_context, _loggerFactory, commandDto);
-                command.Execute();
+                ICommand command = new UpdateAboutDataCommand(_loggerFactory, commandDto);
+                command.Execute(_context);
+                _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
+                _commandDataAccessProvider.Save();
                 _undocommands.Push(command);
             }
 
             if (commandDto.CommandType == CommandTypes.DELETE)
             {
-                ICommand command = new DeleteAboutDataCommand(_context, _loggerFactory, commandDto);
-                command.Execute();
+                ICommand command = new DeleteAboutDataCommand(_loggerFactory, commandDto);
+                command.Execute(_context);
+                _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
+                _commandDataAccessProvider.Save();
                 _undocommands.Push(command);
             }
-
-
-            _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
-            _commandDataAccessProvider.Save();
         }
 
         private void ExecuteNoDataCommand(CommandDto commandDto)

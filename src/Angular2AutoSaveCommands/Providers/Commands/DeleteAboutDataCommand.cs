@@ -7,29 +7,27 @@ namespace Angular2AutoSaveCommands.Providers.Commands
 {
     public class DeleteAboutDataCommand : ICommand
     {
-        private readonly DomainModelMsSqlServerContext _context;
         private readonly ILogger _logger;
         private readonly CommandDto _commandDto;
 
-        public DeleteAboutDataCommand(DomainModelMsSqlServerContext context, ILoggerFactory loggerFactory, CommandDto commandDto)
+        public DeleteAboutDataCommand(ILoggerFactory loggerFactory, CommandDto commandDto)
         {
-            _context = context;
             _logger = loggerFactory.CreateLogger("DeleteAboutDataCommand");
             _commandDto = commandDto;
         }
 
-        public void Execute()
+        public void Execute(DomainModelMsSqlServerContext context)
         {
             var aboutData = _commandDto.Payload.ToObject<AboutData>();
-            var entity = _context.AboutData.First(t => t.Id == aboutData.Id);
+            var entity = context.AboutData.First(t => t.Id == aboutData.Id);
             entity.Deleted = true;
             _logger.LogDebug("Executed");
         }
 
-        public void UnExecute()
+        public void UnExecute(DomainModelMsSqlServerContext context)
         {
             var aboutData = _commandDto.Payload.ToObject<AboutData>();
-            var entity = _context.AboutData.First(t => t.Id == aboutData.Id);
+            var entity = context.AboutData.First(t => t.Id == aboutData.Id);
             entity.Deleted = false;
             _logger.LogDebug("Unexecuted");
         }

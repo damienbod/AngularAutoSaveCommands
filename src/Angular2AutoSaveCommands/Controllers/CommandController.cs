@@ -15,6 +15,7 @@ namespace Angular2AutoSaveCommands.Controllers
         }
 
         [HttpPost]
+        [Route("Execute")]
         public IActionResult Post([FromBody]CommandDto value)
         {
             if (!ModelState.IsValid)
@@ -37,6 +38,7 @@ namespace Angular2AutoSaveCommands.Controllers
         }
 
         [HttpPost]
+        [Route("Undo")]
         public IActionResult Undo()
         {
             _commandHandler.Undo();
@@ -44,6 +46,7 @@ namespace Angular2AutoSaveCommands.Controllers
         }
 
         [HttpPost]
+        [Route("Redo")]
         public IActionResult Redo()
         {
             _commandHandler.Redo();
