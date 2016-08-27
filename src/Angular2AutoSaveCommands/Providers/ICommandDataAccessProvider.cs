@@ -5,9 +5,6 @@ namespace Angular2AutoSaveCommands.Providers
     public interface ICommandDataAccessProvider
     {
         void AddCommand(CommandEntity command);
-        void Undo();
-
-        void Redo();
 
         void Save();
 

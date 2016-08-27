@@ -49,13 +49,18 @@ namespace Angular2AutoSaveCommands.Providers
 
         public void Undo()
         {
-            if(_undocommands.Count > 0)
+            var commandDto = new CommandDto();
+            commandDto.CommandType = CommandTypes.UNDO;
+            commandDto.PayloadType = PayloadTypes.NONE;
+
+            if (_undocommands.Count > 0)
             {
                 ICommand command;
                 if (_undocommands.TryPop(out command))
                 {
                     _redocommands.Push(command);
                     command.UnExecute(_context);
+                    _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
                     _commandDataAccessProvider.Save();
                 }   
             }
@@ -63,6 +68,10 @@ namespace Angular2AutoSaveCommands.Providers
 
         public void Redo()
         {
+            var commandDto = new CommandDto();
+            commandDto.CommandType = CommandTypes.REDO;
+            commandDto.PayloadType = PayloadTypes.NONE;
+
             if (_redocommands.Count > 0)
             {
                 ICommand command;
@@ -70,6 +79,7 @@ namespace Angular2AutoSaveCommands.Providers
                 {
                     _undocommands.Push(command);
                     command.Execute(_context);
+                    _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
                     _commandDataAccessProvider.Save();
                 }
             }
