@@ -13,8 +13,8 @@ namespace Angular2AutoSaveCommands.Providers
         private readonly ILoggerFactory _loggerFactory;
         private readonly ILogger _logger;
 
-        private Stack<ICommand> _Undocommands = new Stack<ICommand>();
-        private Stack<ICommand> _Redocommands = new Stack<ICommand>();
+        private Stack<ICommand> _undocommands = new Stack<ICommand>();
+        private Stack<ICommand> _redocommands = new Stack<ICommand>();
 
         public CommandHandler(ICommandDataAccessProvider commandDataAccessProvider, DomainModelMsSqlServerContext context, ILoggerFactory loggerFactory)
         {
@@ -47,12 +47,22 @@ namespace Angular2AutoSaveCommands.Providers
 
         public void Undo()
         {
-            throw new NotImplementedException();
+            if(_undocommands.Count > 0)
+            {
+                ICommand command = _undocommands.Pop();
+                _redocommands.Push(command);
+                command.UnExecute();
+            }
         }
 
         public void Redo()
         {
-            throw new NotImplementedException();
+            if (_redocommands.Count > 0)
+            {
+                ICommand command = _redocommands.Pop();
+                _undocommands.Push(command);
+                command.Execute();
+            }
         }
 
         private void ExecuteHomeDataCommand(CommandDto commandDto)
@@ -61,21 +71,21 @@ namespace Angular2AutoSaveCommands.Providers
             {
                 ICommand command = new AddHomeDataCommand(_context, _loggerFactory, commandDto);
                 command.Execute();
-                // TODO add to Undo stack
+                _undocommands.Push(command);
             }
 
             if (commandDto.CommandType == CommandTypes.UPDATE)
             {
                 ICommand command = new UpdateHomeDataCommand(_context, _loggerFactory, commandDto);
                 command.Execute();
-                // TODO add to Undo stack
+                _undocommands.Push(command);
             }
 
             if (commandDto.CommandType == CommandTypes.DELETE)
             {
                 ICommand command = new DeleteHomeDataCommand(_context, _loggerFactory, commandDto);
                 command.Execute();
-                // TODO add to Undo stack
+                _undocommands.Push(command);
             }
 
             _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
@@ -88,21 +98,21 @@ namespace Angular2AutoSaveCommands.Providers
             {
                 ICommand command = new AddAboutDataCommand(_context, _loggerFactory, commandDto);
                 command.Execute();
-                // TODO add to Undo stack
+                _undocommands.Push(command);
             }
 
             if (commandDto.CommandType == CommandTypes.UPDATE)
             {
                 ICommand command = new UpdateAboutDataCommand(_context, _loggerFactory, commandDto);
                 command.Execute();
-                // TODO add to Undo stack
+                _undocommands.Push(command);
             }
 
             if (commandDto.CommandType == CommandTypes.DELETE)
             {
                 ICommand command = new DeleteAboutDataCommand(_context, _loggerFactory, commandDto);
                 command.Execute();
-                // TODO add to Undo stack
+                _undocommands.Push(command);
             }
 
 
