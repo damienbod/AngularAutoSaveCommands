@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Angular2AutoSaveCommands.Models;
 using Angular2AutoSaveCommands.Providers.Commands;
@@ -13,8 +14,9 @@ namespace Angular2AutoSaveCommands.Providers
         private readonly ILoggerFactory _loggerFactory;
         private readonly ILogger _logger;
 
-        private Stack<ICommand> _undocommands = new Stack<ICommand>();
-        private Stack<ICommand> _redocommands = new Stack<ICommand>();
+        // TODO remove these and used persistent stacks
+        private static ConcurrentStack<ICommand> _undocommands = new ConcurrentStack<ICommand>();
+        private static ConcurrentStack<ICommand> _redocommands = new ConcurrentStack<ICommand>();
 
         public CommandHandler(ICommandDataAccessProvider commandDataAccessProvider, DomainModelMsSqlServerContext context, ILoggerFactory loggerFactory)
         {
@@ -49,9 +51,12 @@ namespace Angular2AutoSaveCommands.Providers
         {
             if(_undocommands.Count > 0)
             {
-                ICommand command = _undocommands.Pop();
-                _redocommands.Push(command);
-                command.UnExecute();
+                ICommand command;
+                if (_undocommands.TryPop(out command))
+                {
+                    _redocommands.Push(command);
+                    command.UnExecute();
+                }   
             }
         }
 
@@ -59,9 +64,12 @@ namespace Angular2AutoSaveCommands.Providers
         {
             if (_redocommands.Count > 0)
             {
-                ICommand command = _redocommands.Pop();
-                _undocommands.Push(command);
-                command.Execute();
+                ICommand command;
+                if(_redocommands.TryPop(out command))
+                {
+                    _undocommands.Push(command);
+                    command.Execute();
+                }
             }
         }
 
