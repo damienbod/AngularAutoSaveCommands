@@ -22,7 +22,16 @@ namespace Angular2AutoSaveCommands.Providers.Commands
         public void Execute(DomainModelMsSqlServerContext context)
         {
             _aboutData = _commandDto.Payload.ToObject<AboutData>();
-            context.AboutData.Add(_aboutData);
+            if(_aboutData.Id > 0)
+            {
+                _aboutData.Deleted = false;
+                context.AboutData.Update(_aboutData);
+            }
+            else
+            {
+                context.AboutData.Add(_aboutData);
+            }
+            
             _logger.LogDebug("Executed");
         }
 
