@@ -1,21 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 using Angular2AutoSaveCommands.Models;
+using Angular2AutoSaveCommands.Providers.Commands;
+using Microsoft.Extensions.Logging;
 
 namespace Angular2AutoSaveCommands.Providers
 {
     public class CommandHandler : ICommandHandler
     {
         private readonly ICommandDataAccessProvider _commandDataAccessProvider;
-        private readonly IAboutDataAccessProvider _aboutDataAccessProvider;
-        private readonly IHomeDataAccessProvider _homeDataAccessProvider;
+        private readonly DomainModelMsSqlServerContext _context;
+        private readonly ILoggerFactory _loggerFactory;
+        private readonly ILogger _logger;
 
-        public CommandHandler(ICommandDataAccessProvider commandDataAccessProvider,
-            IAboutDataAccessProvider aboutDataAccessProvider,
-            IHomeDataAccessProvider homeDataAccessProvider)
+        private Stack<ICommand> _Undocommands = new Stack<ICommand>();
+        private Stack<ICommand> _Redocommands = new Stack<ICommand>();
+
+        public CommandHandler(ICommandDataAccessProvider commandDataAccessProvider, DomainModelMsSqlServerContext context, ILoggerFactory loggerFactory)
         {
             _commandDataAccessProvider = commandDataAccessProvider;
-            _homeDataAccessProvider = homeDataAccessProvider;
-            _aboutDataAccessProvider = aboutDataAccessProvider;
+            _context = context;
+            _loggerFactory = loggerFactory;
+            _logger = loggerFactory.CreateLogger("CommandHandler");
         }
 
         public void Execute(CommandDto commandDto)
@@ -43,17 +49,23 @@ namespace Angular2AutoSaveCommands.Providers
         {
             if (commandDto.CommandType == CommandTypes.ADD)
             {
-                _homeDataAccessProvider.AddHomeData(commandDto.Payload.ToObject<HomeData>());
+                ICommand command = new AddHomeDataCommand(_context, _loggerFactory);
+                command.Execute(commandDto);
+                // TODO add to Undo stack
             }
 
             if (commandDto.CommandType == CommandTypes.UPDATE)
             {
-                _homeDataAccessProvider.UpdateHomeData(commandDto.Payload.ToObject<HomeData>());
+                ICommand command = new UpdateHomeDataCommand(_context, _loggerFactory);
+                command.Execute(commandDto);
+                // TODO add to Undo stack
             }
 
             if (commandDto.CommandType == CommandTypes.DELETE)
             {
-                _homeDataAccessProvider.DeleteHomeData(commandDto.Payload.ToObject<HomeData>());
+                ICommand command = new DeleteHomeDataCommand(_context, _loggerFactory);
+                command.Execute(commandDto);
+                // TODO add to Undo stack
             }
 
             _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
@@ -64,17 +76,23 @@ namespace Angular2AutoSaveCommands.Providers
         {
             if(commandDto.CommandType == CommandTypes.ADD)
             {
-                _aboutDataAccessProvider.AddAboutData(commandDto.Payload.ToObject<AboutData>());
+                ICommand command = new AddAboutDataCommand(_context, _loggerFactory);
+                command.Execute(commandDto);
+                // TODO add to Undo stack
             }
 
             if (commandDto.CommandType == CommandTypes.UPDATE)
             {
-                _aboutDataAccessProvider.UpdateAboutData(commandDto.Payload.ToObject<AboutData>());
+                ICommand command = new UpdateAboutDataCommand(_context, _loggerFactory);
+                command.Execute(commandDto);
+                // TODO add to Undo stack
             }
 
             if (commandDto.CommandType == CommandTypes.DELETE)
             {
-                _aboutDataAccessProvider.DeleteAboutData(commandDto.Payload.ToObject<AboutData>());
+                ICommand command = new DeleteAboutDataCommand(_context, _loggerFactory);
+                command.Execute(commandDto);
+                // TODO add to Undo stack
             }
 
 

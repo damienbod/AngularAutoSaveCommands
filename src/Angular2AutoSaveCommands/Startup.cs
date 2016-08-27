@@ -35,8 +35,6 @@ namespace Angular2AutoSaveCommands
 
             services.AddMvc();
 
-            services.AddScoped<IAboutDataAccessProvider, AboutDataAccessProvider>();
-            services.AddScoped<IHomeDataAccessProvider, HomeDataAccessProvider>();
             services.AddScoped<ICommandDataAccessProvider, CommandDataAccessProvider>();
             services.AddScoped<ICommandHandler, CommandHandler>();
         }
