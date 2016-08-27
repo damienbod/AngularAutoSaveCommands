@@ -45,6 +45,16 @@ namespace Angular2AutoSaveCommands.Providers
             }
         }
 
+        public void Undo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Redo()
+        {
+            throw new NotImplementedException();
+        }
+
         private void ExecuteHomeDataCommand(CommandDto commandDto)
         {
             if (commandDto.CommandType == CommandTypes.ADD)
@@ -105,5 +115,6 @@ namespace Angular2AutoSaveCommands.Providers
             _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
             _commandDataAccessProvider.Save();
         }
+
     }
 }
