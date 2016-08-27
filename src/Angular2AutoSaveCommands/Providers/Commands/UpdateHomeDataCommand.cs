@@ -9,28 +9,37 @@ namespace Angular2AutoSaveCommands.Providers.Commands
     {
         private readonly DomainModelMsSqlServerContext _context;
         private readonly ILogger _logger;
+        private readonly CommandDto _commandDto;
+        private HomeData _previousHometData;
 
-        public UpdateHomeDataCommand(DomainModelMsSqlServerContext context, ILoggerFactory loggerFactory)
+        public UpdateHomeDataCommand(DomainModelMsSqlServerContext context, ILoggerFactory loggerFactory, CommandDto commandDto)
         {
             _context = context;
             _logger = loggerFactory.CreateLogger("UpdateHomeDataCommand");
+            _commandDto = commandDto;
         }
 
-        public void Execute(CommandDto commandDto)
+        public void Execute()
         {
-            var homeData = commandDto.Payload.ToObject<HomeData>();
+            _previousHometData = new HomeData();
+
+            var homeData = _commandDto.Payload.ToObject<HomeData>();
             var entity = _context.HomeData.First(t => t.Id == homeData.Id);
+
+            _previousHometData.Name = entity.Name;
+            _previousHometData.Deleted = entity.Deleted;
+
             entity.Name = homeData.Name;
             entity.Deleted = homeData.Deleted;
             _logger.LogDebug("Executed");
         }
 
-        public void UnExecute(CommandDto commandDto)
+        public void UnExecute()
         {
-            var homeData = commandDto.Payload.ToObject<HomeData>();
+            var homeData = _commandDto.Payload.ToObject<HomeData>();
             var entity = _context.HomeData.First(t => t.Id == homeData.Id);
-            entity.Name = homeData.Name;
-            entity.Deleted = homeData.Deleted;
+            entity.Name = _previousHometData.Name;
+            entity.Deleted = _previousHometData.Deleted;
             _logger.LogDebug("Unexecuted");
         }
     }

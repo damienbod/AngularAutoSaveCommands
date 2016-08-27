@@ -4,7 +4,7 @@ namespace Angular2AutoSaveCommands.Providers.Commands
 {
     public interface ICommand
     {
-        void Execute(CommandDto commandDto);
-        void UnExecute(CommandDto commandDto);
+        void Execute();
+        void UnExecute();
     }
 }

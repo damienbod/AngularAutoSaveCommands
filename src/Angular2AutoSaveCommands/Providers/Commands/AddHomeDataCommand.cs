@@ -9,23 +9,25 @@ namespace Angular2AutoSaveCommands.Providers.Commands
     {
         private readonly DomainModelMsSqlServerContext _context;
         private readonly ILogger _logger;
+        private readonly CommandDto _commandDto;
 
-        public AddHomeDataCommand(DomainModelMsSqlServerContext context, ILoggerFactory loggerFactory)
+        public AddHomeDataCommand(DomainModelMsSqlServerContext context, ILoggerFactory loggerFactory, CommandDto commandDto)
         {
             _context = context;
             _logger = loggerFactory.CreateLogger("AddHomeDataCommand");
+            _commandDto = commandDto;
         }
 
-        public void Execute(CommandDto commandDto)
+        public void Execute()
         {
-            var homeData = commandDto.Payload.ToObject<HomeData>();
+            var homeData = _commandDto.Payload.ToObject<HomeData>();
             _context.HomeData.Add(homeData);
             _logger.LogDebug("Executed");
         }
 
-        public void UnExecute(CommandDto commandDto)
+        public void UnExecute()
         {
-            var homeData = commandDto.Payload.ToObject<HomeData>();
+            var homeData = _commandDto.Payload.ToObject<HomeData>();
             var entity = _context.HomeData.First(t => t.Id == homeData.Id);
             entity.Deleted = true;
             _logger.LogDebug("Unexecuted");

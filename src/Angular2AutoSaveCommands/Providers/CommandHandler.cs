@@ -49,22 +49,22 @@ namespace Angular2AutoSaveCommands.Providers
         {
             if (commandDto.CommandType == CommandTypes.ADD)
             {
-                ICommand command = new AddHomeDataCommand(_context, _loggerFactory);
-                command.Execute(commandDto);
+                ICommand command = new AddHomeDataCommand(_context, _loggerFactory, commandDto);
+                command.Execute();
                 // TODO add to Undo stack
             }
 
             if (commandDto.CommandType == CommandTypes.UPDATE)
             {
-                ICommand command = new UpdateHomeDataCommand(_context, _loggerFactory);
-                command.Execute(commandDto);
+                ICommand command = new UpdateHomeDataCommand(_context, _loggerFactory, commandDto);
+                command.Execute();
                 // TODO add to Undo stack
             }
 
             if (commandDto.CommandType == CommandTypes.DELETE)
             {
-                ICommand command = new DeleteHomeDataCommand(_context, _loggerFactory);
-                command.Execute(commandDto);
+                ICommand command = new DeleteHomeDataCommand(_context, _loggerFactory, commandDto);
+                command.Execute();
                 // TODO add to Undo stack
             }
 
@@ -76,22 +76,22 @@ namespace Angular2AutoSaveCommands.Providers
         {
             if(commandDto.CommandType == CommandTypes.ADD)
             {
-                ICommand command = new AddAboutDataCommand(_context, _loggerFactory);
-                command.Execute(commandDto);
+                ICommand command = new AddAboutDataCommand(_context, _loggerFactory, commandDto);
+                command.Execute();
                 // TODO add to Undo stack
             }
 
             if (commandDto.CommandType == CommandTypes.UPDATE)
             {
-                ICommand command = new UpdateAboutDataCommand(_context, _loggerFactory);
-                command.Execute(commandDto);
+                ICommand command = new UpdateAboutDataCommand(_context, _loggerFactory, commandDto);
+                command.Execute();
                 // TODO add to Undo stack
             }
 
             if (commandDto.CommandType == CommandTypes.DELETE)
             {
-                ICommand command = new DeleteAboutDataCommand(_context, _loggerFactory);
-                command.Execute(commandDto);
+                ICommand command = new DeleteAboutDataCommand(_context, _loggerFactory, commandDto);
+                command.Execute();
                 // TODO add to Undo stack
             }
 
