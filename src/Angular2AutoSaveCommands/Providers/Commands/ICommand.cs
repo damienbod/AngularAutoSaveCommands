@@ -6,5 +6,7 @@ namespace Angular2AutoSaveCommands.Providers.Commands
     {
         void Execute(DomainModelMsSqlServerContext context);
         void UnExecute(DomainModelMsSqlServerContext context);
+
+        CommandDto ActualCommandDtoForNewState();
     }
 }

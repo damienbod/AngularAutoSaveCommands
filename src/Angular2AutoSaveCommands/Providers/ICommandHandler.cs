@@ -5,7 +5,7 @@ namespace Angular2AutoSaveCommands.Providers
     public interface ICommandHandler 
     {
         void Execute(CommandDto commandDto);
-        void Undo();
-        void Redo();
+        CommandDto Undo();
+        CommandDto Redo();
     }
 }

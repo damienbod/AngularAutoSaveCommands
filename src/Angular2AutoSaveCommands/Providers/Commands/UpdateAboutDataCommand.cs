@@ -41,5 +41,10 @@ namespace Angular2AutoSaveCommands.Providers.Commands
             entity.Deleted = _previousAboutData.Deleted;
             _logger.LogDebug("Unexecuted");
         }
+
+        public CommandDto ActualCommandDtoForNewState()
+        {
+            return _commandDto;
+        }
     }
 }

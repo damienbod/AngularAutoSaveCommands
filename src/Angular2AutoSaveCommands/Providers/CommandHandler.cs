@@ -47,11 +47,13 @@ namespace Angular2AutoSaveCommands.Providers
             }
         }
 
-        public void Undo()
-        {
+        // TODO add return object for UI
+        public CommandDto Undo()
+        {  
             var commandDto = new CommandDto();
             commandDto.CommandType = CommandTypes.UNDO;
             commandDto.PayloadType = PayloadTypes.NONE;
+            commandDto.ActualClientRoute = "NONE";
 
             if (_undocommands.Count > 0)
             {
@@ -62,15 +64,20 @@ namespace Angular2AutoSaveCommands.Providers
                     command.UnExecute(_context);
                     _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
                     _commandDataAccessProvider.Save();
+                    return command.ActualCommandDtoForNewState();
                 }   
             }
+
+            return commandDto;
         }
 
-        public void Redo()
+        // TODO add return object for UI
+        public CommandDto Redo()
         {
             var commandDto = new CommandDto();
             commandDto.CommandType = CommandTypes.REDO;
             commandDto.PayloadType = PayloadTypes.NONE;
+            commandDto.ActualClientRoute = "NONE";
 
             if (_redocommands.Count > 0)
             {
@@ -81,8 +88,11 @@ namespace Angular2AutoSaveCommands.Providers
                     command.Execute(_context);
                     _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
                     _commandDataAccessProvider.Save();
+                    return command.ActualCommandDtoForNewState();
                 }
             }
+
+            return commandDto;
         }
 
         private void ExecuteHomeDataCommand(CommandDto commandDto)
