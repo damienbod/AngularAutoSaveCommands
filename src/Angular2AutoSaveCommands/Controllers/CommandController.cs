@@ -41,16 +41,16 @@ namespace Angular2AutoSaveCommands.Controllers
         [Route("Undo")]
         public IActionResult Undo()
         {
-            _commandHandler.Undo();
-            return Ok("Undo successfully, TODO will return the old URL here;");
+            var commandDto = _commandHandler.Undo();
+            return Ok(commandDto);
         }
 
         [HttpPost]
         [Route("Redo")]
         public IActionResult Redo()
         {
-            _commandHandler.Redo();
-            return Ok("Redo successfully, TODO will return the old URL here;");
+            var commandDto = _commandHandler.Redo();
+            return Ok(commandDto);
         }
 
         private bool validateCommandType(CommandDto value)
