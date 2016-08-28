@@ -62,6 +62,7 @@ namespace Angular2AutoSaveCommands.Providers
                 {
                     _redocommands.Push(command);
                     command.UnExecute(_context);
+                    commandDto.Payload = command.ActualCommandDtoForNewState(CommandTypes.UNDO).Payload;
                     _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
                     _commandDataAccessProvider.Save();
                     return command.ActualCommandDtoForNewState(CommandTypes.UNDO);
@@ -83,9 +84,10 @@ namespace Angular2AutoSaveCommands.Providers
             {
                 ICommand command;
                 if(_redocommands.TryPop(out command))
-                {
+                { 
                     _undocommands.Push(command);
                     command.Execute(_context);
+                    commandDto.Payload = command.ActualCommandDtoForNewState(CommandTypes.REDO).Payload;
                     _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
                     _commandDataAccessProvider.Save();
                     return command.ActualCommandDtoForNewState(CommandTypes.REDO);
