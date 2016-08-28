@@ -2,6 +2,7 @@
 using System.Linq;
 using Angular2AutoSaveCommands.Models;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 
 namespace Angular2AutoSaveCommands.Providers.Commands
 {
@@ -26,6 +27,7 @@ namespace Angular2AutoSaveCommands.Providers.Commands
 
             _previousHometData.Name = entity.Name;
             _previousHometData.Deleted = entity.Deleted;
+            _previousAboutData.Id = entity.Id;
 
             entity.Name = homeData.Name;
             entity.Deleted = homeData.Deleted;
@@ -41,9 +43,21 @@ namespace Angular2AutoSaveCommands.Providers.Commands
             _logger.LogDebug("Unexecuted");
         }
 
-        public CommandDto ActualCommandDtoForNewState()
+        public CommandDto ActualCommandDtoForNewState(string commandType)
         {
-            return _commandDto;
+            if (commandType == CommandTypes.UNDO)
+            {
+                var commandDto = new CommandDto();
+                commandDto.ActualClientRoute = _commandDto.ActualClientRoute;
+                commandDto.CommandType = _commandDto.CommandType;
+                commandDto.PayloadType = _commandDto.PayloadType;
+                commandDto.Payload = JObject.FromObject(_previousHometData);
+                return commandDto;
+            }
+            else
+            {
+                return _commandDto;
+            } 
         }
     }
 }

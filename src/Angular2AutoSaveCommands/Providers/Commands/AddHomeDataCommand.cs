@@ -48,7 +48,7 @@ namespace Angular2AutoSaveCommands.Providers.Commands
             _commandDto.Payload = JObject.FromObject(_homeData);
         }
 
-        public CommandDto ActualCommandDtoForNewState()
+        public CommandDto ActualCommandDtoForNewState(string commandType)
         {
             return _commandDto;
         }

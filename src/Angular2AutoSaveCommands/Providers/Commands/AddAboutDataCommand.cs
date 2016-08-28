@@ -10,7 +10,6 @@ namespace Angular2AutoSaveCommands.Providers.Commands
     {
         private readonly ILogger _logger;
         private readonly CommandDto _commandDto;
-
         private AboutData _aboutData;
 
         public AddAboutDataCommand(ILoggerFactory loggerFactory, CommandDto commandDto)
@@ -48,7 +47,7 @@ namespace Angular2AutoSaveCommands.Providers.Commands
             _commandDto.Payload = JObject.FromObject(_aboutData);
         }
 
-        public CommandDto ActualCommandDtoForNewState()
+        public CommandDto ActualCommandDtoForNewState(string commandType)
         {
             return _commandDto;
         }

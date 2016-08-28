@@ -64,7 +64,7 @@ namespace Angular2AutoSaveCommands.Providers
                     command.UnExecute(_context);
                     _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
                     _commandDataAccessProvider.Save();
-                    return command.ActualCommandDtoForNewState();
+                    return command.ActualCommandDtoForNewState(CommandTypes.UNDO);
                 }   
             }
 
@@ -88,7 +88,7 @@ namespace Angular2AutoSaveCommands.Providers
                     command.Execute(_context);
                     _commandDataAccessProvider.AddCommand(CommandEntity.CreateCommandEntity(commandDto));
                     _commandDataAccessProvider.Save();
-                    return command.ActualCommandDtoForNewState();
+                    return command.ActualCommandDtoForNewState(CommandTypes.REDO);
                 }
             }
 

@@ -32,7 +32,7 @@ namespace Angular2AutoSaveCommands.Providers.Commands
             _logger.LogDebug("Unexecuted");
         }
 
-        public CommandDto ActualCommandDtoForNewState()
+        public CommandDto ActualCommandDtoForNewState(string commandType)
         {
             return _commandDto;
         }
