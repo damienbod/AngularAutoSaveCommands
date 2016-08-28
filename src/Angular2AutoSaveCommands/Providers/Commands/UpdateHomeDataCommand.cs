@@ -10,7 +10,7 @@ namespace Angular2AutoSaveCommands.Providers.Commands
     {
         private readonly ILogger _logger;
         private readonly CommandDto _commandDto;
-        private HomeData _previousHometData;
+        private HomeData _previousHomeData;
 
         public UpdateHomeDataCommand( ILoggerFactory loggerFactory, CommandDto commandDto)
         {
@@ -20,14 +20,14 @@ namespace Angular2AutoSaveCommands.Providers.Commands
 
         public void Execute(DomainModelMsSqlServerContext context)
         {
-            _previousHometData = new HomeData();
+            _previousHomeData = new HomeData();
 
             var homeData = _commandDto.Payload.ToObject<HomeData>();
             var entity = context.HomeData.First(t => t.Id == homeData.Id);
 
-            _previousHometData.Name = entity.Name;
-            _previousHometData.Deleted = entity.Deleted;
-            _previousAboutData.Id = entity.Id;
+            _previousHomeData.Name = entity.Name;
+            _previousHomeData.Deleted = entity.Deleted;
+            _previousHomeData.Id = entity.Id;
 
             entity.Name = homeData.Name;
             entity.Deleted = homeData.Deleted;
@@ -38,8 +38,8 @@ namespace Angular2AutoSaveCommands.Providers.Commands
         {
             var homeData = _commandDto.Payload.ToObject<HomeData>();
             var entity = context.HomeData.First(t => t.Id == homeData.Id);
-            entity.Name = _previousHometData.Name;
-            entity.Deleted = _previousHometData.Deleted;
+            entity.Name = _previousHomeData.Name;
+            entity.Deleted = _previousHomeData.Deleted;
             _logger.LogDebug("Unexecuted");
         }
 
@@ -51,7 +51,7 @@ namespace Angular2AutoSaveCommands.Providers.Commands
                 commandDto.ActualClientRoute = _commandDto.ActualClientRoute;
                 commandDto.CommandType = _commandDto.CommandType;
                 commandDto.PayloadType = _commandDto.PayloadType;
-                commandDto.Payload = JObject.FromObject(_previousHometData);
+                commandDto.Payload = JObject.FromObject(_previousHomeData);
                 return commandDto;
             }
             else
