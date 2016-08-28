@@ -46,7 +46,8 @@ namespace Angular2AutoSaveCommands
             loggerFactory.AddDebug();
 
             var angularRoutes = new[] {
-                 "/home"
+                 "/home",
+                 "/about"
              };
 
             app.Use(async (context, next) =>
