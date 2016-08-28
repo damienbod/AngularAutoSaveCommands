@@ -2,4 +2,71 @@
 
     <p>{{message}}</p>
 
+    <textarea style="height: 600px;" class="col-lg-12" readonly>
+        http://localhost:5000/api/command/execute
+        User-Agent: Fiddler
+        Host: localhost:5000
+        Content-Type: application/json
+
+        {
+        "commandType":"ADD",
+        "payloadType":"ABOUT",
+        "payload":
+        {
+        "Id":0,
+        "Description":"something from the about form",
+        "Deleted":false
+        },
+        "actualClientRoute":"http://damienbod.com"
+        }
+
+        ------------------------------------------------------
+
+        http://localhost:5000/api/command/undo
+
+        ------------------------------------------------------
+
+        http://localhost:5000/api/command/redo
+
+        ------------------------------------------------------
+
+        http://localhost:5000/api/command/execute
+        User-Agent: Fiddler
+        Host: localhost:5000
+        Content-Type: application/json
+
+        {
+        "commandType":"ADD",
+        "payloadType":"HOME",
+        "payload":
+        {
+        "Id":0,
+        "Description":"A lovely home object",
+        "Deleted":false
+        },
+        "actualClientRoute":"http://damienbod.com"
+        }
+
+        ------------------------------------------------------
+
+        http://localhost:5000/api/command/execute
+        User-Agent: Fiddler
+        Host: localhost:5000
+        Content-Type: application/json
+
+        {
+        "commandType":"DELETE",
+        "payloadType":"ABOUT",
+        "payload":
+        {
+        "Id":1,
+        "Description":"something from the about form",
+        "Deleted":false
+        },
+        "actualClientRoute":"http://damienbod.com"
+        }
+
+        ------------------------------------------------------
+
+    </textarea>
 </div>
