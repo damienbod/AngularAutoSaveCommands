@@ -1,0 +1,29 @@
+<div class="container" style="margin-top: 15px;">
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" [routerLink]="['/about']">ASP.NET Command</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a [routerLink]="['/home']">Home</a></li>
+                <li><a [routerLink]="['/about']">About</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://twitter.com/damien_bod"><img src="assets/damienbod.jpg" height="40" style="margin-top: -10px;" /></a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <router-outlet></router-outlet>
+
+
+    <footer>
+        <p>
+            <a href="https://twitter.com/damien_bod">DamienBod</a>&nbsp;Blog: <a href="https://damienbod.com/">Software Engineering</a>
+            &copy; 2016
+        </p>
+    </footer>
+</div>
