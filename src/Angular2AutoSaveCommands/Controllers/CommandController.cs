@@ -53,11 +53,13 @@ namespace Angular2AutoSaveCommands.Controllers
             return Ok(commandDto);
         }
 
+        // TODO
         private bool validateCommandType(CommandDto value)
         {
             return true;
         }
 
+        // TODO
         private bool validatePayloadType(CommandDto value)
         {
             return true;
