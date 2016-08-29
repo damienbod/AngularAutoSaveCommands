@@ -27,7 +27,8 @@ namespace Angular2AutoSaveCommands
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var sqlConnectionString = Configuration["DataAccessMsSqlServerProvider:ConnectionString"];
+            var sqlConnectionString = Configuration.GetConnectionString("DataAccessMsSqlServerProvider");
+
 
             services.AddDbContext<DomainModelMsSqlServerContext>(options =>
                 options.UseSqlServer(  sqlConnectionString )
@@ -39,7 +40,6 @@ namespace Angular2AutoSaveCommands
             services.AddScoped<ICommandHandler, CommandHandler>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));

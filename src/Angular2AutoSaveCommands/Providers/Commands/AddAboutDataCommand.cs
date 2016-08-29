@@ -37,6 +37,7 @@ namespace Angular2AutoSaveCommands.Providers.Commands
         public void UnExecute(DomainModelMsSqlServerContext context)
         {
             _aboutData = _commandDto.Payload.ToObject<AboutData>();
+            _aboutData.Deleted = true;
             var entity = context.AboutData.First(t => t.Id == _aboutData.Id);
             entity.Deleted = true;
             _logger.LogDebug("Unexecuted");
@@ -49,7 +50,16 @@ namespace Angular2AutoSaveCommands.Providers.Commands
 
         public CommandDto ActualCommandDtoForNewState(string commandType)
         {
-            return _commandDto;
+            var aboutData = _commandDto.Payload.ToObject<AboutData>();
+            var commandDto = new CommandDto();
+            commandDto.ActualClientRoute = _commandDto.ActualClientRoute;
+            commandDto.CommandType = _commandDto.CommandType;
+            commandDto.PayloadType = _commandDto.PayloadType;
+            aboutData.Deleted = _aboutData.Deleted;
+
+            commandDto.Payload = JObject.FromObject(aboutData);
+            return commandDto;
+
         }
     }
 }
