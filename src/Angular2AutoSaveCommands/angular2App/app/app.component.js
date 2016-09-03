@@ -18,8 +18,7 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'my-app',
             template: require('./app.component.html'),
-            styles: [require('./app.component.scss'), require('../style/app.scss')],
-            directives: [router_1.ROUTER_DIRECTIVES]
+            styles: [require('./app.component.scss'), require('../style/app.scss')]
         }), 
         __metadata('design:paramtypes', [router_1.Router])
     ], AppComponent);

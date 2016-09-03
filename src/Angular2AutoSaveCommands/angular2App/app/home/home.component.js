@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
 var testDataService_1 = require('../services/testDataService');
 var HomeComponent = (function () {
     function HomeComponent(_dataService) {
@@ -26,7 +25,6 @@ var HomeComponent = (function () {
         core_1.Component({
             selector: 'homecomponent',
             template: require('./home.component.html'),
-            directives: [common_1.CORE_DIRECTIVES],
             providers: [testDataService_1.TestDataService]
         }), 
         __metadata('design:paramtypes', [testDataService_1.TestDataService])
