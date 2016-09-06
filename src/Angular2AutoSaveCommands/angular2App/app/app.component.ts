@@ -1,5 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommandService } from './services/commandService';
+import { CommandDto } from './services/commandDto';
 
 @Component({
     selector: 'my-app',
@@ -10,6 +12,28 @@ import { Router } from '@angular/router';
 
 export class AppComponent {
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private _commandService: CommandService,) {
+    }
+
+    public Undo() {
+        let resultCommand;
+
+        this._commandService.Undo()
+            .subscribe(
+            data => resultCommand = data ,
+            error => console.log(error),
+            () => console.log(resultCommand)
+        );
+    }
+
+    public Redo() {
+        let resultCommand;
+
+        this._commandService.Redo()
+            .subscribe(
+            data => resultCommand = data,
+            error => console.log(error),
+            () => console.log(resultCommand)
+            );
     }
 }
