@@ -4,3 +4,11 @@ src/Angular2AutoSaveCommands/obj
 .vs/Angular2AutoSaveCommands/v14/.suo
 .vs
 src/Angular2AutoSaveCommands/project.lock.json
+src/Angular2AutoSaveCommands/angular2App/app/services/aboutDataService.js
+src/Angular2AutoSaveCommands/angular2App/app/services/aboutDataService.js.map
+src/Angular2AutoSaveCommands/angular2App/app/services/CommandDto.js
+src/Angular2AutoSaveCommands/angular2App/app/services/CommandDto.js.map
+src/Angular2AutoSaveCommands/angular2App/app/services/commandService.js
+src/Angular2AutoSaveCommands/angular2App/app/services/commandService.js.map
+src/Angular2AutoSaveCommands/angular2App/app/services/homeDataService.js
+src/Angular2AutoSaveCommands/angular2App/app/services/homeDataService.js.map
