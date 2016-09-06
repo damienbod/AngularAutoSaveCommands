@@ -25,12 +25,12 @@ export class CommandService {
         return this._http.post(url, command, { headers: this.headers }).map(res => res.json());
     }
 
-    public Undo = (): Observable<Response> => {
+    public Undo = (): Observable<CommandDto> => {
         let url = `${this.actionUrl}undo`;
         return this._http.post(url, '', { headers: this.headers }).map(res => res.json());
     }
 
-    public Redo = (): Observable<Response> => {
+    public Redo = (): Observable<CommandDto> => {
         let url = `${this.actionUrl}redo`;
         return this._http.post(url, '', { headers: this.headers }).map(res => res.json());
     }

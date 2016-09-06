@@ -16,18 +16,18 @@ export class AppComponent {
     }
 
     public Undo() {
-        let resultCommand;
+        let resultCommand: CommandDto;
 
         this._commandService.Undo()
             .subscribe(
-            data => resultCommand = data ,
+            data => resultCommand = data,
             error => console.log(error),
-            () => console.log(resultCommand)
+            () => console.log(resultCommand); 
         );
     }
 
     public Redo() {
-        let resultCommand;
+        let resultCommand: CommandDto;
 
         this._commandService.Redo()
             .subscribe(
