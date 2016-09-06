@@ -22,7 +22,7 @@ export class AppComponent {
             .subscribe(
             data => resultCommand = data,
             error => console.log(error),
-            () => console.log(resultCommand); 
+            () => this.router.navigate(['/' + resultCommand.ActualClientRoute])
         );
     }
 
@@ -33,7 +33,7 @@ export class AppComponent {
             .subscribe(
             data => resultCommand = data,
             error => console.log(error),
-            () => console.log(resultCommand)
+            () => this.router.navigate(['/' + resultCommand.ActualClientRoute])
             );
     }
 }
