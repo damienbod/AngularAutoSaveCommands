@@ -1,6 +1,5 @@
-webpackJsonp([0],{
-
-/***/ 0:
+webpackJsonp([0],[
+/* 0 */
 /*!*****************************!*\
   !*** ./angular2App/boot.ts ***!
   \*****************************/
@@ -13,8 +12,30 @@ webpackJsonp([0],{
 
 
 /***/ },
-
-/***/ 24:
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */
 /*!***************************************!*\
   !*** ./angular2App/app/app.module.ts ***!
   \***************************************/
@@ -36,11 +57,15 @@ webpackJsonp([0],{
 	var platform_browser_1 = __webpack_require__(/*! @angular/platform-browser */ 22);
 	var app_component_1 = __webpack_require__(/*! ./app.component */ 29);
 	var app_constants_1 = __webpack_require__(/*! ./app.constants */ 61);
-	var app_routes_1 = __webpack_require__(/*! ./app.routes */ 62);
-	var http_1 = __webpack_require__(/*! @angular/http */ 65);
-	var home_component_1 = __webpack_require__(/*! ./home/home.component */ 63);
-	var about_component_1 = __webpack_require__(/*! ./about/about.component */ 68);
-	var testDataService_1 = __webpack_require__(/*! ./services/testDataService */ 64);
+	var app_routes_1 = __webpack_require__(/*! ./app.routes */ 65);
+	var http_1 = __webpack_require__(/*! @angular/http */ 59);
+	var home_component_1 = __webpack_require__(/*! ./home/home.component */ 66);
+	var about_component_1 = __webpack_require__(/*! ./about/about.component */ 71);
+	var httprequests_component_1 = __webpack_require__(/*! ./httprequests/httprequests.component */ 75);
+	var commands_component_1 = __webpack_require__(/*! ./commands/commands.component */ 77);
+	var commandService_1 = __webpack_require__(/*! ./services/commandService */ 58);
+	var aboutDataService_1 = __webpack_require__(/*! ./services/aboutDataService */ 73);
+	var homeDataService_1 = __webpack_require__(/*! ./services/homeDataService */ 69);
 	var AppModule = (function () {
 	    function AppModule() {
 	    }
@@ -57,10 +82,14 @@ webpackJsonp([0],{
 	            declarations: [
 	                app_component_1.AppComponent,
 	                about_component_1.AboutComponent,
-	                home_component_1.HomeComponent
+	                home_component_1.HomeComponent,
+	                httprequests_component_1.HttpRequestsComponent,
+	                commands_component_1.CommandsComponent
 	            ],
 	            providers: [
-	                testDataService_1.TestDataService,
+	                commandService_1.CommandService,
+	                aboutDataService_1.AboutDataService,
+	                homeDataService_1.HomeDataService,
 	                app_constants_1.Configuration
 	            ],
 	            bootstrap: [app_component_1.AppComponent],
@@ -73,8 +102,7 @@ webpackJsonp([0],{
 
 
 /***/ },
-
-/***/ 25:
+/* 25 */
 /*!***********************************************!*\
   !*** ./~/@angular/forms/bundles/forms.umd.js ***!
   \***********************************************/
@@ -4388,8 +4416,7 @@ webpackJsonp([0],{
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-
-/***/ 26:
+/* 26 */
 /*!**************************************!*\
   !*** ./~/rxjs/operator/toPromise.js ***!
   \**************************************/
@@ -4425,8 +4452,9 @@ webpackJsonp([0],{
 	//# sourceMappingURL=toPromise.js.map
 
 /***/ },
-
-/***/ 29:
+/* 27 */,
+/* 28 */,
+/* 29 */
 /*!******************************************!*\
   !*** ./angular2App/app/app.component.ts ***!
   \******************************************/
@@ -4444,17 +4472,29 @@ webpackJsonp([0],{
 	};
 	var core_1 = __webpack_require__(/*! @angular/core */ 3);
 	var router_1 = __webpack_require__(/*! @angular/router */ 30);
+	var commandService_1 = __webpack_require__(/*! ./services/commandService */ 58);
 	var AppComponent = (function () {
-	    function AppComponent(router) {
+	    function AppComponent(router, _commandService) {
 	        this.router = router;
+	        this._commandService = _commandService;
 	    }
+	    AppComponent.prototype.Undo = function () {
+	        var resultCommand;
+	        this._commandService.Undo()
+	            .subscribe(function (data) { return resultCommand = data; }, function (error) { return console.log(error); }, function () { return console.log(resultCommand); });
+	    };
+	    AppComponent.prototype.Redo = function () {
+	        var resultCommand;
+	        this._commandService.Redo()
+	            .subscribe(function (data) { return resultCommand = data; }, function (error) { return console.log(error); }, function () { return console.log(resultCommand); });
+	    };
 	    AppComponent = __decorate([
 	        core_1.Component({
 	            selector: 'my-app',
-	            template: __webpack_require__(/*! ./app.component.html */ 58),
-	            styles: [__webpack_require__(/*! ./app.component.scss */ 59), __webpack_require__(/*! ../style/app.scss */ 60)]
+	            template: __webpack_require__(/*! ./app.component.html */ 62),
+	            styles: [__webpack_require__(/*! ./app.component.scss */ 63), __webpack_require__(/*! ../style/app.scss */ 64)]
 	        }), 
-	        __metadata('design:paramtypes', [router_1.Router])
+	        __metadata('design:paramtypes', [router_1.Router, commandService_1.CommandService])
 	    ], AppComponent);
 	    return AppComponent;
 	}());
@@ -4462,38 +4502,104 @@ webpackJsonp([0],{
 
 
 /***/ },
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */
+/*!****************************************************!*\
+  !*** ./angular2App/app/services/commandService.ts ***!
+  \****************************************************/
+/***/ function(module, exports, __webpack_require__) {
 
-/***/ 58:
-/*!********************************************!*\
-  !*** ./angular2App/app/app.component.html ***!
-  \********************************************/
-/***/ function(module, exports) {
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(/*! @angular/core */ 3);
+	var http_1 = __webpack_require__(/*! @angular/http */ 59);
+	__webpack_require__(/*! rxjs/add/operator/map */ 60);
+	var app_constants_1 = __webpack_require__(/*! ../app.constants */ 61);
+	var CommandService = (function () {
+	    function CommandService(_http, _configuration) {
+	        var _this = this;
+	        this._http = _http;
+	        this._configuration = _configuration;
+	        this.Execute = function (command) {
+	            var url = _this.actionUrl + "execute";
+	            return _this._http.post(url, command, { headers: _this.headers }).map(function (res) { return res.json(); });
+	        };
+	        this.Undo = function () {
+	            var url = _this.actionUrl + "undo";
+	            return _this._http.post(url, '', { headers: _this.headers }).map(function (res) { return res.json(); });
+	        };
+	        this.Redo = function () {
+	            var url = _this.actionUrl + "redo";
+	            return _this._http.post(url, '', { headers: _this.headers }).map(function (res) { return res.json(); });
+	        };
+	        this.GetAll = function () {
+	            return _this._http.get(_this.actionUrl).map(function (response) { return response.json(); });
+	        };
+	        this.actionUrl = _configuration.Server + "api/command/";
+	        this.headers = new http_1.Headers();
+	        this.headers.append('Content-Type', 'application/json');
+	        this.headers.append('Accept', 'application/json');
+	    }
+	    CommandService = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [http_1.Http, app_constants_1.Configuration])
+	    ], CommandService);
+	    return CommandService;
+	}());
+	exports.CommandService = CommandService;
 
-	module.exports = "<div class=\"container\" style=\"margin-top: 15px;\">\r\n\r\n    <nav class=\"navbar navbar-inverse\">\r\n        <div class=\"container-fluid\">\r\n            <div class=\"navbar-header\">\r\n                <a class=\"navbar-brand\" [routerLink]=\"['/about']\">ASP.NET Command</a>\r\n            </div>\r\n            <ul class=\"nav navbar-nav\">\r\n                <li><a [routerLink]=\"['/home']\">Home</a></li>\r\n                <li><a [routerLink]=\"['/about']\">About</a></li>\r\n            </ul>\r\n            <ul class=\"nav navbar-nav navbar-right\">\r\n                <li><a href=\"https://twitter.com/damien_bod\"><img src=\"assets/damienbod.jpg\" height=\"40\" style=\"margin-top: -10px;\" /></a></li>\r\n            </ul>\r\n        </div>\r\n    </nav>\r\n\r\n\r\n\r\n    <router-outlet></router-outlet>\r\n\r\n\r\n    <footer>\r\n        <p>\r\n            <a href=\"https://twitter.com/damien_bod\">DamienBod</a>&nbsp;Blog: <a href=\"https://damienbod.com/\">Software Engineering</a>\r\n            &copy; 2016\r\n        </p>\r\n    </footer>\r\n</div>"
 
 /***/ },
-
-/***/ 59:
-/*!********************************************!*\
-  !*** ./angular2App/app/app.component.scss ***!
-  \********************************************/
-/***/ function(module, exports) {
-
-	module.exports = "// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = require(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.component.scss\");\nif(typeof content === 'string') content = [[module.id, content, '']];\n// add the styles to the DOM\nvar update = require(\"!./../../node_modules/style-loader/addStyles.js\")(content, {});\nif(content.locals) module.exports = content.locals;\n// Hot Module Replacement\nif(module.hot) {\n\t// When the styles change, update the <style> tags\n\tif(!content.locals) {\n\t\tmodule.hot.accept(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.component.scss\", function() {\n\t\t\tvar newContent = require(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.component.scss\");\n\t\t\tif(typeof newContent === 'string') newContent = [[module.id, newContent, '']];\n\t\t\tupdate(newContent);\n\t\t});\n\t}\n\t// When the module is disposed, remove the <style> tags\n\tmodule.hot.dispose(function() { update(); });\n}"
-
-/***/ },
-
-/***/ 60:
+/* 59 */,
+/* 60 */
 /*!************************************!*\
-  !*** ./angular2App/style/app.scss ***!
+  !*** ./~/rxjs/add/operator/map.js ***!
   \************************************/
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = require(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.scss\");\nif(typeof content === 'string') content = [[module.id, content, '']];\n// add the styles to the DOM\nvar update = require(\"!./../../node_modules/style-loader/addStyles.js\")(content, {});\nif(content.locals) module.exports = content.locals;\n// Hot Module Replacement\nif(module.hot) {\n\t// When the styles change, update the <style> tags\n\tif(!content.locals) {\n\t\tmodule.hot.accept(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.scss\", function() {\n\t\t\tvar newContent = require(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.scss\");\n\t\t\tif(typeof newContent === 'string') newContent = [[module.id, newContent, '']];\n\t\t\tupdate(newContent);\n\t\t});\n\t}\n\t// When the module is disposed, remove the <style> tags\n\tmodule.hot.dispose(function() { update(); });\n}"
+	"use strict";
+	var Observable_1 = __webpack_require__(/*! ../../Observable */ 5);
+	var map_1 = __webpack_require__(/*! ../../operator/map */ 45);
+	Observable_1.Observable.prototype.map = map_1.map;
+	//# sourceMappingURL=map.js.map
 
 /***/ },
-
-/***/ 61:
+/* 61 */
 /*!******************************************!*\
   !*** ./angular2App/app/app.constants.ts ***!
   \******************************************/
@@ -4524,8 +4630,34 @@ webpackJsonp([0],{
 
 
 /***/ },
+/* 62 */
+/*!********************************************!*\
+  !*** ./angular2App/app/app.component.html ***!
+  \********************************************/
+/***/ function(module, exports) {
 
-/***/ 62:
+	module.exports = "<div class=\"container\" style=\"margin-top: 15px;\">\r\n\r\n    <nav class=\"navbar navbar-inverse\">\r\n        <div class=\"container-fluid\">\r\n            <div class=\"navbar-header\">\r\n                <a class=\"navbar-brand\" [routerLink]=\"['/commands']\">Commands</a>\r\n            </div>\r\n            <ul class=\"nav navbar-nav\">\r\n                <li><a [routerLink]=\"['/home']\">Home</a></li>\r\n                <li><a [routerLink]=\"['/about']\">About</a></li>\r\n                <li><a [routerLink]=\"['/httprequests']\">HTTP API Requests</a></li>\r\n            </ul>\r\n            <ul class=\"nav navbar-nav navbar-right\">\r\n                <li><a (click)=\"Undo()\">Undo</a></li>\r\n                <li><a (click)=\"Redo()\">Redo</a></li>\r\n                <li><a href=\"https://twitter.com/damien_bod\"><img src=\"assets/damienbod.jpg\" height=\"40\" style=\"margin-top: -10px;\" /></a></li>               \r\n\r\n            </ul>\r\n        </div>\r\n    </nav>\r\n\r\n    <router-outlet></router-outlet>\r\n\r\n    <footer>\r\n        <p>\r\n            <a href=\"https://twitter.com/damien_bod\">Damien twitter</a>&nbsp; <a href=\"https://damienbod.com/\">damienbod.com</a>\r\n            &copy; 2016\r\n        </p>\r\n    </footer>\r\n</div>"
+
+/***/ },
+/* 63 */
+/*!********************************************!*\
+  !*** ./angular2App/app/app.component.scss ***!
+  \********************************************/
+/***/ function(module, exports) {
+
+	module.exports = "// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = require(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.component.scss\");\nif(typeof content === 'string') content = [[module.id, content, '']];\n// add the styles to the DOM\nvar update = require(\"!./../../node_modules/style-loader/addStyles.js\")(content, {});\nif(content.locals) module.exports = content.locals;\n// Hot Module Replacement\nif(module.hot) {\n\t// When the styles change, update the <style> tags\n\tif(!content.locals) {\n\t\tmodule.hot.accept(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.component.scss\", function() {\n\t\t\tvar newContent = require(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.component.scss\");\n\t\t\tif(typeof newContent === 'string') newContent = [[module.id, newContent, '']];\n\t\t\tupdate(newContent);\n\t\t});\n\t}\n\t// When the module is disposed, remove the <style> tags\n\tmodule.hot.dispose(function() { update(); });\n}"
+
+/***/ },
+/* 64 */
+/*!************************************!*\
+  !*** ./angular2App/style/app.scss ***!
+  \************************************/
+/***/ function(module, exports) {
+
+	module.exports = "// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = require(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.scss\");\nif(typeof content === 'string') content = [[module.id, content, '']];\n// add the styles to the DOM\nvar update = require(\"!./../../node_modules/style-loader/addStyles.js\")(content, {});\nif(content.locals) module.exports = content.locals;\n// Hot Module Replacement\nif(module.hot) {\n\t// When the styles change, update the <style> tags\n\tif(!content.locals) {\n\t\tmodule.hot.accept(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.scss\", function() {\n\t\t\tvar newContent = require(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.scss\");\n\t\t\tif(typeof newContent === 'string') newContent = [[module.id, newContent, '']];\n\t\t\tupdate(newContent);\n\t\t});\n\t}\n\t// When the module is disposed, remove the <style> tags\n\tmodule.hot.dispose(function() { update(); });\n}"
+
+/***/ },
+/* 65 */
 /*!***************************************!*\
   !*** ./angular2App/app/app.routes.ts ***!
   \***************************************/
@@ -4533,19 +4665,22 @@ webpackJsonp([0],{
 
 	"use strict";
 	var router_1 = __webpack_require__(/*! @angular/router */ 30);
-	var home_component_1 = __webpack_require__(/*! ./home/home.component */ 63);
-	var about_component_1 = __webpack_require__(/*! ./about/about.component */ 68);
+	var home_component_1 = __webpack_require__(/*! ./home/home.component */ 66);
+	var about_component_1 = __webpack_require__(/*! ./about/about.component */ 71);
+	var httprequests_component_1 = __webpack_require__(/*! ./httprequests/httprequests.component */ 75);
+	var commands_component_1 = __webpack_require__(/*! ./commands/commands.component */ 77);
 	var appRoutes = [
 	    { path: '', component: home_component_1.HomeComponent },
 	    { path: 'home', component: home_component_1.HomeComponent },
-	    { path: 'about', component: about_component_1.AboutComponent }
+	    { path: 'about', component: about_component_1.AboutComponent },
+	    { path: 'httprequests', component: httprequests_component_1.HttpRequestsComponent },
+	    { path: 'commands', component: commands_component_1.CommandsComponent }
 	];
 	exports.routing = router_1.RouterModule.forRoot(appRoutes);
 
 
 /***/ },
-
-/***/ 63:
+/* 66 */
 /*!************************************************!*\
   !*** ./angular2App/app/home/home.component.ts ***!
   \************************************************/
@@ -4562,25 +4697,66 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(/*! @angular/core */ 3);
-	var testDataService_1 = __webpack_require__(/*! ../services/testDataService */ 64);
+	var HomeData_1 = __webpack_require__(/*! ./HomeData */ 67);
+	var commandService_1 = __webpack_require__(/*! ../services/commandService */ 58);
+	var commandDto_1 = __webpack_require__(/*! ../services/commandDto */ 68);
+	var homeDataService_1 = __webpack_require__(/*! ../services/homeDataService */ 69);
 	var HomeComponent = (function () {
-	    function HomeComponent(_dataService) {
-	        this._dataService = _dataService;
-	        this.message = "Hello from HomeComponent constructor";
+	    function HomeComponent(_commandService, _homeDataService) {
+	        this._commandService = _commandService;
+	        this._homeDataService = _homeDataService;
+	        this.message = "Hello from Home";
 	    }
 	    HomeComponent.prototype.ngOnInit = function () {
+	        this.model = new HomeData_1.HomeData(0, 'new home name', false);
+	        this.submitted = false;
+	        this.active = true;
+	        this.GetHomeDataItems();
+	    };
+	    HomeComponent.prototype.GetHomeDataItems = function () {
 	        var _this = this;
-	        this._dataService
-	            .GetAll()
-	            .subscribe(function (data) { return _this.values = data; }, function (error) { return console.log(error); }, function () { return console.log('Get all complete'); });
+	        console.log('HomeComponent starting...');
+	        this._homeDataService.GetAll()
+	            .subscribe(function (data) {
+	            _this.HomeDataItems = data;
+	        }, function (error) { return console.log(error); }, function () {
+	            console.log('HomeDataService:GetAll completed');
+	        });
+	    };
+	    HomeComponent.prototype.Edit = function (aboutItem) {
+	        this.model.Name = aboutItem.Name;
+	        this.model.Id = aboutItem.Id;
+	    };
+	    HomeComponent.prototype.Delete = function (aboutItem) {
+	        var _this = this;
+	        var myCommand = new commandDto_1.CommandDto("DELETE", "HOME", aboutItem, "home");
+	        console.log(myCommand);
+	        this._commandService.Execute(myCommand)
+	            .subscribe(function (data) { return _this.GetHomeDataItems(); }, function (error) { return console.log(error); }, function () { return console.log('Command executed'); });
+	    };
+	    HomeComponent.prototype.onSubmit = function () {
+	        var _this = this;
+	        this.submitted = true;
+	        var myCommand = new commandDto_1.CommandDto("ADD", "HOME", this.model, "home");
+	        if (this.model.Id > 0) {
+	            myCommand.CommandType = "UPDATE";
+	        }
+	        console.log(myCommand);
+	        this._commandService.Execute(myCommand)
+	            .subscribe(function (data) { return _this.GetHomeDataItems(); }, function (error) { return console.log(error); }, function () { return console.log('Command executed'); });
+	    };
+	    HomeComponent.prototype.newHomeData = function () {
+	        var _this = this;
+	        this.model = new HomeData_1.HomeData(0, 'new home item', false);
+	        this.active = false;
+	        setTimeout(function () { return _this.active = true; }, 0);
 	    };
 	    HomeComponent = __decorate([
 	        core_1.Component({
 	            selector: 'homecomponent',
-	            template: __webpack_require__(/*! ./home.component.html */ 67),
-	            providers: [testDataService_1.TestDataService]
+	            template: __webpack_require__(/*! ./home.component.html */ 70)
 	        }), 
-	        __metadata('design:paramtypes', [testDataService_1.TestDataService])
+	        __metadata('design:paramtypes', [commandService_1.CommandService, homeDataService_1.HomeDataService])
 	    ], HomeComponent);
 	    return HomeComponent;
 	}());
@@ -4588,10 +4764,48 @@ webpackJsonp([0],{
 
 
 /***/ },
+/* 67 */
+/*!******************************************!*\
+  !*** ./angular2App/app/home/HomeData.ts ***!
+  \******************************************/
+/***/ function(module, exports) {
 
-/***/ 64:
+	"use strict";
+	var HomeData = (function () {
+	    function HomeData(id, name, deleted) {
+	        this.Id = id;
+	        this.Name = name;
+	        this.Deleted = deleted;
+	    }
+	    return HomeData;
+	}());
+	exports.HomeData = HomeData;
+
+
+/***/ },
+/* 68 */
+/*!************************************************!*\
+  !*** ./angular2App/app/services/commandDto.ts ***!
+  \************************************************/
+/***/ function(module, exports) {
+
+	"use strict";
+	var CommandDto = (function () {
+	    function CommandDto(commandType, payloadType, payload, actualClientRoute) {
+	        this.CommandType = commandType;
+	        this.PayloadType = payloadType;
+	        this.Payload = payload;
+	        this.ActualClientRoute = actualClientRoute;
+	    }
+	    return CommandDto;
+	}());
+	exports.CommandDto = CommandDto;
+
+
+/***/ },
+/* 69 */
 /*!*****************************************************!*\
-  !*** ./angular2App/app/services/testDataService.ts ***!
+  !*** ./angular2App/app/services/homeDataService.ts ***!
   \*****************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -4606,73 +4820,42 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(/*! @angular/core */ 3);
-	var http_1 = __webpack_require__(/*! @angular/http */ 65);
-	__webpack_require__(/*! rxjs/add/operator/map */ 66);
+	var http_1 = __webpack_require__(/*! @angular/http */ 59);
+	__webpack_require__(/*! rxjs/add/operator/map */ 60);
 	var app_constants_1 = __webpack_require__(/*! ../app.constants */ 61);
-	var TestDataService = (function () {
-	    function TestDataService(_http, _configuration) {
+	var HomeDataService = (function () {
+	    function HomeDataService(_http, _configuration) {
 	        var _this = this;
 	        this._http = _http;
 	        this._configuration = _configuration;
 	        this.GetAll = function () {
 	            return _this._http.get(_this.actionUrl).map(function (response) { return response.json(); });
 	        };
-	        this.GetSingle = function (id) {
-	            return _this._http.get(_this.actionUrl + id).map(function (res) { return res.json(); });
-	        };
-	        this.Add = function (itemName) {
-	            var toAdd = JSON.stringify({ ItemName: itemName });
-	            return _this._http.post(_this.actionUrl, toAdd, { headers: _this.headers }).map(function (res) { return res.json(); });
-	        };
-	        this.Update = function (id, itemToUpdate) {
-	            return _this._http
-	                .put(_this.actionUrl + id, JSON.stringify(itemToUpdate), { headers: _this.headers })
-	                .map(function (res) { return res.json(); });
-	        };
-	        this.Delete = function (id) {
-	            return _this._http.delete(_this.actionUrl + id);
-	        };
-	        this.actionUrl = _configuration.Server + 'api/values/';
+	        this.actionUrl = _configuration.Server + "api/home/";
 	        this.headers = new http_1.Headers();
 	        this.headers.append('Content-Type', 'application/json');
 	        this.headers.append('Accept', 'application/json');
 	    }
-	    TestDataService = __decorate([
+	    HomeDataService = __decorate([
 	        core_1.Injectable(), 
 	        __metadata('design:paramtypes', [http_1.Http, app_constants_1.Configuration])
-	    ], TestDataService);
-	    return TestDataService;
+	    ], HomeDataService);
+	    return HomeDataService;
 	}());
-	exports.TestDataService = TestDataService;
+	exports.HomeDataService = HomeDataService;
 
 
 /***/ },
-
-/***/ 66:
-/*!************************************!*\
-  !*** ./~/rxjs/add/operator/map.js ***!
-  \************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var Observable_1 = __webpack_require__(/*! ../../Observable */ 5);
-	var map_1 = __webpack_require__(/*! ../../operator/map */ 45);
-	Observable_1.Observable.prototype.map = map_1.map;
-	//# sourceMappingURL=map.js.map
-
-/***/ },
-
-/***/ 67:
+/* 70 */
 /*!**************************************************!*\
   !*** ./angular2App/app/home/home.component.html ***!
   \**************************************************/
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"panel-group\">\r\n\r\n    <p>hello {{message}}</p>\r\n\r\n    <ul>\r\n        <li *ngFor=\"let value of values\">\r\n            <span>{{value}} </span>\r\n        </li>\r\n    </ul>\r\n</div>"
+	module.exports = "<div class=\"container\">\r\n    <div class=\"col-lg-12\">\r\n        <h1>Selected Item: {{model.Id}}</h1>\r\n        <form *ngIf=\"active\" (ngSubmit)=\"onSubmit()\" #homeItemForm=\"ngForm\">\r\n\r\n            <input type=\"hidden\" class=\"form-control\" id=\"id\" [(ngModel)]=\"model.Id\" name=\"id\" #id=\"ngModel\">\r\n            <input type=\"hidden\" class=\"form-control\" id=\"deleted\" [(ngModel)]=\"model.Deleted\" name=\"deleted\" #id=\"ngModel\">\r\n\r\n            <div class=\"form-group\">\r\n                <label for=\"name\">Name</label>\r\n                <input type=\"text\" class=\"form-control\" id=\"name\" required [(ngModel)]=\"model.Name\" name=\"name\" #name=\"ngModel\">\r\n                <div [hidden]=\"name.valid || name.pristine\" class=\"alert alert-danger\">\r\n                    Name is required\r\n                </div>\r\n            </div>\r\n\r\n            <button type=\"submit\" class=\"btn btn-default\" [disabled]=\"!homeItemForm.form.valid\">Submit</button>\r\n            <button type=\"button\" class=\"btn btn-default\" (click)=\"newHomeData()\">New About</button>\r\n\r\n        </form>\r\n    </div>\r\n</div>\r\n\r\n<hr />\r\n\r\n<div>\r\n\r\n    <table class=\"table\">\r\n        <thead>\r\n            <tr>\r\n                <th>Id</th>\r\n                <th>Name</th>\r\n                <th></th>\r\n                <th></th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr style=\"height:20px;\" *ngFor=\"let homeItem of HomeDataItems\">\r\n                <td>{{homeItem.Name}}</td>\r\n                <td>\r\n                    <button class=\"btn btn-default\" (click)=\"Edit(homeItem)\">Edit</button>\r\n                </td>\r\n                <td>\r\n                    <button class=\"btn btn-default\" (click)=\"Delete(homeItem)\">Delete</button>\r\n                </td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n\r\n</div>\r\n\r\n"
 
 /***/ },
-
-/***/ 68:
+/* 71 */
 /*!**************************************************!*\
   !*** ./angular2App/app/about/about.component.ts ***!
   \**************************************************/
@@ -4689,18 +4872,66 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(/*! @angular/core */ 3);
+	var AboutData_1 = __webpack_require__(/*! ./AboutData */ 72);
+	var commandService_1 = __webpack_require__(/*! ../services/commandService */ 58);
+	var commandDto_1 = __webpack_require__(/*! ../services/commandDto */ 68);
+	var aboutDataService_1 = __webpack_require__(/*! ../services/aboutDataService */ 73);
 	var AboutComponent = (function () {
-	    function AboutComponent() {
+	    function AboutComponent(_commandService, _aboutDataService) {
+	        this._commandService = _commandService;
+	        this._aboutDataService = _aboutDataService;
 	        this.message = "Hello from About";
 	    }
 	    AboutComponent.prototype.ngOnInit = function () {
+	        this.model = new AboutData_1.AboutData(0, 'yes', false);
+	        this.submitted = false;
+	        this.active = true;
+	        this.GetAboutDataItems();
+	    };
+	    AboutComponent.prototype.GetAboutDataItems = function () {
+	        var _this = this;
+	        console.log('AboutComponent starting...');
+	        this._aboutDataService.GetAll()
+	            .subscribe(function (data) {
+	            _this.AboutDataItems = data;
+	        }, function (error) { return console.log(error); }, function () {
+	            console.log('AboutDataService:GetAll completed');
+	        });
+	    };
+	    AboutComponent.prototype.Edit = function (aboutItem) {
+	        this.model.Description = aboutItem.Description;
+	        this.model.Id = aboutItem.Id;
+	    };
+	    AboutComponent.prototype.Delete = function (aboutItem) {
+	        var _this = this;
+	        var myCommand = new commandDto_1.CommandDto("DELETE", "ABOUT", aboutItem, "about");
+	        console.log(myCommand);
+	        this._commandService.Execute(myCommand)
+	            .subscribe(function (data) { return _this.GetAboutDataItems(); }, function (error) { return console.log(error); }, function () { return console.log('Command executed'); });
+	    };
+	    AboutComponent.prototype.onSubmit = function () {
+	        var _this = this;
+	        this.submitted = true;
+	        var myCommand = new commandDto_1.CommandDto("ADD", "ABOUT", this.model, "about");
+	        if (this.model.Id > 0) {
+	            myCommand.CommandType = "UPDATE";
+	        }
+	        console.log(myCommand);
+	        this._commandService.Execute(myCommand)
+	            .subscribe(function (data) { return _this.GetAboutDataItems(); }, function (error) { return console.log(error); }, function () { return console.log('Command executed'); });
+	    };
+	    AboutComponent.prototype.newAboutData = function () {
+	        var _this = this;
+	        this.model = new AboutData_1.AboutData(0, 'yes', false);
+	        this.active = false;
+	        setTimeout(function () { return _this.active = true; }, 0);
 	    };
 	    AboutComponent = __decorate([
 	        core_1.Component({
 	            selector: 'about',
-	            template: __webpack_require__(/*! ./about.component.html */ 69)
+	            template: __webpack_require__(/*! ./about.component.html */ 74)
 	        }), 
-	        __metadata('design:paramtypes', [])
+	        __metadata('design:paramtypes', [commandService_1.CommandService, aboutDataService_1.AboutDataService])
 	    ], AboutComponent);
 	    return AboutComponent;
 	}());
@@ -4708,16 +4939,178 @@ webpackJsonp([0],{
 
 
 /***/ },
+/* 72 */
+/*!********************************************!*\
+  !*** ./angular2App/app/about/AboutData.ts ***!
+  \********************************************/
+/***/ function(module, exports) {
 
-/***/ 69:
+	"use strict";
+	var AboutData = (function () {
+	    function AboutData(id, description, deleted) {
+	        this.Id = id;
+	        this.Description = description;
+	        this.Deleted = deleted;
+	    }
+	    return AboutData;
+	}());
+	exports.AboutData = AboutData;
+
+
+/***/ },
+/* 73 */
+/*!******************************************************!*\
+  !*** ./angular2App/app/services/aboutDataService.ts ***!
+  \******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(/*! @angular/core */ 3);
+	var http_1 = __webpack_require__(/*! @angular/http */ 59);
+	__webpack_require__(/*! rxjs/add/operator/map */ 60);
+	var app_constants_1 = __webpack_require__(/*! ../app.constants */ 61);
+	var AboutDataService = (function () {
+	    function AboutDataService(_http, _configuration) {
+	        var _this = this;
+	        this._http = _http;
+	        this._configuration = _configuration;
+	        this.GetAll = function () {
+	            return _this._http.get(_this.actionUrl).map(function (response) { return response.json(); });
+	        };
+	        this.actionUrl = _configuration.Server + "api/about/";
+	        this.headers = new http_1.Headers();
+	        this.headers.append('Content-Type', 'application/json');
+	        this.headers.append('Accept', 'application/json');
+	    }
+	    AboutDataService = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [http_1.Http, app_constants_1.Configuration])
+	    ], AboutDataService);
+	    return AboutDataService;
+	}());
+	exports.AboutDataService = AboutDataService;
+
+
+/***/ },
+/* 74 */
 /*!****************************************************!*\
   !*** ./angular2App/app/about/about.component.html ***!
   \****************************************************/
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"panel-group\">\n\n    <p>{{message}}</p>\n\n    <textarea style=\"height: 600px;\" class=\"col-lg-12\" readonly>\r\n        http://localhost:5000/api/command/execute\r\n        User-Agent: Fiddler\r\n        Host: localhost:5000\r\n        Content-Type: application/json\r\n\r\n        {\r\n        \"commandType\":\"ADD\",\r\n        \"payloadType\":\"ABOUT\",\r\n        \"payload\":\r\n        {\r\n        \"Id\":0,\r\n        \"Description\":\"something from the about form\",\r\n        \"Deleted\":false\r\n        },\r\n        \"actualClientRoute\":\"http://damienbod.com\"\r\n        }\r\n\r\n        ------------------------------------------------------\r\n\r\n        http://localhost:5000/api/command/undo\r\n\r\n        ------------------------------------------------------\r\n\r\n        http://localhost:5000/api/command/redo\r\n\r\n        ------------------------------------------------------\r\n\r\n        http://localhost:5000/api/command/execute\r\n        User-Agent: Fiddler\r\n        Host: localhost:5000\r\n        Content-Type: application/json\r\n\r\n        {\r\n        \"commandType\":\"ADD\",\r\n        \"payloadType\":\"HOME\",\r\n        \"payload\":\r\n        {\r\n        \"Id\":0,\r\n        \"Description\":\"A lovely home object\",\r\n        \"Deleted\":false\r\n        },\r\n        \"actualClientRoute\":\"http://damienbod.com\"\r\n        }\r\n\r\n        ------------------------------------------------------\r\n\r\n        http://localhost:5000/api/command/execute\r\n        User-Agent: Fiddler\r\n        Host: localhost:5000\r\n        Content-Type: application/json\r\n\r\n        {\r\n        \"commandType\":\"DELETE\",\r\n        \"payloadType\":\"ABOUT\",\r\n        \"payload\":\r\n        {\r\n        \"Id\":1,\r\n        \"Description\":\"something from the about form\",\r\n        \"Deleted\":false\r\n        },\r\n        \"actualClientRoute\":\"http://damienbod.com\"\r\n        }\r\n\r\n        ------------------------------------------------------\r\n\r\n    </textarea>\n</div>"
+	module.exports = "<div class=\"container\">\r\n    <div class=\"col-lg-12\">\r\n        <h1>Selected Item: {{model.Id}}</h1>\r\n        <form *ngIf=\"active\" (ngSubmit)=\"onSubmit()\" #aboutItemForm=\"ngForm\">\r\n\r\n            <input type=\"hidden\" class=\"form-control\" id=\"id\" [(ngModel)]=\"model.Id\" name=\"id\" #id=\"ngModel\">\r\n            <input type=\"hidden\" class=\"form-control\" id=\"deleted\" [(ngModel)]=\"model.Deleted\" name=\"deleted\" #id=\"ngModel\">\r\n\r\n            <div class=\"form-group\">\r\n                <label for=\"name\">Description</label>\r\n                <input type=\"text\" class=\"form-control\" id=\"description\" required [(ngModel)]=\"model.Description\" name=\"description\" #description=\"ngModel\">\r\n                <div [hidden]=\"description.valid || description.pristine\" class=\"alert alert-danger\">\r\n                    Description is required\r\n                </div>\r\n            </div>\r\n\r\n            <button type=\"submit\" class=\"btn btn-default\" [disabled]=\"!aboutItemForm.form.valid\">Submit</button>\r\n            <button type=\"button\" class=\"btn btn-default\" (click)=\"newAboutData()\">New About</button>\r\n\r\n        </form>\r\n    </div>\r\n</div>\r\n\r\n<hr />\r\n\r\n<div>\r\n\r\n        <table class=\"table\">\r\n            <thead>\r\n                <tr>\r\n                    <th>Id</th>\r\n                    <th>Description</th>\r\n                    <th></th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr style=\"height:20px;\" *ngFor=\"let aboutItem of AboutDataItems\">\r\n                    <td>{{aboutItem.Description}}</td>\r\n                    <td>\r\n                        <button class=\"btn btn-default\" (click)=\"Edit(aboutItem)\">Edit</button>\r\n                    </td>\r\n                    <td>\r\n                        <button class=\"btn btn-default\" (click)=\"Delete(aboutItem)\">Delete</button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n\r\n    </div>\r\n\r\n"
+
+/***/ },
+/* 75 */
+/*!****************************************************************!*\
+  !*** ./angular2App/app/httprequests/httprequests.component.ts ***!
+  \****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(/*! @angular/core */ 3);
+	var HttpRequestsComponent = (function () {
+	    function HttpRequestsComponent() {
+	        this.message = "Hello from HttpRequestsComponent constructor";
+	    }
+	    HttpRequestsComponent.prototype.ngOnInit = function () {
+	    };
+	    HttpRequestsComponent = __decorate([
+	        core_1.Component({
+	            selector: 'httprequestscomponent',
+	            template: __webpack_require__(/*! ./httprequests.component.html */ 76)
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], HttpRequestsComponent);
+	    return HttpRequestsComponent;
+	}());
+	exports.HttpRequestsComponent = HttpRequestsComponent;
+
+
+/***/ },
+/* 76 */
+/*!******************************************************************!*\
+  !*** ./angular2App/app/httprequests/httprequests.component.html ***!
+  \******************************************************************/
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"panel-group\">\r\n\r\n    <textarea style=\"height: 600px;\" class=\"col-lg-12\" readonly>\r\n        http://localhost:5000/api/command/execute\r\n        User-Agent: Fiddler\r\n        Host: localhost:5000\r\n        Content-Type: application/json\r\n\r\n        {\r\n        \"commandType\":\"ADD\",\r\n        \"payloadType\":\"ABOUT\",\r\n        \"payload\":\r\n        {\r\n        \"Id\":0,\r\n        \"Description\":\"something from the about form\",\r\n        \"Deleted\":false\r\n        },\r\n        \"actualClientRoute\":\"http://damienbod.com\"\r\n        }\r\n\r\n        ------------------------------------------------------\r\n\r\n        http://localhost:5000/api/command/undo\r\n\r\n        ------------------------------------------------------\r\n\r\n        http://localhost:5000/api/command/redo\r\n\r\n        ------------------------------------------------------\r\n\r\n        http://localhost:5000/api/command/execute\r\n        User-Agent: Fiddler\r\n        Host: localhost:5000\r\n        Content-Type: application/json\r\n\r\n        {\r\n        \"commandType\":\"ADD\",\r\n        \"payloadType\":\"HOME\",\r\n        \"payload\":\r\n        {\r\n        \"Id\":0,\r\n        \"Description\":\"A lovely home object\",\r\n        \"Deleted\":false\r\n        },\r\n        \"actualClientRoute\":\"http://damienbod.com\"\r\n        }\r\n\r\n        ------------------------------------------------------\r\n\r\n        http://localhost:5000/api/command/execute\r\n        User-Agent: Fiddler\r\n        Host: localhost:5000\r\n        Content-Type: application/json\r\n\r\n        {\r\n        \"commandType\":\"DELETE\",\r\n        \"payloadType\":\"ABOUT\",\r\n        \"payload\":\r\n        {\r\n        \"Id\":1,\r\n        \"Description\":\"something from the about form\",\r\n        \"Deleted\":false\r\n        },\r\n        \"actualClientRoute\":\"http://damienbod.com\"\r\n        }\r\n\r\n        ------------------------------------------------------\r\n\r\n    </textarea>\r\n</div>"
+
+/***/ },
+/* 77 */
+/*!********************************************************!*\
+  !*** ./angular2App/app/commands/commands.component.ts ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(/*! @angular/core */ 3);
+	var commandService_1 = __webpack_require__(/*! ../services/commandService */ 58);
+	var CommandsComponent = (function () {
+	    function CommandsComponent(_commandService) {
+	        this._commandService = _commandService;
+	        this.message = "Hello from CommandsComponent constructor";
+	    }
+	    CommandsComponent.prototype.ngOnInit = function () {
+	        this.GetCommands();
+	    };
+	    CommandsComponent.prototype.GetCommands = function () {
+	        var _this = this;
+	        this._commandService.GetAll()
+	            .subscribe(function (data) {
+	            _this.Commands = data;
+	        }, function (error) { return console.log(error); }, function () {
+	            console.log('CommandsService:GetAll completed');
+	        });
+	    };
+	    CommandsComponent = __decorate([
+	        core_1.Component({
+	            selector: 'commandscomponent',
+	            template: __webpack_require__(/*! ./commands.component.html */ 78)
+	        }), 
+	        __metadata('design:paramtypes', [commandService_1.CommandService])
+	    ], CommandsComponent);
+	    return CommandsComponent;
+	}());
+	exports.CommandsComponent = CommandsComponent;
+
+
+/***/ },
+/* 78 */
+/*!**********************************************************!*\
+  !*** ./angular2App/app/commands/commands.component.html ***!
+  \**********************************************************/
+/***/ function(module, exports) {
+
+	module.exports = "\r\n<div>\r\n\r\n    <table class=\"table\">\r\n        <thead>\r\n            <tr>\r\n                <th>Id</th>\r\n                <th>ActualClientRoute</th>\r\n                <th>CommandType</th>\r\n                <th>Payload</th>\r\n                <th>PayloadType</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr style=\"height:20px;\" *ngFor=\"let commands of Commands\">\r\n                <td>{{commands.Id}}</td>\r\n                <td>{{commands.ActualClientRoute}}</td>\r\n                <td>{{commands.CommandType}}</td>\r\n                <td>{{commands.Payload}}</td>\r\n                <td>{{commands.PayloadType}}</td>\r\n\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n\r\n</div>\r\n"
 
 /***/ }
-
-});
+]);
 //# sourceMappingURL=app.bundle.js.map
