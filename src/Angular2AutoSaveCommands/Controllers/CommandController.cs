@@ -65,18 +65,11 @@ namespace Angular2AutoSaveCommands.Controllers
             return true;
         }
 
+
         [HttpGet]
         public IActionResult Get()
         {
-            var about = new AboutData();
-            about.Description = "test data";
-
-            var command = new CommandDto();
-            command.ActualClientRoute = "http://daminbod.com";
-            command.CommandType = CommandTypes.ADD;
-            command.PayloadType = PayloadTypes.ABOUT;
-            command.Payload = JObject.FromObject(about);
-            return Ok(command);
+            return Ok(_commandHandler.GetAll());          
         }
     }
 }
