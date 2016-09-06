@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Angular2AutoSaveCommands.Providers;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
 
 namespace Angular2AutoSaveCommands
 {
@@ -34,7 +35,10 @@ namespace Angular2AutoSaveCommands
                 options.UseSqlServer(  sqlConnectionString )
             );
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+            });
 
             services.AddScoped<ICommandDataAccessProvider, CommandDataAccessProvider>();
             services.AddScoped<ICommandHandler, CommandHandler>();
