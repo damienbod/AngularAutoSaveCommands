@@ -51,7 +51,9 @@ namespace Angular2AutoSaveCommands
 
             var angularRoutes = new[] {
                  "/home",
-                 "/about"
+                 "/about",
+                 "/httprequests",
+                 "/commands"
              };
 
             app.Use(async (context, next) =>
