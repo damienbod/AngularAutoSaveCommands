@@ -89,9 +89,11 @@ export class HomeComponent implements OnInit {
         setTimeout(() => this.active = true, 0);
     }
 
-    private OnUndoRedoRecieved(item) {
-        this.GetHomeDataItems();
-        console.log("OnUndoRedoRecieved Home");
-        console.log(item);
+    private OnUndoRedoRecieved(payloadType) {
+        if (payloadType === "HOME") {
+            this.GetHomeDataItems();
+            console.log("OnUndoRedoRecieved Home");
+            console.log(payloadType);
+        }       
     }
 }

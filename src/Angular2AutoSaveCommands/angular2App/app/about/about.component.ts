@@ -88,9 +88,11 @@ export class AboutComponent implements OnInit {
         setTimeout(() => this.active = true, 0);
     }
     
-    private OnUndoRedoRecieved(item) {
-        this.GetAboutDataItems();
-        console.log("OnUndoRedoRecieved About");
-        console.log(item);
+    private OnUndoRedoRecieved(payloadType) {
+        if (payloadType === "ABOUT") {
+            this.GetAboutDataItems();
+            console.log("OnUndoRedoRecieved About");
+            console.log(payloadType);
+        } 
     }
 }
