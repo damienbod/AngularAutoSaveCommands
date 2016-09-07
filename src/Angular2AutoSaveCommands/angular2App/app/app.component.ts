@@ -9,10 +9,9 @@ import { CommandDto } from './services/commandDto';
     styles: [require('./app.component.scss'), require('../style/app.scss')]
 })
 
-
 export class AppComponent {
 
-    constructor(private router: Router, private _commandService: CommandService,) {
+    constructor(private router: Router, private _commandService: CommandService) {
     }
 
     public Undo() {
@@ -20,10 +19,13 @@ export class AppComponent {
 
         this._commandService.Undo()
             .subscribe(
-            data => resultCommand = data,
-            error => console.log(error),
-            () => this.router.navigate(['/' + resultCommand.ActualClientRoute])
-        );
+                data => resultCommand = data,
+                error => console.log(error),
+                () => {
+                    this._commandService.UndoRedoUpdate(resultCommand.PayloadType);
+                    this.router.navigate(['/' + resultCommand.ActualClientRoute]);
+                }
+            );
     }
 
     public Redo() {
@@ -31,9 +33,12 @@ export class AppComponent {
 
         this._commandService.Redo()
             .subscribe(
-            data => resultCommand = data,
-            error => console.log(error),
-            () => this.router.navigate(['/' + resultCommand.ActualClientRoute])
+                data => resultCommand = data,
+                error => console.log(error),
+                () => {
+                    this._commandService.UndoRedoUpdate(resultCommand.PayloadType);
+                    this.router.navigate(['/' + resultCommand.ActualClientRoute]);
+                }
             );
     }
 }
