@@ -8,13 +8,13 @@
 
             <div class="form-group">
                 <label for="name">Description</label>
-                <input type="text" class="form-control" id="description" required [(ngModel)]="model.Description" name="description" #description="ngModel">
+                <input type="text" class="form-control" id="description" required (keyup)="createCommand($event)" [(ngModel)]="model.Description" name="description" #description="ngModel">
                 <div [hidden]="description.valid || description.pristine" class="alert alert-danger">
                     Description is required
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-default" [disabled]="!aboutItemForm.form.valid">Submit</button>
+            <!--<button type="submit" class="btn btn-default" [disabled]="!aboutItemForm.form.valid">Submit</button>-->
             <button type="button" class="btn btn-default" (click)="newAboutData()">New About</button>
 
         </form>
@@ -24,8 +24,7 @@
 <hr />
 
 <div>
-
-        <table class="table">
+    <table class="table">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -48,5 +47,5 @@
             </tbody>
         </table>
 
-    </div>
+</div>
 

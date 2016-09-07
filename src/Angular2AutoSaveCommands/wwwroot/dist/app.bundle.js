@@ -4772,10 +4772,12 @@ webpackJsonp([0],[
 	        this.active = false;
 	        setTimeout(function () { return _this.active = true; }, 0);
 	    };
-	    HomeComponent.prototype.OnUndoRedoRecieved = function (item) {
-	        this.GetHomeDataItems();
-	        console.log("OnUndoRedoRecieved Home");
-	        console.log(item);
+	    HomeComponent.prototype.OnUndoRedoRecieved = function (payloadType) {
+	        if (payloadType === "HOME") {
+	            this.GetHomeDataItems();
+	            console.log("OnUndoRedoRecieved Home");
+	            console.log(payloadType);
+	        }
 	    };
 	    HomeComponent = __decorate([
 	        core_1.Component({
@@ -4937,8 +4939,17 @@ webpackJsonp([0],[
 	        this._commandService.Execute(myCommand)
 	            .subscribe(function (data) { return _this.GetAboutDataItems(); }, function (error) { return console.log(error); }, function () { return console.log('Command executed'); });
 	    };
+	    AboutComponent.prototype.createCommand = function (evt) {
+	        var _this = this;
+	        if (!this.executeTimer) {
+	            this.executeTimer = setTimeout(function () {
+	                _this.onSubmit();
+	            }, 1000);
+	        }
+	    };
 	    AboutComponent.prototype.onSubmit = function () {
 	        var _this = this;
+	        this.executeTimer = undefined;
 	        this.submitted = true;
 	        var myCommand = new commandDto_1.CommandDto("ADD", "ABOUT", this.model, "about");
 	        if (this.model.Id > 0) {
@@ -4957,10 +4968,12 @@ webpackJsonp([0],[
 	        this.active = false;
 	        setTimeout(function () { return _this.active = true; }, 0);
 	    };
-	    AboutComponent.prototype.OnUndoRedoRecieved = function (item) {
-	        this.GetAboutDataItems();
-	        console.log("OnUndoRedoRecieved About");
-	        console.log(item);
+	    AboutComponent.prototype.OnUndoRedoRecieved = function (payloadType) {
+	        if (payloadType === "ABOUT") {
+	            this.GetAboutDataItems();
+	            console.log("OnUndoRedoRecieved About");
+	            console.log(payloadType);
+	        }
 	    };
 	    AboutComponent = __decorate([
 	        core_1.Component({
@@ -5043,7 +5056,7 @@ webpackJsonp([0],[
   \****************************************************/
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\">\r\n    <div class=\"col-lg-12\">\r\n        <h1>Selected Item: {{model.Id}}</h1>\r\n        <form *ngIf=\"active\" (ngSubmit)=\"onSubmit()\" #aboutItemForm=\"ngForm\">\r\n\r\n            <input type=\"hidden\" class=\"form-control\" id=\"id\" [(ngModel)]=\"model.Id\" name=\"id\" #id=\"ngModel\">\r\n            <input type=\"hidden\" class=\"form-control\" id=\"deleted\" [(ngModel)]=\"model.Deleted\" name=\"deleted\" #id=\"ngModel\">\r\n\r\n            <div class=\"form-group\">\r\n                <label for=\"name\">Description</label>\r\n                <input type=\"text\" class=\"form-control\" id=\"description\" required [(ngModel)]=\"model.Description\" name=\"description\" #description=\"ngModel\">\r\n                <div [hidden]=\"description.valid || description.pristine\" class=\"alert alert-danger\">\r\n                    Description is required\r\n                </div>\r\n            </div>\r\n\r\n            <button type=\"submit\" class=\"btn btn-default\" [disabled]=\"!aboutItemForm.form.valid\">Submit</button>\r\n            <button type=\"button\" class=\"btn btn-default\" (click)=\"newAboutData()\">New About</button>\r\n\r\n        </form>\r\n    </div>\r\n</div>\r\n\r\n<hr />\r\n\r\n<div>\r\n\r\n        <table class=\"table\">\r\n            <thead>\r\n                <tr>\r\n                    <th>Id</th>\r\n                    <th>Description</th>\r\n                    <th></th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr style=\"height:20px;\" *ngFor=\"let aboutItem of AboutDataItems\">\r\n                    <td>{{aboutItem.Id}}</td>\r\n                    <td>{{aboutItem.Description}}</td>\r\n                    <td>\r\n                        <button class=\"btn btn-default\" (click)=\"Edit(aboutItem)\">Edit</button>\r\n                    </td>\r\n                    <td>\r\n                        <button class=\"btn btn-default\" (click)=\"Delete(aboutItem)\">Delete</button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n\r\n    </div>\r\n\r\n"
+	module.exports = "<div class=\"container\">\r\n    <div class=\"col-lg-12\">\r\n        <h1>Selected Item: {{model.Id}}</h1>\r\n        <form *ngIf=\"active\" (ngSubmit)=\"onSubmit()\" #aboutItemForm=\"ngForm\">\r\n\r\n            <input type=\"hidden\" class=\"form-control\" id=\"id\" [(ngModel)]=\"model.Id\" name=\"id\" #id=\"ngModel\">\r\n            <input type=\"hidden\" class=\"form-control\" id=\"deleted\" [(ngModel)]=\"model.Deleted\" name=\"deleted\" #id=\"ngModel\">\r\n\r\n            <div class=\"form-group\">\r\n                <label for=\"name\">Description</label>\r\n                <input type=\"text\" class=\"form-control\" id=\"description\" required (keyup)=\"createCommand($event)\" [(ngModel)]=\"model.Description\" name=\"description\" #description=\"ngModel\">\r\n                <div [hidden]=\"description.valid || description.pristine\" class=\"alert alert-danger\">\r\n                    Description is required\r\n                </div>\r\n            </div>\r\n\r\n            <!--<button type=\"submit\" class=\"btn btn-default\" [disabled]=\"!aboutItemForm.form.valid\">Submit</button>-->\r\n            <button type=\"button\" class=\"btn btn-default\" (click)=\"newAboutData()\">New About</button>\r\n\r\n        </form>\r\n    </div>\r\n</div>\r\n\r\n<hr />\r\n\r\n<div>\r\n    <table class=\"table\">\r\n            <thead>\r\n                <tr>\r\n                    <th>Id</th>\r\n                    <th>Description</th>\r\n                    <th></th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr style=\"height:20px;\" *ngFor=\"let aboutItem of AboutDataItems\">\r\n                    <td>{{aboutItem.Id}}</td>\r\n                    <td>{{aboutItem.Description}}</td>\r\n                    <td>\r\n                        <button class=\"btn btn-default\" (click)=\"Edit(aboutItem)\">Edit</button>\r\n                    </td>\r\n                    <td>\r\n                        <button class=\"btn btn-default\" (click)=\"Delete(aboutItem)\">Delete</button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n\r\n</div>\r\n\r\n"
 
 /***/ },
 /* 75 */

@@ -17,6 +17,8 @@ export class AboutComponent implements OnInit {
     public active: boolean;
     public AboutDataItems: AboutData[];
 
+    private executeTimer: any;
+
     constructor(private _commandService: CommandService, private _aboutDataService: AboutDataService) {
         this.message = "Hello from About";
         this._commandService.OnUndoRedo.subscribe(item => this.OnUndoRedoRecieved(item));
@@ -60,8 +62,19 @@ export class AboutComponent implements OnInit {
             );
     }
 
+    public createCommand(evt: any) {
+        if (!this.executeTimer) {
+            this.executeTimer = setTimeout(
+                () => {
+                    this.onSubmit();
+                },
+                1000);
+        }
+    }
+
     // TODO remove the get All request and update the list using the return item
     public onSubmit() {
+        this.executeTimer = undefined;
         this.submitted = true;
 
         let myCommand = new CommandDto("ADD", "ABOUT", this.model, "about");
