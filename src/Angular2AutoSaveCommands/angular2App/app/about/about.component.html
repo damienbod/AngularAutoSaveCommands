@@ -36,6 +36,7 @@
             </thead>
             <tbody>
                 <tr style="height:20px;" *ngFor="let aboutItem of AboutDataItems">
+                    <td>{{aboutItem.Id}}</td>
                     <td>{{aboutItem.Description}}</td>
                     <td>
                         <button class="btn btn-default" (click)="Edit(aboutItem)">Edit</button>

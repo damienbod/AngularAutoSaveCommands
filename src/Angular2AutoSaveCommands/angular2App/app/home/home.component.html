@@ -15,7 +15,7 @@
             </div>
 
             <button type="submit" class="btn btn-default" [disabled]="!homeItemForm.form.valid">Submit</button>
-            <button type="button" class="btn btn-default" (click)="newHomeData()">New About</button>
+            <button type="button" class="btn btn-default" (click)="newHomeData()">New Home</button>
 
         </form>
     </div>
@@ -36,6 +36,7 @@
         </thead>
         <tbody>
             <tr style="height:20px;" *ngFor="let homeItem of HomeDataItems">
+                <td>{{homeItem.Id}}</td>
                 <td>{{homeItem.Name}}</td>
                 <td>
                     <button class="btn btn-default" (click)="Edit(homeItem)">Edit</button>
