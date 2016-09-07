@@ -19,6 +19,7 @@ export class AboutComponent implements OnInit {
 
     constructor(private _commandService: CommandService, private _aboutDataService: AboutDataService) {
         this.message = "Hello from About";
+        this._commandService.OnUndoRedo.subscribe(item => this.OnUndoRedoRecieved(item));
     }
 
     ngOnInit() {
@@ -62,6 +63,7 @@ export class AboutComponent implements OnInit {
     // TODO remove the get All request and update the list using the return item
     public onSubmit() {
         this.submitted = true;
+
         let myCommand = new CommandDto("ADD", "ABOUT", this.model, "about");
 
         if (this.model.Id > 0) {
@@ -71,7 +73,10 @@ export class AboutComponent implements OnInit {
         console.log(myCommand);
         this._commandService.Execute(myCommand)
             .subscribe(
-            data => this.GetAboutDataItems(),
+            data => {
+                this.model.Id = data.Payload.Id;
+                this.GetAboutDataItems();
+            },
                 error => console.log(error),
                 () => console.log('Command executed')
             );
@@ -81,5 +86,11 @@ export class AboutComponent implements OnInit {
         this.model = new AboutData(0, 'yes', false);
         this.active = false;
         setTimeout(() => this.active = true, 0);
+    }
+    
+    private OnUndoRedoRecieved(item) {
+        this.GetAboutDataItems();
+        console.log("OnUndoRedoRecieved About");
+        console.log(item);
     }
 }

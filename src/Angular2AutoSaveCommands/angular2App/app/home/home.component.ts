@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
 
     constructor(private _commandService: CommandService, private _homeDataService: HomeDataService) {
         this.message = "Hello from Home";
+        this._commandService.OnUndoRedo.subscribe(item => this.OnUndoRedoRecieved(item));
     }
 
     ngOnInit() {
@@ -73,7 +74,10 @@ export class HomeComponent implements OnInit {
         console.log(myCommand);
         this._commandService.Execute(myCommand)
             .subscribe(
-            data => this.GetHomeDataItems(),
+            data => {
+                this.model.Id = data.Payload.Id;
+                this.GetHomeDataItems();
+            },
             error => console.log(error),
             () => console.log('Command executed')
             );
@@ -83,5 +87,11 @@ export class HomeComponent implements OnInit {
         this.model = new HomeData(0, 'new home item', false);
         this.active = false;
         setTimeout(() => this.active = true, 0);
+    }
+
+    private OnUndoRedoRecieved(item) {
+        this.GetHomeDataItems();
+        console.log("OnUndoRedoRecieved Home");
+        console.log(item);
     }
 }
