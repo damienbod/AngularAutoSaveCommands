@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit {
     public active: boolean;
     public HomeDataItems: HomeData[];
 
+    private executeTimer: any;
+
     constructor(private _commandService: CommandService, private _homeDataService: HomeDataService) {
         this.message = "Hello from Home";
         this._commandService.OnUndoRedo.subscribe(item => this.OnUndoRedoRecieved(item));
@@ -62,8 +64,19 @@ export class HomeComponent implements OnInit {
             );
     }
 
+    public createCommand(evt: any) {
+        if (!this.executeTimer) {
+            this.executeTimer = setTimeout(
+                () => {
+                    this.onSubmit();
+                },
+                1000);
+        }
+    }
+
     // TODO remove the get All request and update the list using the return item
     public onSubmit() {
+        this.executeTimer = undefined;
         this.submitted = true;
         let myCommand = new CommandDto("ADD", "HOME", this.model, "home");
 
