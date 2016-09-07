@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map'
 import { Observable } from 'rxjs/Observable';
@@ -7,6 +7,8 @@ import { CommandDto } from './CommandDto';
 
 @Injectable()
 export class CommandService {
+
+    @Output() OnUndoRedo = new EventEmitter<string>();
 
     private actionUrl: string;
     private headers: Headers;
@@ -20,7 +22,7 @@ export class CommandService {
         this.headers.append('Accept', 'application/json');
     }
 
-    public Execute = (command: CommandDto): Observable<Response> => {
+    public Execute = (command: CommandDto): Observable<CommandDto> => {
         let url = `${this.actionUrl}execute`;
         return this._http.post(url, command, { headers: this.headers }).map(res => res.json());
     }
@@ -37,5 +39,9 @@ export class CommandService {
 
     public GetAll = (): Observable<any> => {
         return this._http.get(this.actionUrl).map((response: Response) => <any>response.json());
+    }
+    
+    public UndoRedoUpdate = (payloadType: string) => {
+        this.OnUndoRedo.emit(payloadType);
     }
 }
