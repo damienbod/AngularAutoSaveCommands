@@ -4,6 +4,21 @@ import { CommandService } from '../services/commandService';
 import { CommandDto } from '../services/commandDto';
 import { AboutDataService } from '../services/aboutDataService';
 
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/throw';
+
+// Observable operators
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
+
 @Component({
     selector: 'about',
     template: require('./about.component.html')
@@ -17,7 +32,8 @@ export class AboutComponent implements OnInit {
     public active: boolean;
     public AboutDataItems: AboutData[];
 
-    private executeTimer: any;
+    private deboucedInput: Observable<string>;
+    private keyDownEvents = new Subject<string>();
 
     constructor(private _commandService: CommandService, private _aboutDataService: AboutDataService) {
         this.message = "Hello from About";
@@ -29,6 +45,14 @@ export class AboutComponent implements OnInit {
         this.submitted = false;
         this.active = true;
         this.GetAboutDataItems();
+
+        this.deboucedInput = this.keyDownEvents;
+        this.deboucedInput
+            .debounceTime(1000)
+            .distinctUntilChanged()
+            .subscribe((filter: string) => {
+                this.onSubmit();
+            });
     }
 
     public GetAboutDataItems() {
@@ -63,36 +87,31 @@ export class AboutComponent implements OnInit {
     }
 
     public createCommand(evt: any) {
-        if (!this.executeTimer) {
-            this.executeTimer = setTimeout(
-                () => {
-                    this.onSubmit();
-                },
-                1000);
-        }
+        this.keyDownEvents.next(this.model.Description);
     }
 
     // TODO remove the get All request and update the list using the return item
     public onSubmit() {
-        this.executeTimer = undefined;
-        this.submitted = true;
+        if (this.model.Description != "") {
+            this.submitted = true;
 
-        let myCommand = new CommandDto("ADD", "ABOUT", this.model, "about");
+            let myCommand = new CommandDto("ADD", "ABOUT", this.model, "about");
 
-        if (this.model.Id > 0) {
-            myCommand.CommandType = "UPDATE";
-        } 
-        
-        console.log(myCommand);
-        this._commandService.Execute(myCommand)
-            .subscribe(
-            data => {
-                this.model.Id = data.Payload.Id;
-                this.GetAboutDataItems();
-            },
+            if (this.model.Id > 0) {
+                myCommand.CommandType = "UPDATE";
+            }
+
+            console.log(myCommand);
+            this._commandService.Execute(myCommand)
+                .subscribe(
+                data => {
+                    this.model.Id = data.Payload.Id;
+                    this.GetAboutDataItems();
+                },
                 error => console.log(error),
                 () => console.log('Command executed')
-            );
+                );
+        }
     }
 
     public newAboutData() {

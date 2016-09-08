@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Http } from '@angular/http';
@@ -7,6 +6,7 @@ import { CommandService } from '../services/commandService';
 import { CommandDto } from '../services/commandDto';
 import { HomeDataService } from '../services/homeDataService';
 
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import 'rxjs/add/observable/of';
@@ -33,7 +33,8 @@ export class HomeComponent implements OnInit {
     public submitted: boolean;
     public active: boolean;
     public HomeDataItems: HomeData[];
-    public deboucedInput: Observable<string>;
+
+    private deboucedInput: Observable<string>;
     private keyDownEvents = new Subject<string>();
 
     constructor(private _commandService: CommandService, private _homeDataService: HomeDataService) {
