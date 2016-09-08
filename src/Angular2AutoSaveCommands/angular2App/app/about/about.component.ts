@@ -41,7 +41,7 @@ export class AboutComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.model = new AboutData(0, 'yes', false);
+        this.model = new AboutData(0, 'description', false);
         this.submitted = false;
         this.active = true;
         this.GetAboutDataItems();
@@ -119,7 +119,7 @@ export class AboutComponent implements OnInit {
     }
 
     public newAboutData() {
-        this.model = new AboutData(0, 'yes', false);
+        this.model = new AboutData(0, 'add a new description', false);
         this.active = false;
         setTimeout(() => this.active = true, 0);
     }
@@ -127,7 +127,7 @@ export class AboutComponent implements OnInit {
     private OnUndoRedoRecieved(payloadType) {
         if (payloadType === "ABOUT") {
             this.GetAboutDataItems();
-            this.newAboutData();
+            // this.newAboutData();
             console.log("OnUndoRedoRecieved About");
             console.log(payloadType);
         } 

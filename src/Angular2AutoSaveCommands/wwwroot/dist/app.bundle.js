@@ -4738,7 +4738,7 @@ webpackJsonp([0],[
 	    }
 	    HomeComponent.prototype.ngOnInit = function () {
 	        var _this = this;
-	        this.model = new HomeData_1.HomeData(0, 'new home name', false);
+	        this.model = new HomeData_1.HomeData(0, 'name', false);
 	        this.submitted = false;
 	        this.active = true;
 	        this.GetHomeDataItems();
@@ -4796,14 +4796,13 @@ webpackJsonp([0],[
 	    };
 	    HomeComponent.prototype.newHomeData = function () {
 	        var _this = this;
-	        this.model = new HomeData_1.HomeData(0, 'new home item', false);
+	        this.model = new HomeData_1.HomeData(0, 'add a new name', false);
 	        this.active = false;
 	        setTimeout(function () { return _this.active = true; }, 0);
 	    };
 	    HomeComponent.prototype.OnUndoRedoRecieved = function (payloadType) {
 	        if (payloadType === "HOME") {
 	            this.GetHomeDataItems();
-	            this.newHomeData();
 	            console.log("OnUndoRedoRecieved Home");
 	            console.log(payloadType);
 	        }
@@ -6068,7 +6067,7 @@ webpackJsonp([0],[
 	    }
 	    AboutComponent.prototype.ngOnInit = function () {
 	        var _this = this;
-	        this.model = new AboutData_1.AboutData(0, 'yes', false);
+	        this.model = new AboutData_1.AboutData(0, 'description', false);
 	        this.submitted = false;
 	        this.active = true;
 	        this.GetAboutDataItems();
@@ -6126,14 +6125,13 @@ webpackJsonp([0],[
 	    };
 	    AboutComponent.prototype.newAboutData = function () {
 	        var _this = this;
-	        this.model = new AboutData_1.AboutData(0, 'yes', false);
+	        this.model = new AboutData_1.AboutData(0, 'add a new description', false);
 	        this.active = false;
 	        setTimeout(function () { return _this.active = true; }, 0);
 	    };
 	    AboutComponent.prototype.OnUndoRedoRecieved = function (payloadType) {
 	        if (payloadType === "ABOUT") {
 	            this.GetAboutDataItems();
-	            this.newAboutData();
 	            console.log("OnUndoRedoRecieved About");
 	            console.log(payloadType);
 	        }

@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.model = new HomeData(0, 'new home name', false);
+        this.model = new HomeData(0, 'name', false);
         this.submitted = false;
         this.active = true;
         this.GetHomeDataItems();
@@ -121,7 +121,7 @@ export class HomeComponent implements OnInit {
     }
 
     public newHomeData() {
-        this.model = new HomeData(0, 'new home item', false);
+        this.model = new HomeData(0, 'add a new name', false);
         this.active = false;
         setTimeout(() => this.active = true, 0);
     }
@@ -129,7 +129,7 @@ export class HomeComponent implements OnInit {
     private OnUndoRedoRecieved(payloadType) {
         if (payloadType === "HOME") {
             this.GetHomeDataItems();
-            this.newHomeData();
+           // this.newHomeData();
             console.log("OnUndoRedoRecieved Home");
             console.log(payloadType);
         }       
