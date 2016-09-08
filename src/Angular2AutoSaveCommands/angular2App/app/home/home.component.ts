@@ -77,15 +77,19 @@ export class HomeComponent implements OnInit {
     }
 
     // TODO remove the get All request and update the list using the return item
-    public Delete(aboutItem: HomeData) {
-        let myCommand = new CommandDto("DELETE", "HOME", aboutItem, "home");
+    public Delete(homeItem: HomeData) {
+        let myCommand = new CommandDto("DELETE", "HOME", homeItem, "home");
 
         console.log(myCommand);
         this._commandService.Execute(myCommand)
             .subscribe(
             data => this.GetHomeDataItems(),
             error => console.log(error),
-            () => console.log('Command executed')
+            () => {
+                if (this.model.Id === homeItem.Id) {
+                    this.newHomeData();
+                }
+            }   
             );
     }
 

@@ -4764,12 +4764,16 @@ webpackJsonp([0],[
 	        this.model.Name = aboutItem.Name;
 	        this.model.Id = aboutItem.Id;
 	    };
-	    HomeComponent.prototype.Delete = function (aboutItem) {
+	    HomeComponent.prototype.Delete = function (homeItem) {
 	        var _this = this;
-	        var myCommand = new commandDto_1.CommandDto("DELETE", "HOME", aboutItem, "home");
+	        var myCommand = new commandDto_1.CommandDto("DELETE", "HOME", homeItem, "home");
 	        console.log(myCommand);
 	        this._commandService.Execute(myCommand)
-	            .subscribe(function (data) { return _this.GetHomeDataItems(); }, function (error) { return console.log(error); }, function () { return console.log('Command executed'); });
+	            .subscribe(function (data) { return _this.GetHomeDataItems(); }, function (error) { return console.log(error); }, function () {
+	            if (_this.model.Id === homeItem.Id) {
+	                _this.newHomeData();
+	            }
+	        });
 	    };
 	    HomeComponent.prototype.createCommand = function (evt) {
 	        this.keyDownEvents.next(this.model.Name);
@@ -6094,7 +6098,11 @@ webpackJsonp([0],[
 	        var myCommand = new commandDto_1.CommandDto("DELETE", "ABOUT", aboutItem, "about");
 	        console.log(myCommand);
 	        this._commandService.Execute(myCommand)
-	            .subscribe(function (data) { return _this.GetAboutDataItems(); }, function (error) { return console.log(error); }, function () { return console.log('Command executed'); });
+	            .subscribe(function (data) { return _this.GetAboutDataItems(); }, function (error) { return console.log(error); }, function () {
+	            if (_this.model.Id === aboutItem.Id) {
+	                _this.newAboutData();
+	            }
+	        });
 	    };
 	    AboutComponent.prototype.createCommand = function (evt) {
 	        this.keyDownEvents.next(this.model.Description);

@@ -82,7 +82,11 @@ export class AboutComponent implements OnInit {
             .subscribe(
             data => this.GetAboutDataItems(),
             error => console.log(error),
-            () => console.log('Command executed')
+            () => {
+                if (this.model.Id === aboutItem.Id) {
+                    this.newAboutData();
+                }
+            }            
             );
     }
 
