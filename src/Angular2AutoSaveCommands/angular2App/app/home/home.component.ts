@@ -129,6 +129,7 @@ export class HomeComponent implements OnInit {
     private OnUndoRedoRecieved(payloadType) {
         if (payloadType === "HOME") {
             this.GetHomeDataItems();
+            this.newHomeData();
             console.log("OnUndoRedoRecieved Home");
             console.log(payloadType);
         }       

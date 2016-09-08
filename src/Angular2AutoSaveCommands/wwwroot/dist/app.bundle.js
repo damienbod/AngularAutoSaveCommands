@@ -4803,6 +4803,7 @@ webpackJsonp([0],[
 	    HomeComponent.prototype.OnUndoRedoRecieved = function (payloadType) {
 	        if (payloadType === "HOME") {
 	            this.GetHomeDataItems();
+	            this.newHomeData();
 	            console.log("OnUndoRedoRecieved Home");
 	            console.log(payloadType);
 	        }
@@ -6132,6 +6133,7 @@ webpackJsonp([0],[
 	    AboutComponent.prototype.OnUndoRedoRecieved = function (payloadType) {
 	        if (payloadType === "ABOUT") {
 	            this.GetAboutDataItems();
+	            this.newAboutData();
 	            console.log("OnUndoRedoRecieved About");
 	            console.log(payloadType);
 	        }

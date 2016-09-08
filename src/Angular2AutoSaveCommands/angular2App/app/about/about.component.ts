@@ -127,6 +127,7 @@ export class AboutComponent implements OnInit {
     private OnUndoRedoRecieved(payloadType) {
         if (payloadType === "ABOUT") {
             this.GetAboutDataItems();
+            this.newAboutData();
             console.log("OnUndoRedoRecieved About");
             console.log(payloadType);
         } 
