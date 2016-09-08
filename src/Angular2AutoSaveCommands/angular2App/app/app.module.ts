@@ -7,11 +7,14 @@ import { Configuration } from './app.constants';
 import { routing } from './app.routes';
 import { HttpModule, JsonpModule } from '@angular/http';
 
-import { provideRouter, RouterConfig } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { HttpRequestsComponent } from './httprequests/httprequests.component';
+import { CommandsComponent } from './commands/commands.component';
 
-import { TestDataService } from './services/testDataService';
+import { CommandService } from './services/commandService';
+import { AboutDataService } from './services/aboutDataService';
+import { HomeDataService } from './services/homeDataService';
 
 @NgModule({
     imports: [
@@ -25,10 +28,14 @@ import { TestDataService } from './services/testDataService';
     declarations: [
         AppComponent,
         AboutComponent,
-        HomeComponent
+        HomeComponent,
+        HttpRequestsComponent,
+        CommandsComponent
     ],
     providers: [
-        TestDataService,
+        CommandService,
+        AboutDataService,
+        HomeDataService,
         Configuration
     ],
     bootstrap:    [AppComponent],

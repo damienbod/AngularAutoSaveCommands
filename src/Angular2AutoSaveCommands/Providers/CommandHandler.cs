@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using Angular2AutoSaveCommands.Models;
 using Angular2AutoSaveCommands.Providers.Commands;
 using Microsoft.Extensions.Logging;
@@ -166,5 +167,9 @@ namespace Angular2AutoSaveCommands.Providers
             _commandDataAccessProvider.Save();
         }
 
+        public List<CommandEntity> GetAll()
+        {
+            return _context.CommandEntity.ToList();
+        }
     }
 }
