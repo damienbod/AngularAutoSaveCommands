@@ -23,34 +23,24 @@ namespace Angular2AutoSaveCommands.ActionFilters
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var commandDto = context.ActionArguments["commandDto"] as CommandDto;
-            if (commandDto != null)
+            if (commandDto == null)
             {
-                _logger.LogDebug("validating PayloadType");
+                throw new ArgumentNullException("Body is not a CommandDto");
+            }
 
-                _logger.LogDebug("validating CommandType");
+            _logger.LogDebug("validating CommandType");
+            if (!CommandTypes.AllowedTypes.Contains(commandDto.CommandType))
+            {
+                throw new ArgumentException("CommandTypes not allowed");
+            }
 
-                var dd = commandDto.PayloadType;
+            _logger.LogDebug("validating PayloadType");
+            if (!PayloadTypes.AllowedTypes.Contains(commandDto.PayloadType))
+            {
+                throw new ArgumentException("PayloadType not allowed");
             }
 
             base.OnActionExecuting(context);
-        }
-
-        public override void OnActionExecuted(ActionExecutedContext context)
-        {
-            _logger.LogWarning("ClassFilter OnActionExecuted");
-            base.OnActionExecuted(context);
-        }
-
-        public override void OnResultExecuting(ResultExecutingContext context)
-        {
-            _logger.LogWarning("ClassFilter OnResultExecuting");
-            base.OnResultExecuting(context);
-        }
-
-        public override void OnResultExecuted(ResultExecutedContext context)
-        {
-            _logger.LogWarning("ClassFilter OnResultExecuted");
-            base.OnResultExecuted(context);
         }
     }
 }
