@@ -2,7 +2,6 @@
 using Angular2AutoSaveCommands.Models;
 using Angular2AutoSaveCommands.Providers;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 
 namespace Angular2AutoSaveCommands.Controllers
 {
@@ -20,11 +19,6 @@ namespace Angular2AutoSaveCommands.Controllers
         [Route("Execute")]
         public IActionResult Post([FromBody]CommandDto commandDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Model is invalid");
-            }
-
             _commandHandler.Execute(commandDto);
             return Ok(commandDto);
         }
