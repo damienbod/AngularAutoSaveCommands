@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Angular2AutoSaveCommands.Providers;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
+using Angular2AutoSaveCommands.ActionFilters;
 
 namespace Angular2AutoSaveCommands
 {
@@ -34,6 +35,9 @@ namespace Angular2AutoSaveCommands
             services.AddDbContext<DomainModelMsSqlServerContext>(options =>
                 options.UseSqlServer(  sqlConnectionString )
             );
+
+            services.AddScoped<ValidatePayloadTypeFilter>();
+            services.AddScoped<ValidationCommandTypeFilter>();
 
             services.AddMvc().AddJsonOptions(options =>
             {
