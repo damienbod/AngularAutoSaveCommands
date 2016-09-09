@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Angular2AutoSaveCommands.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
 
 namespace Angular2AutoSaveCommands.ActionFilters
 {
@@ -25,19 +22,34 @@ namespace Angular2AutoSaveCommands.ActionFilters
             var commandDto = context.ActionArguments["commandDto"] as CommandDto;
             if (commandDto == null)
             {
-                throw new ArgumentNullException("Body is not a CommandDto");
+                context.HttpContext.Response.StatusCode = 400;
+                context.Result = new ContentResult()
+                {
+                    Content = "The body is not a CommandDto type"
+                };
+                return;
             }
 
             _logger.LogDebug("validating CommandType");
             if (!CommandTypes.AllowedTypes.Contains(commandDto.CommandType))
             {
-                throw new ArgumentException("CommandTypes not allowed");
+                context.HttpContext.Response.StatusCode = 400;
+                context.Result = new ContentResult()
+                {
+                    Content = "CommandTypes not allowed"
+                };
+                return;
             }
 
             _logger.LogDebug("validating PayloadType");
             if (!PayloadTypes.AllowedTypes.Contains(commandDto.PayloadType))
             {
-                throw new ArgumentException("PayloadType not allowed");
+                context.HttpContext.Response.StatusCode = 400;
+                context.Result = new ContentResult()
+                {
+                    Content = "PayloadType not allowed"
+                };
+                return;
             }
 
             base.OnActionExecuting(context);
