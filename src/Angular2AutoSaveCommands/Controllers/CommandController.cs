@@ -15,19 +15,18 @@ namespace Angular2AutoSaveCommands.Controllers
             _commandHandler = commandHandler;
         }
 
-        [ServiceFilter(typeof(ValidatePayloadTypeFilter))]
-        [ServiceFilter(typeof(ValidationCommandTypeFilter))]
+        [ServiceFilter(typeof(ValidateCommandDtoFilter))]
         [HttpPost]
         [Route("Execute")]
-        public IActionResult Post([FromBody]CommandDto value)
+        public IActionResult Post([FromBody]CommandDto commandDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest("Model is invalid");
             }
 
-            _commandHandler.Execute(value);
-            return Ok(value);
+            _commandHandler.Execute(commandDto);
+            return Ok(commandDto);
         }
 
         [HttpPost]

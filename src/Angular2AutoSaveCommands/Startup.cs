@@ -36,8 +36,7 @@ namespace Angular2AutoSaveCommands
                 options.UseSqlServer(  sqlConnectionString )
             );
 
-            services.AddScoped<ValidatePayloadTypeFilter>();
-            services.AddScoped<ValidationCommandTypeFilter>();
+            services.AddScoped<ValidateCommandDtoFilter>();
 
             services.AddMvc().AddJsonOptions(options =>
             {
