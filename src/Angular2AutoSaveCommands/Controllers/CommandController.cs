@@ -1,4 +1,5 @@
-﻿using Angular2AutoSaveCommands.Models;
+﻿using Angular2AutoSaveCommands.ActionFilters;
+using Angular2AutoSaveCommands.Models;
 using Angular2AutoSaveCommands.Providers;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -14,6 +15,8 @@ namespace Angular2AutoSaveCommands.Controllers
             _commandHandler = commandHandler;
         }
 
+        [ServiceFilter(typeof(ValidatePayloadTypeFilter))]
+        [ServiceFilter(typeof(ValidationCommandTypeFilter))]
         [HttpPost]
         [Route("Execute")]
         public IActionResult Post([FromBody]CommandDto value)
