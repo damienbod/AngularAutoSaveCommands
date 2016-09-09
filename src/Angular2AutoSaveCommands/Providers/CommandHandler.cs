@@ -35,7 +35,7 @@ namespace Angular2AutoSaveCommands.Providers
                 return;
             }
 
-            if (commandDto.PayloadType == PayloadTypes.Home)
+            if (commandDto.PayloadType == PayloadTypes.HOME)
             {
                 ExecuteHomeDataCommand(commandDto);
                 return;

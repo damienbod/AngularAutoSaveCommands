@@ -1,7 +1,7 @@
-﻿using Angular2AutoSaveCommands.Models;
+﻿using Angular2AutoSaveCommands.ActionFilters;
+using Angular2AutoSaveCommands.Models;
 using Angular2AutoSaveCommands.Providers;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 
 namespace Angular2AutoSaveCommands.Controllers
 {
@@ -14,27 +14,13 @@ namespace Angular2AutoSaveCommands.Controllers
             _commandHandler = commandHandler;
         }
 
+        [ServiceFilter(typeof(ValidateCommandDtoFilter))]
         [HttpPost]
         [Route("Execute")]
-        public IActionResult Post([FromBody]CommandDto value)
+        public IActionResult Post([FromBody]CommandDto commandDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Model is invalid");
-            }
-
-            if (!validateCommandType(value))
-            {
-                return BadRequest($"CommandType: {value.CommandType} is invalid");
-            }
-
-            if (!validatePayloadType(value))
-            {
-                return BadRequest($"PayloadType: {value.CommandType} is invalid");
-            }
-
-            _commandHandler.Execute(value);
-            return Ok(value);
+            _commandHandler.Execute(commandDto);
+            return Ok(commandDto);
         }
 
         [HttpPost]
@@ -52,19 +38,6 @@ namespace Angular2AutoSaveCommands.Controllers
             var commandDto = _commandHandler.Redo();
             return Ok(commandDto);
         }
-
-        // TODO
-        private bool validateCommandType(CommandDto value)
-        {
-            return true;
-        }
-
-        // TODO
-        private bool validatePayloadType(CommandDto value)
-        {
-            return true;
-        }
-
 
         [HttpGet]
         public IActionResult Get()
