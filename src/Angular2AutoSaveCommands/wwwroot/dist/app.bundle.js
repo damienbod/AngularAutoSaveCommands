@@ -55,16 +55,16 @@ webpackJsonp([0],[
 	var forms_1 = __webpack_require__(/*! @angular/forms */ 24);
 	var platform_browser_1 = __webpack_require__(/*! @angular/platform-browser */ 21);
 	var app_component_1 = __webpack_require__(/*! ./app.component */ 28);
-	var app_constants_1 = __webpack_require__(/*! ./app.constants */ 60);
-	var app_routes_1 = __webpack_require__(/*! ./app.routes */ 64);
-	var http_1 = __webpack_require__(/*! @angular/http */ 58);
-	var home_component_1 = __webpack_require__(/*! ./home/home.component */ 65);
-	var about_component_1 = __webpack_require__(/*! ./about/about.component */ 90);
-	var httprequests_component_1 = __webpack_require__(/*! ./httprequests/httprequests.component */ 94);
-	var commands_component_1 = __webpack_require__(/*! ./commands/commands.component */ 96);
-	var commandService_1 = __webpack_require__(/*! ./services/commandService */ 57);
-	var aboutDataService_1 = __webpack_require__(/*! ./services/aboutDataService */ 92);
-	var homeDataService_1 = __webpack_require__(/*! ./services/homeDataService */ 68);
+	var app_constants_1 = __webpack_require__(/*! ./app.constants */ 62);
+	var app_routes_1 = __webpack_require__(/*! ./app.routes */ 70);
+	var http_1 = __webpack_require__(/*! @angular/http */ 60);
+	var home_component_1 = __webpack_require__(/*! ./home/home.component */ 71);
+	var about_component_1 = __webpack_require__(/*! ./about/about.component */ 95);
+	var httprequests_component_1 = __webpack_require__(/*! ./httprequests/httprequests.component */ 99);
+	var commands_component_1 = __webpack_require__(/*! ./commands/commands.component */ 101);
+	var commandService_1 = __webpack_require__(/*! ./services/commandService */ 59);
+	var aboutDataService_1 = __webpack_require__(/*! ./services/aboutDataService */ 97);
+	var homeDataService_1 = __webpack_require__(/*! ./services/homeDataService */ 74);
 	var AppModule = (function () {
 	    function AppModule() {
 	    }
@@ -108,7 +108,7 @@ webpackJsonp([0],[
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * @license Angular v2.0.1
+	 * @license Angular v2.1.0
 	 * (c) 2010-2016 Google, Inc. https://angular.io/
 	 * License: MIT
 	 */
@@ -133,74 +133,6 @@ webpackJsonp([0],[
 	    function isArray(obj) {
 	        return Array.isArray(obj);
 	    }
-	    var StringWrapper = (function () {
-	        function StringWrapper() {
-	        }
-	        StringWrapper.fromCharCode = function (code) { return String.fromCharCode(code); };
-	        StringWrapper.charCodeAt = function (s, index) { return s.charCodeAt(index); };
-	        StringWrapper.split = function (s, regExp) { return s.split(regExp); };
-	        StringWrapper.equals = function (s, s2) { return s === s2; };
-	        StringWrapper.stripLeft = function (s, charVal) {
-	            if (s && s.length) {
-	                var pos = 0;
-	                for (var i = 0; i < s.length; i++) {
-	                    if (s[i] != charVal)
-	                        break;
-	                    pos++;
-	                }
-	                s = s.substring(pos);
-	            }
-	            return s;
-	        };
-	        StringWrapper.stripRight = function (s, charVal) {
-	            if (s && s.length) {
-	                var pos = s.length;
-	                for (var i = s.length - 1; i >= 0; i--) {
-	                    if (s[i] != charVal)
-	                        break;
-	                    pos--;
-	                }
-	                s = s.substring(0, pos);
-	            }
-	            return s;
-	        };
-	        StringWrapper.replace = function (s, from, replace) {
-	            return s.replace(from, replace);
-	        };
-	        StringWrapper.replaceAll = function (s, from, replace) {
-	            return s.replace(from, replace);
-	        };
-	        StringWrapper.slice = function (s, from, to) {
-	            if (from === void 0) { from = 0; }
-	            if (to === void 0) { to = null; }
-	            return s.slice(from, to === null ? undefined : to);
-	        };
-	        StringWrapper.replaceAllMapped = function (s, from, cb) {
-	            return s.replace(from, function () {
-	                var matches = [];
-	                for (var _i = 0; _i < arguments.length; _i++) {
-	                    matches[_i - 0] = arguments[_i];
-	                }
-	                // Remove offset & string from the result array
-	                matches.splice(-2, 2);
-	                // The callback receives match, p1, ..., pn
-	                return cb(matches);
-	            });
-	        };
-	        StringWrapper.contains = function (s, substr) { return s.indexOf(substr) != -1; };
-	        StringWrapper.compare = function (a, b) {
-	            if (a < b) {
-	                return -1;
-	            }
-	            else if (a > b) {
-	                return 1;
-	            }
-	            else {
-	                return 0;
-	            }
-	        };
-	        return StringWrapper;
-	    }());
 	    var NumberWrapper = (function () {
 	        function NumberWrapper() {
 	        }
@@ -484,26 +416,6 @@ webpackJsonp([0],[
 	    var StringMapWrapper = (function () {
 	        function StringMapWrapper() {
 	        }
-	        StringMapWrapper.get = function (map, key) {
-	            return map.hasOwnProperty(key) ? map[key] : undefined;
-	        };
-	        StringMapWrapper.set = function (map, key, value) { map[key] = value; };
-	        StringMapWrapper.keys = function (map) { return Object.keys(map); };
-	        StringMapWrapper.values = function (map) {
-	            return Object.keys(map).map(function (k) { return map[k]; });
-	        };
-	        StringMapWrapper.isEmpty = function (map) {
-	            for (var prop in map) {
-	                return false;
-	            }
-	            return true;
-	        };
-	        StringMapWrapper.forEach = function (map, callback) {
-	            for (var _i = 0, _a = Object.keys(map); _i < _a.length; _i++) {
-	                var k = _a[_i];
-	                callback(map[k], k);
-	            }
-	        };
 	        StringMapWrapper.merge = function (m1, m2) {
 	            var m = {};
 	            for (var _i = 0, _a = Object.keys(m1); _i < _a.length; _i++) {
@@ -665,6 +577,9 @@ webpackJsonp([0],[
 	
 	    var isPromise = _angular_core.__core_private__.isPromise;
 	
+	    function isEmptyInputValue(value) {
+	        return value == null || typeof value === 'string' && value.length === 0;
+	    }
 	    /**
 	     * Providers for validators to be used for {@link FormControl}s in a form.
 	     *
@@ -708,20 +623,19 @@ webpackJsonp([0],[
 	         * Validator that requires controls to have a non-empty value.
 	         */
 	        Validators.required = function (control) {
-	            return isBlank(control.value) || (isString(control.value) && control.value == '') ?
-	                { 'required': true } :
-	                null;
+	            return isEmptyInputValue(control.value) ? { 'required': true } : null;
 	        };
 	        /**
 	         * Validator that requires controls to have a value of a minimum length.
 	         */
 	        Validators.minLength = function (minLength) {
 	            return function (control) {
-	                if (isPresent(Validators.required(control)))
-	                    return null;
-	                var v = control.value;
-	                return v.length < minLength ?
-	                    { 'minlength': { 'requiredLength': minLength, 'actualLength': v.length } } :
+	                if (isEmptyInputValue(control.value)) {
+	                    return null; // don't validate empty values to allow optional controls
+	                }
+	                var length = typeof control.value === 'string' ? control.value.length : 0;
+	                return length < minLength ?
+	                    { 'minlength': { 'requiredLength': minLength, 'actualLength': length } } :
 	                    null;
 	            };
 	        };
@@ -730,11 +644,9 @@ webpackJsonp([0],[
 	         */
 	        Validators.maxLength = function (maxLength) {
 	            return function (control) {
-	                if (isPresent(Validators.required(control)))
-	                    return null;
-	                var v = control.value;
-	                return v.length > maxLength ?
-	                    { 'maxlength': { 'requiredLength': maxLength, 'actualLength': v.length } } :
+	                var length = typeof control.value === 'string' ? control.value.length : 0;
+	                return length > maxLength ?
+	                    { 'maxlength': { 'requiredLength': maxLength, 'actualLength': length } } :
 	                    null;
 	            };
 	        };
@@ -743,12 +655,14 @@ webpackJsonp([0],[
 	         */
 	        Validators.pattern = function (pattern) {
 	            return function (control) {
-	                if (isPresent(Validators.required(control)))
-	                    return null;
+	                if (isEmptyInputValue(control.value)) {
+	                    return null; // don't validate empty values to allow optional controls
+	                }
 	                var regex = new RegExp("^" + pattern + "$");
-	                var v = control.value;
-	                return regex.test(v) ? null :
-	                    { 'pattern': { 'requiredPattern': "^" + pattern + "$", 'actualValue': v } };
+	                var value = control.value;
+	                return regex.test(value) ?
+	                    null :
+	                    { 'pattern': { 'requiredPattern': "^" + pattern + "$", 'actualValue': value } };
 	            };
 	        };
 	        /**
@@ -760,7 +674,7 @@ webpackJsonp([0],[
 	         * of the individual error maps.
 	         */
 	        Validators.compose = function (validators) {
-	            if (isBlank(validators))
+	            if (!validators)
 	                return null;
 	            var presentValidators = validators.filter(isPresent);
 	            if (presentValidators.length == 0)
@@ -770,7 +684,7 @@ webpackJsonp([0],[
 	            };
 	        };
 	        Validators.composeAsync = function (validators) {
-	            if (isBlank(validators))
+	            if (!validators)
 	                return null;
 	            var presentValidators = validators.filter(isPresent);
 	            if (presentValidators.length == 0)
@@ -795,7 +709,7 @@ webpackJsonp([0],[
 	        var res = arrayOfErrors.reduce(function (res, errors) {
 	            return isPresent(errors) ? StringMapWrapper.merge(res, errors) : res;
 	        }, {});
-	        return StringMapWrapper.isEmpty(res) ? null : res;
+	        return Object.keys(res).length === 0 ? null : res;
 	    }
 	
 	    /**
@@ -1174,7 +1088,7 @@ webpackJsonp([0],[
 	            return "" + value;
 	        if (!isPrimitive(value))
 	            value = 'Object';
-	        return StringWrapper.slice(id + ": " + value, 0, 50);
+	        return (id + ": " + value).slice(0, 50);
 	    }
 	    function _extractId(valueString) {
 	        return valueString.split(':')[0];
@@ -1349,7 +1263,7 @@ webpackJsonp([0],[
 	            value = "'" + value + "'";
 	        if (!isPrimitive(value))
 	            value = 'Object';
-	        return StringWrapper.slice(id + ": " + value, 0, 50);
+	        return (id + ": " + value).slice(0, 50);
 	    }
 	    function _extractId$1(valueString) {
 	        return valueString.split(':')[0];
@@ -1524,9 +1438,9 @@ webpackJsonp([0],[
 	        return p;
 	    }
 	    function setUpControl(control, dir) {
-	        if (isBlank(control))
+	        if (!control)
 	            _throwError(dir, 'Cannot find control with');
-	        if (isBlank(dir.valueAccessor))
+	        if (!dir.valueAccessor)
 	            _throwError(dir, 'No value accessor for form control with');
 	        control.validator = Validators.compose([control.validator, dir.validator]);
 	        control.asyncValidator = Validators.composeAsync([control.asyncValidator, dir.asyncValidator]);
@@ -1613,7 +1527,7 @@ webpackJsonp([0],[
 	    }
 	    // TODO: vsavkin remove it once https://github.com/angular/angular/issues/3011 is implemented
 	    function selectValueAccessor(dir, valueAccessors) {
-	        if (isBlank(valueAccessors))
+	        if (!valueAccessors)
 	            return null;
 	        var defaultAccessor;
 	        var builtinAccessor;
@@ -1901,9 +1815,9 @@ webpackJsonp([0],[
 	            var errorFn = function (err) { return null; };
 	            var completeFn = function () { return null; };
 	            if (generatorOrNext && typeof generatorOrNext === 'object') {
-	                schedulerFn = this.__isAsync ? function (value /** TODO #9100 */) {
+	                schedulerFn = this.__isAsync ? function (value) {
 	                    setTimeout(function () { return generatorOrNext.next(value); });
-	                } : function (value /** TODO #9100 */) { generatorOrNext.next(value); };
+	                } : function (value) { generatorOrNext.next(value); };
 	                if (generatorOrNext.error) {
 	                    errorFn = this.__isAsync ? function (err) { setTimeout(function () { return generatorOrNext.error(err); }); } :
 	                        function (err) { generatorOrNext.error(err); };
@@ -1914,9 +1828,8 @@ webpackJsonp([0],[
 	                }
 	            }
 	            else {
-	                schedulerFn = this.__isAsync ? function (value /** TODO #9100 */) {
-	                    setTimeout(function () { return generatorOrNext(value); });
-	                } : function (value /** TODO #9100 */) { generatorOrNext(value); };
+	                schedulerFn = this.__isAsync ? function (value) { setTimeout(function () { return generatorOrNext(value); }); } :
+	                    function (value) { generatorOrNext(value); };
 	                if (error) {
 	                    errorFn =
 	                        this.__isAsync ? function (err) { setTimeout(function () { return error(err); }); } : function (err) { error(err); };
@@ -1971,15 +1884,12 @@ webpackJsonp([0],[
 	            return null;
 	        return path.reduce(function (v, name) {
 	            if (v instanceof FormGroup) {
-	                return isPresent(v.controls[name]) ? v.controls[name] : null;
+	                return v.controls[name] || null;
 	            }
-	            else if (v instanceof FormArray) {
-	                var index = name;
-	                return isPresent(v.at(index)) ? v.at(index) : null;
+	            if (v instanceof FormArray) {
+	                return v.at(name) || null;
 	            }
-	            else {
-	                return null;
-	            }
+	            return null;
 	        }, control);
 	    }
 	    function toObservable(r) {
@@ -2400,7 +2310,7 @@ webpackJsonp([0],[
 	            if (path === void 0) { path = null; }
 	            var control = isPresent(path) && !ListWrapper.isEmpty(path) ? this.get(path) : this;
 	            if (isPresent(control) && isPresent(control._errors)) {
-	                return StringMapWrapper.get(control._errors, errorCode);
+	                return control._errors[errorCode];
 	            }
 	            else {
 	                return null;
@@ -2511,6 +2421,8 @@ webpackJsonp([0],[
 	     *
 	     * You can also initialize the control with a form state object on instantiation,
 	     * which includes both the value and whether or not the control is disabled.
+	     * You can't use the value key without the disabled key; both are required
+	     * to use this way of initialization.
 	     *
 	     * ```ts
 	     * const ctrl = new FormControl({value: 'n/a', disabled: true});
@@ -2810,9 +2722,9 @@ webpackJsonp([0],[
 	            var _this = this;
 	            var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
 	            this._checkAllValuesPresent(value);
-	            StringMapWrapper.forEach(value, function (newValue, name) {
+	            Object.keys(value).forEach(function (name) {
 	                _this._throwIfControlMissing(name);
-	                _this.controls[name].setValue(newValue, { onlySelf: true });
+	                _this.controls[name].setValue(value[name], { onlySelf: true });
 	            });
 	            this.updateValueAndValidity({ onlySelf: onlySelf });
 	        };
@@ -2840,9 +2752,9 @@ webpackJsonp([0],[
 	        FormGroup.prototype.patchValue = function (value, _a) {
 	            var _this = this;
 	            var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
-	            StringMapWrapper.forEach(value, function (newValue, name) {
+	            Object.keys(value).forEach(function (name) {
 	                if (_this.controls[name]) {
-	                    _this.controls[name].patchValue(newValue, { onlySelf: true });
+	                    _this.controls[name].patchValue(value[name], { onlySelf: true });
 	                }
 	            });
 	            this.updateValueAndValidity({ onlySelf: onlySelf });
@@ -2912,7 +2824,8 @@ webpackJsonp([0],[
 	        };
 	        /** @internal */
 	        FormGroup.prototype._forEachChild = function (cb) {
-	            StringMapWrapper.forEach(this.controls, cb);
+	            var _this = this;
+	            Object.keys(this.controls).forEach(function (k) { return cb(_this.controls[k], k); });
 	        };
 	        /** @internal */
 	        FormGroup.prototype._setUpControls = function () {
@@ -3276,7 +3189,8 @@ webpackJsonp([0],[
 	     * sub-groups within the form.
 	     *
 	     * You can listen to the directive's `ngSubmit` event to be notified when the user has
-	     * triggered a form submission.
+	     * triggered a form submission. The `ngSubmit` event will be emitted with the original form
+	     * submission event.
 	     *
 	     * {@example forms/ts/simpleForm/simple_form_example.ts region='Component'}
 	     *
@@ -3367,9 +3281,9 @@ webpackJsonp([0],[
 	            });
 	        };
 	        NgForm.prototype.setValue = function (value) { this.control.setValue(value); };
-	        NgForm.prototype.onSubmit = function () {
+	        NgForm.prototype.onSubmit = function ($event) {
 	            this._submitted = true;
-	            this.ngSubmit.emit(null);
+	            this.ngSubmit.emit($event);
 	            return false;
 	        };
 	        NgForm.prototype.onReset = function () { this.resetForm(); };
@@ -3387,7 +3301,7 @@ webpackJsonp([0],[
 	            { type: _angular_core.Directive, args: [{
 	                        selector: 'form:not([ngNoForm]):not([formGroup]),ngForm,[ngForm]',
 	                        providers: [formDirectiveProvider],
-	                        host: { '(submit)': 'onSubmit()', '(reset)': 'onReset()' },
+	                        host: { '(submit)': 'onSubmit($event)', '(reset)': 'onReset()' },
 	                        outputs: ['ngSubmit'],
 	                        exportAs: 'ngForm'
 	                    },] },
@@ -3904,6 +3818,10 @@ webpackJsonp([0],[
 	     * its {@link AbstractControl.statusChanges} event to be notified when the validation status is
 	     * re-calculated.
 	     *
+	     * Furthermore, you can listen to the directive's `ngSubmit` event to be notified when the user has
+	     * triggered a form submission. The `ngSubmit` event will be emitted with the original form
+	     * submission event.
+	     *
 	     * ### Example
 	     *
 	     * In this example, we create form controls for first name and last name.
@@ -3982,9 +3900,9 @@ webpackJsonp([0],[
 	            var ctrl = this.form.get(dir.path);
 	            ctrl.setValue(value);
 	        };
-	        FormGroupDirective.prototype.onSubmit = function () {
+	        FormGroupDirective.prototype.onSubmit = function ($event) {
 	            this._submitted = true;
-	            this.ngSubmit.emit(null);
+	            this.ngSubmit.emit($event);
 	            return false;
 	        };
 	        FormGroupDirective.prototype.onReset = function () { this.resetForm(); };
@@ -4021,7 +3939,7 @@ webpackJsonp([0],[
 	            this.form.asyncValidator = Validators.composeAsync([this.form.asyncValidator, async]);
 	        };
 	        FormGroupDirective.prototype._checkFormPresent = function () {
-	            if (isBlank(this.form)) {
+	            if (!this.form) {
 	                ReactiveErrors.missingFormException();
 	            }
 	        };
@@ -4029,7 +3947,7 @@ webpackJsonp([0],[
 	            { type: _angular_core.Directive, args: [{
 	                        selector: '[formGroup]',
 	                        providers: [formDirectiveProvider$1],
-	                        host: { '(submit)': 'onSubmit()', '(reset)': 'onReset()' },
+	                        host: { '(submit)': 'onSubmit($event)', '(reset)': 'onReset()' },
 	                        exportAs: 'ngForm'
 	                    },] },
 	        ];
@@ -4643,8 +4561,8 @@ webpackJsonp([0],[
 	        FormBuilder.prototype.group = function (controlsConfig, extra) {
 	            if (extra === void 0) { extra = null; }
 	            var controls = this._reduceControls(controlsConfig);
-	            var validator = isPresent(extra) ? StringMapWrapper.get(extra, 'validator') : null;
-	            var asyncValidator = isPresent(extra) ? StringMapWrapper.get(extra, 'asyncValidator') : null;
+	            var validator = isPresent(extra) ? extra['validator'] : null;
+	            var asyncValidator = isPresent(extra) ? extra['asyncValidator'] : null;
 	            return new FormGroup(controls, validator, asyncValidator);
 	        };
 	        /**
@@ -4675,8 +4593,8 @@ webpackJsonp([0],[
 	        FormBuilder.prototype._reduceControls = function (controlsConfig) {
 	            var _this = this;
 	            var controls = {};
-	            StringMapWrapper.forEach(controlsConfig, function (controlConfig, controlName) {
-	                controls[controlName] = _this._createControl(controlConfig);
+	            Object.keys(controlsConfig).forEach(function (controlName) {
+	                controls[controlName] = _this._createControl(controlsConfig[controlName]);
 	            });
 	            return controls;
 	        };
@@ -4859,7 +4777,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(/*! @angular/core */ 3);
 	var router_1 = __webpack_require__(/*! @angular/router */ 29);
-	var commandService_1 = __webpack_require__(/*! ./services/commandService */ 57);
+	var commandService_1 = __webpack_require__(/*! ./services/commandService */ 59);
 	var AppComponent = (function () {
 	    function AppComponent(router, _commandService) {
 	        this.router = router;
@@ -4886,8 +4804,8 @@ webpackJsonp([0],[
 	    AppComponent = __decorate([
 	        core_1.Component({
 	            selector: 'my-app',
-	            template: __webpack_require__(/*! ./app.component.html */ 61),
-	            styles: [__webpack_require__(/*! ./app.component.scss */ 62), __webpack_require__(/*! ../style/app.scss */ 63)]
+	            template: __webpack_require__(/*! ./app.component.html */ 63),
+	            styles: [String(__webpack_require__(/*! ./app.component.scss */ 64)), String(__webpack_require__(/*! ../style/app.scss */ 68))]
 	        }), 
 	        __metadata('design:paramtypes', [router_1.Router, commandService_1.CommandService])
 	    ], AppComponent);
@@ -4925,7 +4843,9 @@ webpackJsonp([0],[
 /* 54 */,
 /* 55 */,
 /* 56 */,
-/* 57 */
+/* 57 */,
+/* 58 */,
+/* 59 */
 /*!****************************************************!*\
   !*** ./angular2App/app/services/commandService.ts ***!
   \****************************************************/
@@ -4942,9 +4862,9 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(/*! @angular/core */ 3);
-	var http_1 = __webpack_require__(/*! @angular/http */ 58);
-	__webpack_require__(/*! rxjs/add/operator/map */ 59);
-	var app_constants_1 = __webpack_require__(/*! ../app.constants */ 60);
+	var http_1 = __webpack_require__(/*! @angular/http */ 60);
+	__webpack_require__(/*! rxjs/add/operator/map */ 61);
+	var app_constants_1 = __webpack_require__(/*! ../app.constants */ 62);
 	var CommandService = (function () {
 	    function CommandService(_http, _configuration) {
 	        var _this = this;
@@ -4988,8 +4908,8 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 58 */,
-/* 59 */
+/* 60 */,
+/* 61 */
 /*!************************************!*\
   !*** ./~/rxjs/add/operator/map.js ***!
   \************************************/
@@ -4997,12 +4917,12 @@ webpackJsonp([0],[
 
 	"use strict";
 	var Observable_1 = __webpack_require__(/*! ../../Observable */ 5);
-	var map_1 = __webpack_require__(/*! ../../operator/map */ 44);
+	var map_1 = __webpack_require__(/*! ../../operator/map */ 49);
 	Observable_1.Observable.prototype.map = map_1.map;
 	//# sourceMappingURL=map.js.map
 
 /***/ },
-/* 60 */
+/* 62 */
 /*!******************************************!*\
   !*** ./angular2App/app/app.constants.ts ***!
   \******************************************/
@@ -5033,7 +4953,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 61 */
+/* 63 */
 /*!********************************************!*\
   !*** ./angular2App/app/app.component.html ***!
   \********************************************/
@@ -5042,25 +4962,101 @@ webpackJsonp([0],[
 	module.exports = "<div class=\"container\" style=\"margin-top: 15px;\">\r\n\r\n    <nav class=\"navbar navbar-inverse\">\r\n        <div class=\"container-fluid\">\r\n            <div class=\"navbar-header\">\r\n                <a class=\"navbar-brand\" [routerLink]=\"['/commands']\">Commands</a>\r\n            </div>\r\n            <ul class=\"nav navbar-nav\">\r\n                <li><a [routerLink]=\"['/home']\">Home</a></li>\r\n                <li><a [routerLink]=\"['/about']\">About</a></li>\r\n                <li><a [routerLink]=\"['/httprequests']\">HTTP API Requests</a></li>\r\n            </ul>\r\n            <ul class=\"nav navbar-nav navbar-right\">\r\n                <li><a (click)=\"Undo()\">Undo</a></li>\r\n                <li><a (click)=\"Redo()\">Redo</a></li>\r\n                <li><a href=\"https://twitter.com/damien_bod\"><img src=\"assets/damienbod.jpg\" height=\"40\" style=\"margin-top: -10px;\" /></a></li>               \r\n\r\n            </ul>\r\n        </div>\r\n    </nav>\r\n\r\n    <router-outlet></router-outlet>\r\n\r\n    <footer>\r\n        <p>\r\n            <a href=\"https://twitter.com/damien_bod\">twitter(damienbod)</a>&nbsp; <a href=\"https://damienbod.com/\">damienbod.com</a>\r\n            &copy; 2016\r\n        </p>\r\n    </footer>\r\n</div>"
 
 /***/ },
-/* 62 */
+/* 64 */
 /*!********************************************!*\
   !*** ./angular2App/app/app.component.scss ***!
   \********************************************/
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = require(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.component.scss\");\nif(typeof content === 'string') content = [[module.id, content, '']];\n// add the styles to the DOM\nvar update = require(\"!./../../node_modules/style-loader/addStyles.js\")(content, {});\nif(content.locals) module.exports = content.locals;\n// Hot Module Replacement\nif(module.hot) {\n\t// When the styles change, update the <style> tags\n\tif(!content.locals) {\n\t\tmodule.hot.accept(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.component.scss\", function() {\n\t\t\tvar newContent = require(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.component.scss\");\n\t\t\tif(typeof newContent === 'string') newContent = [[module.id, newContent, '']];\n\t\t\tupdate(newContent);\n\t\t});\n\t}\n\t// When the module is disposed, remove the <style> tags\n\tmodule.hot.dispose(function() { update(); });\n}"
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../~/css-loader!./../../~/sass-loader!./app.component.scss */ 65);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 67)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.component.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.component.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
 
 /***/ },
-/* 63 */
+/* 65 */
+/*!***************************************************************************!*\
+  !*** ./~/css-loader!./~/sass-loader!./angular2App/app/app.component.scss ***!
+  \***************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 66)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "body {\n  padding-top: 50px; }\n\n.starter-template {\n  padding: 40px 15px;\n  text-align: center; }\n\n.navigationLinkButton:hover {\n  cursor: pointer; }\n\na {\n  color: #03A9F4; }\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 66 */,
+/* 67 */,
+/* 68 */
 /*!************************************!*\
   !*** ./angular2App/style/app.scss ***!
   \************************************/
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = require(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.scss\");\nif(typeof content === 'string') content = [[module.id, content, '']];\n// add the styles to the DOM\nvar update = require(\"!./../../node_modules/style-loader/addStyles.js\")(content, {});\nif(content.locals) module.exports = content.locals;\n// Hot Module Replacement\nif(module.hot) {\n\t// When the styles change, update the <style> tags\n\tif(!content.locals) {\n\t\tmodule.hot.accept(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.scss\", function() {\n\t\t\tvar newContent = require(\"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.scss\");\n\t\t\tif(typeof newContent === 'string') newContent = [[module.id, newContent, '']];\n\t\t\tupdate(newContent);\n\t\t});\n\t}\n\t// When the module is disposed, remove the <style> tags\n\tmodule.hot.dispose(function() { update(); });\n}"
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../~/css-loader!./../../~/sass-loader!./app.scss */ 69);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 67)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
 
 /***/ },
-/* 64 */
+/* 69 */
+/*!*******************************************************************!*\
+  !*** ./~/css-loader!./~/sass-loader!./angular2App/style/app.scss ***!
+  \*******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 66)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "a {\n  color: #03A9F4; }\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 70 */
 /*!***************************************!*\
   !*** ./angular2App/app/app.routes.ts ***!
   \***************************************/
@@ -5068,10 +5064,10 @@ webpackJsonp([0],[
 
 	"use strict";
 	var router_1 = __webpack_require__(/*! @angular/router */ 29);
-	var home_component_1 = __webpack_require__(/*! ./home/home.component */ 65);
-	var about_component_1 = __webpack_require__(/*! ./about/about.component */ 90);
-	var httprequests_component_1 = __webpack_require__(/*! ./httprequests/httprequests.component */ 94);
-	var commands_component_1 = __webpack_require__(/*! ./commands/commands.component */ 96);
+	var home_component_1 = __webpack_require__(/*! ./home/home.component */ 71);
+	var about_component_1 = __webpack_require__(/*! ./about/about.component */ 95);
+	var httprequests_component_1 = __webpack_require__(/*! ./httprequests/httprequests.component */ 99);
+	var commands_component_1 = __webpack_require__(/*! ./commands/commands.component */ 101);
 	var appRoutes = [
 	    { path: '', component: home_component_1.HomeComponent },
 	    { path: 'home', component: home_component_1.HomeComponent },
@@ -5083,7 +5079,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 65 */
+/* 71 */
 /*!************************************************!*\
   !*** ./angular2App/app/home/home.component.ts ***!
   \************************************************/
@@ -5100,20 +5096,20 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(/*! @angular/core */ 3);
-	var HomeData_1 = __webpack_require__(/*! ./HomeData */ 66);
-	var commandService_1 = __webpack_require__(/*! ../services/commandService */ 57);
-	var commandDto_1 = __webpack_require__(/*! ../services/commandDto */ 67);
-	var homeDataService_1 = __webpack_require__(/*! ../services/homeDataService */ 68);
+	var HomeData_1 = __webpack_require__(/*! ./HomeData */ 72);
+	var commandService_1 = __webpack_require__(/*! ../services/commandService */ 59);
+	var commandDto_1 = __webpack_require__(/*! ../services/commandDto */ 73);
+	var homeDataService_1 = __webpack_require__(/*! ../services/homeDataService */ 74);
 	var Subject_1 = __webpack_require__(/*! rxjs/Subject */ 4);
-	__webpack_require__(/*! rxjs/add/observable/of */ 69);
-	__webpack_require__(/*! rxjs/add/observable/throw */ 70);
-	__webpack_require__(/*! rxjs/add/operator/catch */ 73);
-	__webpack_require__(/*! rxjs/add/operator/debounceTime */ 74);
-	__webpack_require__(/*! rxjs/add/operator/distinctUntilChanged */ 81);
-	__webpack_require__(/*! rxjs/add/operator/do */ 83);
-	__webpack_require__(/*! rxjs/add/operator/filter */ 85);
-	__webpack_require__(/*! rxjs/add/operator/map */ 59);
-	__webpack_require__(/*! rxjs/add/operator/switchMap */ 87);
+	__webpack_require__(/*! rxjs/add/observable/of */ 75);
+	__webpack_require__(/*! rxjs/add/observable/throw */ 76);
+	__webpack_require__(/*! rxjs/add/operator/catch */ 79);
+	__webpack_require__(/*! rxjs/add/operator/debounceTime */ 80);
+	__webpack_require__(/*! rxjs/add/operator/distinctUntilChanged */ 87);
+	__webpack_require__(/*! rxjs/add/operator/do */ 89);
+	__webpack_require__(/*! rxjs/add/operator/filter */ 91);
+	__webpack_require__(/*! rxjs/add/operator/map */ 61);
+	__webpack_require__(/*! rxjs/add/operator/switchMap */ 92);
 	var HomeComponent = (function () {
 	    function HomeComponent(_commandService, _homeDataService) {
 	        var _this = this;
@@ -5197,7 +5193,7 @@ webpackJsonp([0],[
 	    HomeComponent = __decorate([
 	        core_1.Component({
 	            selector: 'homecomponent',
-	            template: __webpack_require__(/*! ./home.component.html */ 89)
+	            template: __webpack_require__(/*! ./home.component.html */ 94)
 	        }), 
 	        __metadata('design:paramtypes', [commandService_1.CommandService, homeDataService_1.HomeDataService])
 	    ], HomeComponent);
@@ -5207,7 +5203,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 66 */
+/* 72 */
 /*!******************************************!*\
   !*** ./angular2App/app/home/HomeData.ts ***!
   \******************************************/
@@ -5226,7 +5222,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 67 */
+/* 73 */
 /*!************************************************!*\
   !*** ./angular2App/app/services/commandDto.ts ***!
   \************************************************/
@@ -5246,7 +5242,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 68 */
+/* 74 */
 /*!*****************************************************!*\
   !*** ./angular2App/app/services/homeDataService.ts ***!
   \*****************************************************/
@@ -5263,9 +5259,9 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(/*! @angular/core */ 3);
-	var http_1 = __webpack_require__(/*! @angular/http */ 58);
-	__webpack_require__(/*! rxjs/add/operator/map */ 59);
-	var app_constants_1 = __webpack_require__(/*! ../app.constants */ 60);
+	var http_1 = __webpack_require__(/*! @angular/http */ 60);
+	__webpack_require__(/*! rxjs/add/operator/map */ 61);
+	var app_constants_1 = __webpack_require__(/*! ../app.constants */ 62);
 	var HomeDataService = (function () {
 	    function HomeDataService(_http, _configuration) {
 	        var _this = this;
@@ -5289,7 +5285,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 69 */
+/* 75 */
 /*!*************************************!*\
   !*** ./~/rxjs/add/observable/of.js ***!
   \*************************************/
@@ -5302,7 +5298,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=of.js.map
 
 /***/ },
-/* 70 */
+/* 76 */
 /*!****************************************!*\
   !*** ./~/rxjs/add/observable/throw.js ***!
   \****************************************/
@@ -5310,24 +5306,24 @@ webpackJsonp([0],[
 
 	"use strict";
 	var Observable_1 = __webpack_require__(/*! ../../Observable */ 5);
-	var throw_1 = __webpack_require__(/*! ../../observable/throw */ 71);
+	var throw_1 = __webpack_require__(/*! ../../observable/throw */ 77);
 	Observable_1.Observable.throw = throw_1._throw;
 	//# sourceMappingURL=throw.js.map
 
 /***/ },
-/* 71 */
+/* 77 */
 /*!************************************!*\
   !*** ./~/rxjs/observable/throw.js ***!
   \************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var ErrorObservable_1 = __webpack_require__(/*! ./ErrorObservable */ 72);
+	var ErrorObservable_1 = __webpack_require__(/*! ./ErrorObservable */ 78);
 	exports._throw = ErrorObservable_1.ErrorObservable.create;
 	//# sourceMappingURL=throw.js.map
 
 /***/ },
-/* 72 */
+/* 78 */
 /*!**********************************************!*\
   !*** ./~/rxjs/observable/ErrorObservable.js ***!
   \**********************************************/
@@ -5417,7 +5413,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=ErrorObservable.js.map
 
 /***/ },
-/* 73 */
+/* 79 */
 /*!**************************************!*\
   !*** ./~/rxjs/add/operator/catch.js ***!
   \**************************************/
@@ -5425,13 +5421,13 @@ webpackJsonp([0],[
 
 	"use strict";
 	var Observable_1 = __webpack_require__(/*! ../../Observable */ 5);
-	var catch_1 = __webpack_require__(/*! ../../operator/catch */ 51);
+	var catch_1 = __webpack_require__(/*! ../../operator/catch */ 52);
 	Observable_1.Observable.prototype.catch = catch_1._catch;
 	Observable_1.Observable.prototype._catch = catch_1._catch;
 	//# sourceMappingURL=catch.js.map
 
 /***/ },
-/* 74 */
+/* 80 */
 /*!*********************************************!*\
   !*** ./~/rxjs/add/operator/debounceTime.js ***!
   \*********************************************/
@@ -5439,12 +5435,12 @@ webpackJsonp([0],[
 
 	"use strict";
 	var Observable_1 = __webpack_require__(/*! ../../Observable */ 5);
-	var debounceTime_1 = __webpack_require__(/*! ../../operator/debounceTime */ 75);
+	var debounceTime_1 = __webpack_require__(/*! ../../operator/debounceTime */ 81);
 	Observable_1.Observable.prototype.debounceTime = debounceTime_1.debounceTime;
 	//# sourceMappingURL=debounceTime.js.map
 
 /***/ },
-/* 75 */
+/* 81 */
 /*!*****************************************!*\
   !*** ./~/rxjs/operator/debounceTime.js ***!
   \*****************************************/
@@ -5457,7 +5453,7 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Subscriber_1 = __webpack_require__(/*! ../Subscriber */ 8);
-	var async_1 = __webpack_require__(/*! ../scheduler/async */ 76);
+	var async_1 = __webpack_require__(/*! ../scheduler/async */ 82);
 	/**
 	 * Emits a value from the source Observable only after a particular time span
 	 * has passed without another source emission.
@@ -5568,20 +5564,20 @@ webpackJsonp([0],[
 	//# sourceMappingURL=debounceTime.js.map
 
 /***/ },
-/* 76 */
+/* 82 */
 /*!***********************************!*\
   !*** ./~/rxjs/scheduler/async.js ***!
   \***********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var AsyncAction_1 = __webpack_require__(/*! ./AsyncAction */ 77);
-	var AsyncScheduler_1 = __webpack_require__(/*! ./AsyncScheduler */ 79);
+	var AsyncAction_1 = __webpack_require__(/*! ./AsyncAction */ 83);
+	var AsyncScheduler_1 = __webpack_require__(/*! ./AsyncScheduler */ 85);
 	exports.async = new AsyncScheduler_1.AsyncScheduler(AsyncAction_1.AsyncAction);
 	//# sourceMappingURL=async.js.map
 
 /***/ },
-/* 77 */
+/* 83 */
 /*!*****************************************!*\
   !*** ./~/rxjs/scheduler/AsyncAction.js ***!
   \*****************************************/
@@ -5594,7 +5590,7 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var root_1 = __webpack_require__(/*! ../util/root */ 6);
-	var Action_1 = __webpack_require__(/*! ./Action */ 78);
+	var Action_1 = __webpack_require__(/*! ./Action */ 84);
 	/**
 	 * We need this JSDoc comment for affecting ESDoc.
 	 * @ignore
@@ -5731,7 +5727,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=AsyncAction.js.map
 
 /***/ },
-/* 78 */
+/* 84 */
 /*!************************************!*\
   !*** ./~/rxjs/scheduler/Action.js ***!
   \************************************/
@@ -5783,7 +5779,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=Action.js.map
 
 /***/ },
-/* 79 */
+/* 85 */
 /*!********************************************!*\
   !*** ./~/rxjs/scheduler/AsyncScheduler.js ***!
   \********************************************/
@@ -5795,7 +5791,7 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Scheduler_1 = __webpack_require__(/*! ../Scheduler */ 80);
+	var Scheduler_1 = __webpack_require__(/*! ../Scheduler */ 86);
 	var AsyncScheduler = (function (_super) {
 	    __extends(AsyncScheduler, _super);
 	    function AsyncScheduler() {
@@ -5842,7 +5838,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=AsyncScheduler.js.map
 
 /***/ },
-/* 80 */
+/* 86 */
 /*!*****************************!*\
   !*** ./~/rxjs/Scheduler.js ***!
   \*****************************/
@@ -5899,7 +5895,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=Scheduler.js.map
 
 /***/ },
-/* 81 */
+/* 87 */
 /*!*****************************************************!*\
   !*** ./~/rxjs/add/operator/distinctUntilChanged.js ***!
   \*****************************************************/
@@ -5907,12 +5903,12 @@ webpackJsonp([0],[
 
 	"use strict";
 	var Observable_1 = __webpack_require__(/*! ../../Observable */ 5);
-	var distinctUntilChanged_1 = __webpack_require__(/*! ../../operator/distinctUntilChanged */ 82);
+	var distinctUntilChanged_1 = __webpack_require__(/*! ../../operator/distinctUntilChanged */ 88);
 	Observable_1.Observable.prototype.distinctUntilChanged = distinctUntilChanged_1.distinctUntilChanged;
 	//# sourceMappingURL=distinctUntilChanged.js.map
 
 /***/ },
-/* 82 */
+/* 88 */
 /*!*************************************************!*\
   !*** ./~/rxjs/operator/distinctUntilChanged.js ***!
   \*************************************************/
@@ -5997,7 +5993,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=distinctUntilChanged.js.map
 
 /***/ },
-/* 83 */
+/* 89 */
 /*!***********************************!*\
   !*** ./~/rxjs/add/operator/do.js ***!
   \***********************************/
@@ -6005,13 +6001,13 @@ webpackJsonp([0],[
 
 	"use strict";
 	var Observable_1 = __webpack_require__(/*! ../../Observable */ 5);
-	var do_1 = __webpack_require__(/*! ../../operator/do */ 84);
+	var do_1 = __webpack_require__(/*! ../../operator/do */ 90);
 	Observable_1.Observable.prototype.do = do_1._do;
 	Observable_1.Observable.prototype._do = do_1._do;
 	//# sourceMappingURL=do.js.map
 
 /***/ },
-/* 84 */
+/* 90 */
 /*!*******************************!*\
   !*** ./~/rxjs/operator/do.js ***!
   \*******************************/
@@ -6131,7 +6127,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=do.js.map
 
 /***/ },
-/* 85 */
+/* 91 */
 /*!***************************************!*\
   !*** ./~/rxjs/add/operator/filter.js ***!
   \***************************************/
@@ -6139,113 +6135,12 @@ webpackJsonp([0],[
 
 	"use strict";
 	var Observable_1 = __webpack_require__(/*! ../../Observable */ 5);
-	var filter_1 = __webpack_require__(/*! ../../operator/filter */ 86);
+	var filter_1 = __webpack_require__(/*! ../../operator/filter */ 58);
 	Observable_1.Observable.prototype.filter = filter_1.filter;
 	//# sourceMappingURL=filter.js.map
 
 /***/ },
-/* 86 */
-/*!***********************************!*\
-  !*** ./~/rxjs/operator/filter.js ***!
-  \***********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var Subscriber_1 = __webpack_require__(/*! ../Subscriber */ 8);
-	/**
-	 * Filter items emitted by the source Observable by only emitting those that
-	 * satisfy a specified predicate.
-	 *
-	 * <span class="informal">Like
-	 * [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),
-	 * it only emits a value from the source if it passes a criterion function.</span>
-	 *
-	 * <img src="./img/filter.png" width="100%">
-	 *
-	 * Similar to the well-known `Array.prototype.filter` method, this operator
-	 * takes values from the source Observable, passes them through a `predicate`
-	 * function and only emits those values that yielded `true`.
-	 *
-	 * @example <caption>Emit only click events whose target was a DIV element</caption>
-	 * var clicks = Rx.Observable.fromEvent(document, 'click');
-	 * var clicksOnDivs = clicks.filter(ev => ev.target.tagName === 'DIV');
-	 * clicksOnDivs.subscribe(x => console.log(x));
-	 *
-	 * @see {@link distinct}
-	 * @see {@link distinctKey}
-	 * @see {@link distinctUntilChanged}
-	 * @see {@link distinctUntilKeyChanged}
-	 * @see {@link ignoreElements}
-	 * @see {@link partition}
-	 * @see {@link skip}
-	 *
-	 * @param {function(value: T, index: number): boolean} predicate A function that
-	 * evaluates each value emitted by the source Observable. If it returns `true`,
-	 * the value is emitted, if `false` the value is not passed to the output
-	 * Observable. The `index` parameter is the number `i` for the i-th source
-	 * emission that has happened since the subscription, starting from the number
-	 * `0`.
-	 * @param {any} [thisArg] An optional argument to determine the value of `this`
-	 * in the `predicate` function.
-	 * @return {Observable} An Observable of values from the source that were
-	 * allowed by the `predicate` function.
-	 * @method filter
-	 * @owner Observable
-	 */
-	function filter(predicate, thisArg) {
-	    return this.lift(new FilterOperator(predicate, thisArg));
-	}
-	exports.filter = filter;
-	var FilterOperator = (function () {
-	    function FilterOperator(predicate, thisArg) {
-	        this.predicate = predicate;
-	        this.thisArg = thisArg;
-	    }
-	    FilterOperator.prototype.call = function (subscriber, source) {
-	        return source._subscribe(new FilterSubscriber(subscriber, this.predicate, this.thisArg));
-	    };
-	    return FilterOperator;
-	}());
-	/**
-	 * We need this JSDoc comment for affecting ESDoc.
-	 * @ignore
-	 * @extends {Ignored}
-	 */
-	var FilterSubscriber = (function (_super) {
-	    __extends(FilterSubscriber, _super);
-	    function FilterSubscriber(destination, predicate, thisArg) {
-	        _super.call(this, destination);
-	        this.predicate = predicate;
-	        this.thisArg = thisArg;
-	        this.count = 0;
-	        this.predicate = predicate;
-	    }
-	    // the try catch block below is left specifically for
-	    // optimization and perf reasons. a tryCatcher is not necessary here.
-	    FilterSubscriber.prototype._next = function (value) {
-	        var result;
-	        try {
-	            result = this.predicate.call(this.thisArg, value, this.count++);
-	        }
-	        catch (err) {
-	            this.destination.error(err);
-	            return;
-	        }
-	        if (result) {
-	            this.destination.next(value);
-	        }
-	    };
-	    return FilterSubscriber;
-	}(Subscriber_1.Subscriber));
-	//# sourceMappingURL=filter.js.map
-
-/***/ },
-/* 87 */
+/* 92 */
 /*!******************************************!*\
   !*** ./~/rxjs/add/operator/switchMap.js ***!
   \******************************************/
@@ -6253,12 +6148,12 @@ webpackJsonp([0],[
 
 	"use strict";
 	var Observable_1 = __webpack_require__(/*! ../../Observable */ 5);
-	var switchMap_1 = __webpack_require__(/*! ../../operator/switchMap */ 88);
+	var switchMap_1 = __webpack_require__(/*! ../../operator/switchMap */ 93);
 	Observable_1.Observable.prototype.switchMap = switchMap_1.switchMap;
 	//# sourceMappingURL=switchMap.js.map
 
 /***/ },
-/* 88 */
+/* 93 */
 /*!**************************************!*\
   !*** ./~/rxjs/operator/switchMap.js ***!
   \**************************************/
@@ -6270,8 +6165,8 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var OuterSubscriber_1 = __webpack_require__(/*! ../OuterSubscriber */ 46);
-	var subscribeToResult_1 = __webpack_require__(/*! ../util/subscribeToResult */ 47);
+	var OuterSubscriber_1 = __webpack_require__(/*! ../OuterSubscriber */ 47);
+	var subscribeToResult_1 = __webpack_require__(/*! ../util/subscribeToResult */ 45);
 	/**
 	 * Projects each source value to an Observable which is merged in the output
 	 * Observable, emitting values only from the most recently projected Observable.
@@ -6405,7 +6300,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=switchMap.js.map
 
 /***/ },
-/* 89 */
+/* 94 */
 /*!**************************************************!*\
   !*** ./angular2App/app/home/home.component.html ***!
   \**************************************************/
@@ -6414,7 +6309,7 @@ webpackJsonp([0],[
 	module.exports = "<div class=\"container\">\r\n    <div class=\"col-lg-12\">\r\n        <h1>Selected Item: {{model.Id}}</h1>\r\n        <form *ngIf=\"active\" (ngSubmit)=\"onSubmit()\" #homeItemForm=\"ngForm\">\r\n\r\n            <input type=\"hidden\" class=\"form-control\" id=\"id\" [(ngModel)]=\"model.Id\" name=\"id\" #id=\"ngModel\">\r\n            <input type=\"hidden\" class=\"form-control\" id=\"deleted\" [(ngModel)]=\"model.Deleted\" name=\"deleted\" #id=\"ngModel\">\r\n\r\n            <div class=\"form-group\">\r\n                <label for=\"name\">Name</label>\r\n                <input type=\"text\" class=\"form-control\" id=\"name\" required  (keyup)=\"createCommand($event)\" [(ngModel)]=\"model.Name\" name=\"name\" #name=\"ngModel\">\r\n                <div [hidden]=\"name.valid || name.pristine\" class=\"alert alert-danger\">\r\n                    Name is required\r\n                </div>\r\n            </div>\r\n\r\n            <button type=\"button\" class=\"btn btn-default\" (click)=\"newHomeData()\">New Home</button>\r\n\r\n        </form>\r\n    </div>\r\n</div>\r\n\r\n<hr />\r\n\r\n<div>\r\n\r\n    <table class=\"table\">\r\n        <thead>\r\n            <tr>\r\n                <th>Id</th>\r\n                <th>Name</th>\r\n                <th></th>\r\n                <th></th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr style=\"height:20px;\" *ngFor=\"let homeItem of HomeDataItems\">\r\n                <td>{{homeItem.Id}}</td>\r\n                <td>{{homeItem.Name}}</td>\r\n                <td>\r\n                    <button class=\"btn btn-default\" (click)=\"Edit(homeItem)\">Edit</button>\r\n                </td>\r\n                <td>\r\n                    <button class=\"btn btn-default\" (click)=\"Delete(homeItem)\">Delete</button>\r\n                </td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n\r\n</div>\r\n\r\n"
 
 /***/ },
-/* 90 */
+/* 95 */
 /*!**************************************************!*\
   !*** ./angular2App/app/about/about.component.ts ***!
   \**************************************************/
@@ -6431,20 +6326,20 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(/*! @angular/core */ 3);
-	var AboutData_1 = __webpack_require__(/*! ./AboutData */ 91);
-	var commandService_1 = __webpack_require__(/*! ../services/commandService */ 57);
-	var commandDto_1 = __webpack_require__(/*! ../services/commandDto */ 67);
-	var aboutDataService_1 = __webpack_require__(/*! ../services/aboutDataService */ 92);
+	var AboutData_1 = __webpack_require__(/*! ./AboutData */ 96);
+	var commandService_1 = __webpack_require__(/*! ../services/commandService */ 59);
+	var commandDto_1 = __webpack_require__(/*! ../services/commandDto */ 73);
+	var aboutDataService_1 = __webpack_require__(/*! ../services/aboutDataService */ 97);
 	var Subject_1 = __webpack_require__(/*! rxjs/Subject */ 4);
-	__webpack_require__(/*! rxjs/add/observable/of */ 69);
-	__webpack_require__(/*! rxjs/add/observable/throw */ 70);
-	__webpack_require__(/*! rxjs/add/operator/catch */ 73);
-	__webpack_require__(/*! rxjs/add/operator/debounceTime */ 74);
-	__webpack_require__(/*! rxjs/add/operator/distinctUntilChanged */ 81);
-	__webpack_require__(/*! rxjs/add/operator/do */ 83);
-	__webpack_require__(/*! rxjs/add/operator/filter */ 85);
-	__webpack_require__(/*! rxjs/add/operator/map */ 59);
-	__webpack_require__(/*! rxjs/add/operator/switchMap */ 87);
+	__webpack_require__(/*! rxjs/add/observable/of */ 75);
+	__webpack_require__(/*! rxjs/add/observable/throw */ 76);
+	__webpack_require__(/*! rxjs/add/operator/catch */ 79);
+	__webpack_require__(/*! rxjs/add/operator/debounceTime */ 80);
+	__webpack_require__(/*! rxjs/add/operator/distinctUntilChanged */ 87);
+	__webpack_require__(/*! rxjs/add/operator/do */ 89);
+	__webpack_require__(/*! rxjs/add/operator/filter */ 91);
+	__webpack_require__(/*! rxjs/add/operator/map */ 61);
+	__webpack_require__(/*! rxjs/add/operator/switchMap */ 92);
 	var AboutComponent = (function () {
 	    function AboutComponent(_commandService, _aboutDataService) {
 	        var _this = this;
@@ -6528,7 +6423,7 @@ webpackJsonp([0],[
 	    AboutComponent = __decorate([
 	        core_1.Component({
 	            selector: 'about',
-	            template: __webpack_require__(/*! ./about.component.html */ 93)
+	            template: __webpack_require__(/*! ./about.component.html */ 98)
 	        }), 
 	        __metadata('design:paramtypes', [commandService_1.CommandService, aboutDataService_1.AboutDataService])
 	    ], AboutComponent);
@@ -6538,7 +6433,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 91 */
+/* 96 */
 /*!********************************************!*\
   !*** ./angular2App/app/about/AboutData.ts ***!
   \********************************************/
@@ -6557,7 +6452,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 92 */
+/* 97 */
 /*!******************************************************!*\
   !*** ./angular2App/app/services/aboutDataService.ts ***!
   \******************************************************/
@@ -6574,9 +6469,9 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(/*! @angular/core */ 3);
-	var http_1 = __webpack_require__(/*! @angular/http */ 58);
-	__webpack_require__(/*! rxjs/add/operator/map */ 59);
-	var app_constants_1 = __webpack_require__(/*! ../app.constants */ 60);
+	var http_1 = __webpack_require__(/*! @angular/http */ 60);
+	__webpack_require__(/*! rxjs/add/operator/map */ 61);
+	var app_constants_1 = __webpack_require__(/*! ../app.constants */ 62);
 	var AboutDataService = (function () {
 	    function AboutDataService(_http, _configuration) {
 	        var _this = this;
@@ -6600,7 +6495,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 93 */
+/* 98 */
 /*!****************************************************!*\
   !*** ./angular2App/app/about/about.component.html ***!
   \****************************************************/
@@ -6609,7 +6504,7 @@ webpackJsonp([0],[
 	module.exports = "<div class=\"container\">\r\n    <div class=\"col-lg-12\">\r\n        <h1>Selected Item: {{model.Id}}</h1>\r\n        <form *ngIf=\"active\" (ngSubmit)=\"onSubmit()\" #aboutItemForm=\"ngForm\">\r\n\r\n            <input type=\"hidden\" class=\"form-control\" id=\"id\" [(ngModel)]=\"model.Id\" name=\"id\" #id=\"ngModel\">\r\n            <input type=\"hidden\" class=\"form-control\" id=\"deleted\" [(ngModel)]=\"model.Deleted\" name=\"deleted\" #id=\"ngModel\">\r\n\r\n            <div class=\"form-group\">\r\n                <label for=\"name\">Description</label>\r\n                <input type=\"text\" class=\"form-control\" id=\"description\" required (keyup)=\"createCommand($event)\" [(ngModel)]=\"model.Description\" name=\"description\" #description=\"ngModel\">\r\n                <div [hidden]=\"description.valid || description.pristine\" class=\"alert alert-danger\">\r\n                    Description is required\r\n                </div>\r\n            </div>\r\n\r\n            <!--<button type=\"submit\" class=\"btn btn-default\" [disabled]=\"!aboutItemForm.form.valid\">Submit</button>-->\r\n            <button type=\"button\" class=\"btn btn-default\" (click)=\"newAboutData()\">New About</button>\r\n\r\n        </form>\r\n    </div>\r\n</div>\r\n\r\n<hr />\r\n\r\n<div>\r\n    <table class=\"table\">\r\n            <thead>\r\n                <tr>\r\n                    <th>Id</th>\r\n                    <th>Description</th>\r\n                    <th></th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr style=\"height:20px;\" *ngFor=\"let aboutItem of AboutDataItems\">\r\n                    <td>{{aboutItem.Id}}</td>\r\n                    <td>{{aboutItem.Description}}</td>\r\n                    <td>\r\n                        <button class=\"btn btn-default\" (click)=\"Edit(aboutItem)\">Edit</button>\r\n                    </td>\r\n                    <td>\r\n                        <button class=\"btn btn-default\" (click)=\"Delete(aboutItem)\">Delete</button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n\r\n</div>\r\n\r\n"
 
 /***/ },
-/* 94 */
+/* 99 */
 /*!****************************************************************!*\
   !*** ./angular2App/app/httprequests/httprequests.component.ts ***!
   \****************************************************************/
@@ -6635,7 +6530,7 @@ webpackJsonp([0],[
 	    HttpRequestsComponent = __decorate([
 	        core_1.Component({
 	            selector: 'httprequestscomponent',
-	            template: __webpack_require__(/*! ./httprequests.component.html */ 95)
+	            template: __webpack_require__(/*! ./httprequests.component.html */ 100)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], HttpRequestsComponent);
@@ -6645,7 +6540,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 95 */
+/* 100 */
 /*!******************************************************************!*\
   !*** ./angular2App/app/httprequests/httprequests.component.html ***!
   \******************************************************************/
@@ -6654,7 +6549,7 @@ webpackJsonp([0],[
 	module.exports = "<div class=\"panel-group\">\r\n\r\n    <textarea style=\"height: 600px;\" class=\"col-lg-12\" readonly>\r\n        http://localhost:5000/api/command/execute\r\n        User-Agent: Fiddler\r\n        Host: localhost:5000\r\n        Content-Type: application/json\r\n\r\n        {\r\n        \"commandType\":\"ADD\",\r\n        \"payloadType\":\"ABOUT\",\r\n        \"payload\":\r\n        {\r\n        \"Id\":0,\r\n        \"Description\":\"something from the about form\",\r\n        \"Deleted\":false\r\n        },\r\n        \"actualClientRoute\":\"http://damienbod.com\"\r\n        }\r\n\r\n        ------------------------------------------------------\r\n\r\n        http://localhost:5000/api/command/undo\r\n\r\n        ------------------------------------------------------\r\n\r\n        http://localhost:5000/api/command/redo\r\n\r\n        ------------------------------------------------------\r\n\r\n        http://localhost:5000/api/command/execute\r\n        User-Agent: Fiddler\r\n        Host: localhost:5000\r\n        Content-Type: application/json\r\n\r\n        {\r\n        \"commandType\":\"ADD\",\r\n        \"payloadType\":\"HOME\",\r\n        \"payload\":\r\n        {\r\n        \"Id\":0,\r\n        \"Description\":\"A lovely home object\",\r\n        \"Deleted\":false\r\n        },\r\n        \"actualClientRoute\":\"http://damienbod.com\"\r\n        }\r\n\r\n        ------------------------------------------------------\r\n\r\n        http://localhost:5000/api/command/execute\r\n        User-Agent: Fiddler\r\n        Host: localhost:5000\r\n        Content-Type: application/json\r\n\r\n        {\r\n        \"commandType\":\"DELETE\",\r\n        \"payloadType\":\"ABOUT\",\r\n        \"payload\":\r\n        {\r\n        \"Id\":1,\r\n        \"Description\":\"something from the about form\",\r\n        \"Deleted\":false\r\n        },\r\n        \"actualClientRoute\":\"http://damienbod.com\"\r\n        }\r\n\r\n        ------------------------------------------------------\r\n\r\n    </textarea>\r\n</div>"
 
 /***/ },
-/* 96 */
+/* 101 */
 /*!********************************************************!*\
   !*** ./angular2App/app/commands/commands.component.ts ***!
   \********************************************************/
@@ -6671,7 +6566,7 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(/*! @angular/core */ 3);
-	var commandService_1 = __webpack_require__(/*! ../services/commandService */ 57);
+	var commandService_1 = __webpack_require__(/*! ../services/commandService */ 59);
 	var CommandsComponent = (function () {
 	    function CommandsComponent(_commandService) {
 	        this._commandService = _commandService;
@@ -6692,7 +6587,7 @@ webpackJsonp([0],[
 	    CommandsComponent = __decorate([
 	        core_1.Component({
 	            selector: 'commandscomponent',
-	            template: __webpack_require__(/*! ./commands.component.html */ 97)
+	            template: __webpack_require__(/*! ./commands.component.html */ 102)
 	        }), 
 	        __metadata('design:paramtypes', [commandService_1.CommandService])
 	    ], CommandsComponent);
@@ -6702,7 +6597,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 97 */
+/* 102 */
 /*!**********************************************************!*\
   !*** ./angular2App/app/commands/commands.component.html ***!
   \**********************************************************/
