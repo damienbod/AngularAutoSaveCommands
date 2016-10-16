@@ -6,7 +6,7 @@ import { CommandDto } from './services/commandDto';
 @Component({
     selector: 'my-app',
     template: require('./app.component.html'),
-    styles: [require('./app.component.scss'), require('../style/app.scss')]
+    styles: [String(require('./app.component.scss')), String(require('../style/app.scss'))]
 })
 
 export class AppComponent {
