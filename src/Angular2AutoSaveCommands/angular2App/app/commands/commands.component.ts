@@ -5,7 +5,7 @@ import { CommandService } from '../services/commandService';
 
 @Component({
     selector: 'commandscomponent',
-    template: require('./commands.component.html')
+    templateUrl: 'commands.component.html'
 })
 
 export class CommandsComponent implements OnInit {

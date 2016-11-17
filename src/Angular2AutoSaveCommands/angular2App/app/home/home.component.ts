@@ -23,7 +23,7 @@ import 'rxjs/add/operator/switchMap';
 
 @Component({
     selector: 'homecomponent',
-    template: require('./home.component.html')
+    templateUrl: 'home.component.html'
 })
 
 export class HomeComponent implements OnInit {
@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
 
     constructor(private _commandService: CommandService, private _homeDataService: HomeDataService) {
         this.message = "Hello from Home";
-        this._commandService.OnUndoRedo.subscribe(item => this.OnUndoRedoRecieved(item));
+        this._commandService.OnUndoRedo.subscribe((item: any) => this.OnUndoRedoRecieved(item));
 
     }
 
@@ -126,7 +126,7 @@ export class HomeComponent implements OnInit {
         setTimeout(() => this.active = true, 0);
     }
 
-    private OnUndoRedoRecieved(payloadType) {
+    private OnUndoRedoRecieved(payloadType: any) {
         if (payloadType === "HOME") {
             this.GetHomeDataItems();
            // this.newHomeData();

@@ -21,7 +21,7 @@ import 'rxjs/add/operator/switchMap';
 
 @Component({
     selector: 'about',
-    template: require('./about.component.html')
+    templateUrl: 'about.component.html'
 })
 
 export class AboutComponent implements OnInit {
@@ -37,7 +37,7 @@ export class AboutComponent implements OnInit {
 
     constructor(private _commandService: CommandService, private _aboutDataService: AboutDataService) {
         this.message = "Hello from About";
-        this._commandService.OnUndoRedo.subscribe(item => this.OnUndoRedoRecieved(item));
+        this._commandService.OnUndoRedo.subscribe((item: any) => this.OnUndoRedoRecieved(item));
     }
 
     ngOnInit() {
@@ -124,7 +124,7 @@ export class AboutComponent implements OnInit {
         setTimeout(() => this.active = true, 0);
     }
     
-    private OnUndoRedoRecieved(payloadType) {
+    private OnUndoRedoRecieved(payloadType: any) {
         if (payloadType === "ABOUT") {
             this.GetAboutDataItems();
             // this.newAboutData();

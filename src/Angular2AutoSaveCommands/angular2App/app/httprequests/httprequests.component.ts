@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 
 @Component({
     selector: 'httprequestscomponent',
-    template: require('./httprequests.component.html')
+    templateUrl: 'httprequests.component.html'
 })
 
 export class HttpRequestsComponent implements OnInit {

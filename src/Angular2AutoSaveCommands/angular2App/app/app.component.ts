@@ -3,10 +3,13 @@ import { Router } from '@angular/router';
 import { CommandService } from './services/commandService';
 import { CommandDto } from './services/commandDto';
 
+// AoT compilation doesn't support 'require'.
+import './app.component.scss';
+import '../style/app.scss';
+
 @Component({
     selector: 'my-app',
-    template: require('./app.component.html'),
-    styles: [String(require('./app.component.scss')), String(require('../style/app.scss'))]
+    templateUrl: 'app.component.html'
 })
 
 export class AppComponent {
