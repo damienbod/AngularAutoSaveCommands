@@ -1,6 +1,6 @@
 # Angular2AutoSaveCommands
 
-<b>2016.12.23:<b/> Updated to Visual Studio 2017 and ASP.NET Core 1.1 
+<b>2016.12.23:</b> Updated to Visual Studio 2017 and ASP.NET Core 1.1 
 
 Articles in this series:
 <ol>	
