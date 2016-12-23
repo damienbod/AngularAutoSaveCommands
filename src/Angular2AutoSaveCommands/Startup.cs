@@ -33,7 +33,7 @@ namespace Angular2AutoSaveCommands
 
 
             services.AddDbContext<DomainModelMsSqlServerContext>(options =>
-                options.UseSqlServer(  sqlConnectionString )
+                options.UseSqlServer(sqlConnectionString)
             );
 
             services.AddScoped<ValidateCommandDtoFilter>();
@@ -52,6 +52,9 @@ namespace Angular2AutoSaveCommands
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             var angularRoutes = new[] {
                  "/home",
                  "/about",
@@ -69,10 +72,6 @@ namespace Angular2AutoSaveCommands
 
                 await next();
             });
-
-            app.UseDefaultFiles();
-
-            app.UseStaticFiles();
 
             app.UseMvc(routes =>
             {

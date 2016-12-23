@@ -1,5 +1,7 @@
 # Angular2AutoSaveCommands
 
+<b>2016.12.23:<b/> Updated to Visual Studio 2017 and ASP.NET Core 1.1 
+
 Articles in this series:
 <ol>	
   <li><a href="https://damienbod.com/2016/08/29/implementing-undo-redo-in-asp-net-core/">Implementing UNDO, REDO in ASP.NET Core</a></li>
