@@ -8,13 +8,13 @@ using Angular2AutoSaveCommands;
 namespace Angular2AutoSaveCommands.Migrations
 {
     [DbContext(typeof(DomainModelMsSqlServerContext))]
-    [Migration("20160826200226_CommandsAutoSave")]
+    [Migration("20161223085202_CommandsAutoSave")]
     partial class CommandsAutoSave
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
+                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Angular2AutoSaveCommands.Models.AboutData", b =>
