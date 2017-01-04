@@ -1,6 +1,6 @@
 ﻿import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Configuration } from '../app.constants';
 import { CommandDto } from './CommandDto';
@@ -40,7 +40,7 @@ export class CommandService {
     public GetAll = (): Observable<any> => {
         return this._http.get(this.actionUrl).map((response: Response) => <any>response.json());
     }
-    
+
     public UndoRedoUpdate = (payloadType: string) => {
         this.OnUndoRedo.emit(payloadType);
     }

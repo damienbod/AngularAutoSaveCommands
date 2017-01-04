@@ -40,7 +40,6 @@ export class HomeComponent implements OnInit {
     constructor(private _commandService: CommandService, private _homeDataService: HomeDataService) {
         this.message = 'Hello from Home';
         this._commandService.OnUndoRedo.subscribe((item: any) => this.OnUndoRedoRecieved(item));
-
     }
 
     ngOnInit() {
@@ -51,11 +50,11 @@ export class HomeComponent implements OnInit {
 
         this.deboucedInput = this.keyDownEvents;
         this.deboucedInput
-            .debounceTime(1000)       
-            .distinctUntilChanged()   
+            .debounceTime(1000)
+            .distinctUntilChanged()
             .subscribe((filter: string) => {
                 this.onSubmit();
-            });
+        });
     }
 
     public GetHomeDataItems() {
@@ -89,15 +88,14 @@ export class HomeComponent implements OnInit {
                 if (this.model.Id === homeItem.Id) {
                     this.newHomeData();
                 }
-            }   
-            );
+            }
+        );
     }
 
     public createCommand(evt: any) {
         this.keyDownEvents.next(this.model.Name);
     }
 
-    // TODO remove the get All request and update the list using the return item
     public onSubmit() {
         if (this.model.Name != '') {
             this.submitted = true;
@@ -116,8 +114,8 @@ export class HomeComponent implements OnInit {
                 },
                 error => console.log(error),
                 () => console.log('Command executed')
-                );
-        }       
+             );
+        }
     }
 
     public newHomeData() {
@@ -132,6 +130,6 @@ export class HomeComponent implements OnInit {
            // this.newHomeData();
             console.log('OnUndoRedoRecieved Home');
             console.log(payloadType);
-        }       
+        }
     }
 }

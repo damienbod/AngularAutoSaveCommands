@@ -14,7 +14,7 @@ export class CommandsComponent implements OnInit {
     public Commands: any[];
 
     constructor(private _commandService: CommandService) {
-        this.message = "Hello from CommandsComponent constructor";
+        this.message = 'Hello from CommandsComponent constructor';
     }
 
     ngOnInit() {

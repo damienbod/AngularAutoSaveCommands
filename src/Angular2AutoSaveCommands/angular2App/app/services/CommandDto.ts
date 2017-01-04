@@ -1,4 +1,10 @@
 ﻿export class CommandDto {
+
+    public CommandType: string;
+    public PayloadType: string;
+    public Payload: any;
+    public ActualClientRoute: string;
+
     constructor(commandType: string, payloadType: string, payload: any, actualClientRoute: string) {
 
         this.CommandType = commandType;
@@ -7,9 +13,4 @@
         this.ActualClientRoute = actualClientRoute;
 
     }
-
-    CommandType: string;
-    PayloadType: string;
-    Payload: any;
-    ActualClientRoute: string;
 }
