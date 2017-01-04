@@ -7,16 +7,12 @@ import { Http } from '@angular/http';
     templateUrl: 'httprequests.component.html'
 })
 
-export class HttpRequestsComponent implements OnInit {
+export class HttpRequestsComponent {
 
     public message: string;
     public values: any[];
 
     constructor() {
-        this.message = "Hello from HttpRequestsComponent constructor";
-    }
-
-    ngOnInit() {
-       
+        this.message = 'Hello from HttpRequestsComponent constructor';
     }
 }

@@ -36,7 +36,7 @@ export class AboutComponent implements OnInit {
     private keyDownEvents = new Subject<string>();
 
     constructor(private _commandService: CommandService, private _aboutDataService: AboutDataService) {
-        this.message = "Hello from About";
+        this.message = 'Hello from About';
         this._commandService.OnUndoRedo.subscribe((item: any) => this.OnUndoRedoRecieved(item));
     }
 
@@ -66,16 +66,15 @@ export class AboutComponent implements OnInit {
                 console.log('AboutDataService:GetAll completed');
             }
         );
-    } 
+    }
 
     public Edit(aboutItem: AboutData) {
         this.model.Description = aboutItem.Description;
         this.model.Id = aboutItem.Id;
     }
 
-    // TODO remove the get All request and update the list using the return item
     public Delete(aboutItem: AboutData) {
-        let myCommand = new CommandDto("DELETE", "ABOUT", aboutItem, "about");
+        let myCommand = new CommandDto('DELETE', 'ABOUT', aboutItem, 'about');
 
         console.log(myCommand);
         this._commandService.Execute(myCommand)
@@ -86,8 +85,8 @@ export class AboutComponent implements OnInit {
                 if (this.model.Id === aboutItem.Id) {
                     this.newAboutData();
                 }
-            }            
-            );
+            }
+         );
     }
 
     public createCommand(evt: any) {
@@ -96,13 +95,13 @@ export class AboutComponent implements OnInit {
 
     // TODO remove the get All request and update the list using the return item
     public onSubmit() {
-        if (this.model.Description != "") {
+        if (this.model.Description != '') {
             this.submitted = true;
 
-            let myCommand = new CommandDto("ADD", "ABOUT", this.model, "about");
+            let myCommand = new CommandDto('ADD', 'ABOUT', this.model, 'about');
 
             if (this.model.Id > 0) {
-                myCommand.CommandType = "UPDATE";
+                myCommand.CommandType = 'UPDATE';
             }
 
             console.log(myCommand);
@@ -123,13 +122,13 @@ export class AboutComponent implements OnInit {
         this.active = false;
         setTimeout(() => this.active = true, 0);
     }
-    
+
     private OnUndoRedoRecieved(payloadType: any) {
-        if (payloadType === "ABOUT") {
+        if (payloadType === 'ABOUT') {
             this.GetAboutDataItems();
             // this.newAboutData();
-            console.log("OnUndoRedoRecieved About");
+            console.log('OnUndoRedoRecieved About');
             console.log(payloadType);
-        } 
+        }
     }
 }

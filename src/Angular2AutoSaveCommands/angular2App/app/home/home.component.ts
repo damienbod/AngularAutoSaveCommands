@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
     private keyDownEvents = new Subject<string>();
 
     constructor(private _commandService: CommandService, private _homeDataService: HomeDataService) {
-        this.message = "Hello from Home";
+        this.message = 'Hello from Home';
         this._commandService.OnUndoRedo.subscribe((item: any) => this.OnUndoRedoRecieved(item));
 
     }
@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit {
 
     // TODO remove the get All request and update the list using the return item
     public Delete(homeItem: HomeData) {
-        let myCommand = new CommandDto("DELETE", "HOME", homeItem, "home");
+        let myCommand = new CommandDto('DELETE', 'HOME', homeItem, 'home');
 
         console.log(myCommand);
         this._commandService.Execute(myCommand)
@@ -99,12 +99,12 @@ export class HomeComponent implements OnInit {
 
     // TODO remove the get All request and update the list using the return item
     public onSubmit() {
-        if (this.model.Name != "") {
+        if (this.model.Name != '') {
             this.submitted = true;
-            let myCommand = new CommandDto("ADD", "HOME", this.model, "home");
+            let myCommand = new CommandDto('ADD', 'HOME', this.model, 'home');
 
             if (this.model.Id > 0) {
-                myCommand.CommandType = "UPDATE";
+                myCommand.CommandType = 'UPDATE';
             }
 
             console.log(myCommand);
@@ -127,10 +127,10 @@ export class HomeComponent implements OnInit {
     }
 
     private OnUndoRedoRecieved(payloadType: any) {
-        if (payloadType === "HOME") {
+        if (payloadType === 'HOME') {
             this.GetHomeDataItems();
            // this.newHomeData();
-            console.log("OnUndoRedoRecieved Home");
+            console.log('OnUndoRedoRecieved Home');
             console.log(payloadType);
         }       
     }
