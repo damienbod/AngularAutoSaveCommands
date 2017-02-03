@@ -11,4 +11,3 @@
         this.Deleted = deleted;
     }
 }
-  
