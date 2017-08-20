@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Text;
-using Angular2AutoSaveCommands.Models;
+﻿using Angular2AutoSaveCommands.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
