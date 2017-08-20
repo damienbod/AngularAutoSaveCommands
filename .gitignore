@@ -38,3 +38,5 @@ Backup
 Backup
 src/Angular2AutoSaveCommands/angular2App/polyfills.js
 src/Angular2AutoSaveCommands/angular2App/vendor.js
+src/Angular2AutoSaveCommands/**/*.js
+src/Angular2AutoSaveCommands/**/*.js.map
