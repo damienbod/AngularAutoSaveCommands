@@ -1,4 +1,4 @@
-﻿using Angular2AutoSaveCommands.Models;
+﻿using AngularAutoSaveCommands.Models;
 
 namespace AngularAutoSaveCommands.Providers
 {

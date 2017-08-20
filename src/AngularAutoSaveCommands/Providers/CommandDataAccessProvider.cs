@@ -1,5 +1,5 @@
 ﻿using System;
-using Angular2AutoSaveCommands.Models;
+using AngularAutoSaveCommands.Models;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 

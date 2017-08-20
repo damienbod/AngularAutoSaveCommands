@@ -2,8 +2,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using Angular2AutoSaveCommands.Models;
-using Angular2AutoSaveCommands.Providers.Commands;
+using AngularAutoSaveCommands.Models;
+using AngularAutoSaveCommands.Providers.Commands;
 using Microsoft.Extensions.Logging;
 
 namespace AngularAutoSaveCommands.Providers

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Angular2AutoSaveCommands.Models;
+using AngularAutoSaveCommands.Models;
 
 namespace AngularAutoSaveCommands.Providers
 {
