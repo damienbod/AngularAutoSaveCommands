@@ -23,17 +23,17 @@ export class CommandService {
     }
 
     public Execute = (command: CommandDto): Observable<CommandDto> => {
-        let url = `${this.actionUrl}execute`;
+        const url = `${this.actionUrl}execute`;
         return this._http.post(url, command, { headers: this.headers }).map(res => res.json());
     }
 
     public Undo = (): Observable<CommandDto> => {
-        let url = `${this.actionUrl}undo`;
+        const url = `${this.actionUrl}undo`;
         return this._http.post(url, '', { headers: this.headers }).map(res => res.json());
     }
 
     public Redo = (): Observable<CommandDto> => {
-        let url = `${this.actionUrl}redo`;
+        const url = `${this.actionUrl}redo`;
         return this._http.post(url, '', { headers: this.headers }).map(res => res.json());
     }
 

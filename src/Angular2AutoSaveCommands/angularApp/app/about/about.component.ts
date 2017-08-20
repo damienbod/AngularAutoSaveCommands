@@ -20,7 +20,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-    selector: 'about',
+    selector: 'app-about-component',
     templateUrl: 'about.component.html'
 })
 
@@ -74,7 +74,7 @@ export class AboutComponent implements OnInit {
     }
 
     public Delete(aboutItem: AboutData) {
-        let myCommand = new CommandDto('DELETE', 'ABOUT', aboutItem, 'about');
+        const myCommand = new CommandDto('DELETE', 'ABOUT', aboutItem, 'about');
 
         console.log(myCommand);
         this._commandService.Execute(myCommand)
@@ -95,10 +95,10 @@ export class AboutComponent implements OnInit {
 
     // TODO remove the get All request and update the list using the return item
     public onSubmit() {
-        if (this.model.Description != '') {
+        if (this.model.Description !== '') {
             this.submitted = true;
 
-            let myCommand = new CommandDto('ADD', 'ABOUT', this.model, 'about');
+            const myCommand = new CommandDto('ADD', 'ABOUT', this.model, 'about');
 
             if (this.model.Id > 0) {
                 myCommand.CommandType = 'UPDATE';

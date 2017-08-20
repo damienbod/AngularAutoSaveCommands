@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 
 @Component({
-    selector: 'httprequestscomponent',
+    selector: 'app-httprequests-component',
     templateUrl: 'httprequests.component.html'
 })
 

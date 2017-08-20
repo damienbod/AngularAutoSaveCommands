@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { CommandService } from '../services/commandService';
 
 @Component({
-    selector: 'commandscomponent',
+    selector: 'app-commands-component',
     templateUrl: 'commands.component.html'
 })
 

@@ -22,7 +22,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-    selector: 'homecomponent',
+    selector: 'app-home-component',
     templateUrl: 'home.component.html'
 })
 
@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit {
 
     // TODO remove the get All request and update the list using the return item
     public Delete(homeItem: HomeData) {
-        let myCommand = new CommandDto('DELETE', 'HOME', homeItem, 'home');
+        const myCommand = new CommandDto('DELETE', 'HOME', homeItem, 'home');
 
         console.log(myCommand);
         this._commandService.Execute(myCommand)
@@ -97,9 +97,9 @@ export class HomeComponent implements OnInit {
     }
 
     public onSubmit() {
-        if (this.model.Name != '') {
+        if (this.model.Name !== '') {
             this.submitted = true;
-            let myCommand = new CommandDto('ADD', 'HOME', this.model, 'home');
+            const myCommand = new CommandDto('ADD', 'HOME', this.model, 'home');
 
             if (this.model.Id > 0) {
                 myCommand.CommandType = 'UPDATE';
