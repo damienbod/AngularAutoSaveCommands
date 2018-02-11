@@ -1,5 +1,7 @@
 # Angular Auto-Save Commands
 
+<b>2018-02-11:</b> Updated to ASP.NET Core All 2.0.5 and Angular 5.2.4
+
 <b>2017-08-19:</b> Updated to ASP.NET Core 2.0 and Angular 4.3.5
 
 <b>2017-02-03:</b> Updated to Angular 2.4.5 and webpack 2.2.1, VS2017 RC3, msbuild3
