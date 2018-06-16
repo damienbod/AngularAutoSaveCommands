@@ -9,17 +9,6 @@ import { AboutDataService } from '../services/aboutDataService';
 import { Observable ,  Subject } from 'rxjs';
 
 
-
-
-// Observable operators
-
-
-
-
-
-
-
-
 @Component({
     selector: 'app-about-component',
     templateUrl: 'about.component.html'
@@ -51,7 +40,7 @@ export class AboutComponent implements OnInit {
         this.deboucedInput.pipe(
             debounceTime(1000),
             distinctUntilChanged(),)
-            .subscribe((filter: string) => {
+            .subscribe(() => {
                 this.onSubmit();
             });
     }
@@ -80,7 +69,7 @@ export class AboutComponent implements OnInit {
         console.log(myCommand);
         this._commandService.Execute(myCommand)
             .subscribe(
-            data => this.GetAboutDataItems(),
+            () => this.GetAboutDataItems(),
             error => console.log(error),
             () => {
                 if (this.model.Id === aboutItem.Id) {
@@ -90,7 +79,7 @@ export class AboutComponent implements OnInit {
          );
     }
 
-    public createCommand(evt: any) {
+    public createCommand() {
         this.keyDownEvents.next(this.model.Description);
     }
 

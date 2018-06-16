@@ -1,6 +1,4 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 import { CommandService } from '../services/commandService';
 
 @Component({
