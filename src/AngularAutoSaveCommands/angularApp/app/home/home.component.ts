@@ -1,7 +1,6 @@
 
 import {distinctUntilChanged, debounceTime} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { Http } from '@angular/http';
 import { HomeData } from './HomeData';
 import { CommandService } from '../services/commandService';
@@ -9,17 +8,6 @@ import { CommandDto } from '../services/commandDto';
 import { HomeDataService } from '../services/homeDataService';
 
 import { Observable ,  Subject } from 'rxjs';
-
-
-
-
-// Observable operators
-
-
-
-
-
-
 
 
 @Component({
