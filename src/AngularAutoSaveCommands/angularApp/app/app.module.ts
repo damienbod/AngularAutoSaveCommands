@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { Configuration } from './app.constants';
 import { routing } from './app.routes';
-import { HttpModule, JsonpModule } from '@angular/http';
 
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
@@ -15,15 +14,15 @@ import { CommandsComponent } from './commands/commands.component';
 import { CommandService } from './services/commandService';
 import { AboutDataService } from './services/aboutDataService';
 import { HomeDataService } from './services/homeDataService';
+import { HttpClientModule } from '@angular/common/http'; 
 
 @NgModule({
     imports: [
         BrowserModule,
         CommonModule,
         FormsModule,
-        routing,
-        HttpModule,
-        JsonpModule
+        HttpClientModule,
+        routing
     ],
     declarations: [
         AppComponent,
