@@ -10,6 +10,7 @@ using AngularAutoSaveCommands.Providers;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 using AngularAutoSaveCommands.ActionFilters;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AngularAutoSaveCommands
 {
@@ -41,7 +42,7 @@ namespace AngularAutoSaveCommands
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-            });
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddScoped<ICommandDataAccessProvider, CommandDataAccessProvider>();
             services.AddScoped<ICommandHandler, CommandHandler>();
