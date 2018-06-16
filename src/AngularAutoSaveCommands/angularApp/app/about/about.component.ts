@@ -1,23 +1,13 @@
+
+import {distinctUntilChanged, debounceTime} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { AboutData } from './AboutData';
 import { CommandService } from '../services/commandService';
 import { CommandDto } from '../services/commandDto';
 import { AboutDataService } from '../services/aboutDataService';
 
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { Observable ,  Subject } from 'rxjs';
 
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/throw';
-
-// Observable operators
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
 
 @Component({
     selector: 'app-about-component',
@@ -47,10 +37,10 @@ export class AboutComponent implements OnInit {
         this.GetAboutDataItems();
 
         this.deboucedInput = this.keyDownEvents;
-        this.deboucedInput
-            .debounceTime(1000)
-            .distinctUntilChanged()
-            .subscribe((filter: string) => {
+        this.deboucedInput.pipe(
+            debounceTime(1000),
+            distinctUntilChanged())
+            .subscribe(() => {
                 this.onSubmit();
             });
     }
@@ -79,7 +69,7 @@ export class AboutComponent implements OnInit {
         console.log(myCommand);
         this._commandService.Execute(myCommand)
             .subscribe(
-            data => this.GetAboutDataItems(),
+            () => this.GetAboutDataItems(),
             error => console.log(error),
             () => {
                 if (this.model.Id === aboutItem.Id) {
@@ -89,7 +79,7 @@ export class AboutComponent implements OnInit {
          );
     }
 
-    public createCommand(evt: any) {
+    public createCommand() {
         this.keyDownEvents.next(this.model.Description);
     }
 

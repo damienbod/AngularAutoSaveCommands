@@ -40,3 +40,4 @@ src/AngularAutoSaveCommands/angular2App/polyfills.js
 src/AngularAutoSaveCommands/angular2App/vendor.js
 src/AngularAutoSaveCommands/**/*.js
 src/AngularAutoSaveCommands/**/*.js.map
+/src/AngularAutoSaveCommands/AngularAutoSaveCommands.csproj.user

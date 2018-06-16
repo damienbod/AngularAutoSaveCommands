@@ -1,25 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Http } from '@angular/http';
 import { HomeData } from './HomeData';
 import { CommandService } from '../services/commandService';
 import { CommandDto } from '../services/commandDto';
 import { HomeDataService } from '../services/homeDataService';
 
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/throw';
-
-// Observable operators
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
+import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { Observable ,  Subject } from 'rxjs';
 
 @Component({
     selector: 'app-home-component',
@@ -49,10 +35,10 @@ export class HomeComponent implements OnInit {
         this.GetHomeDataItems();
 
         this.deboucedInput = this.keyDownEvents;
-        this.deboucedInput
-            .debounceTime(1000)
-            .distinctUntilChanged()
-            .subscribe((filter: string) => {
+        this.deboucedInput.pipe(
+            debounceTime(1000),
+            distinctUntilChanged())
+            .subscribe(() => {
                 this.onSubmit();
         });
     }
@@ -82,7 +68,7 @@ export class HomeComponent implements OnInit {
         console.log(myCommand);
         this._commandService.Execute(myCommand)
             .subscribe(
-            data => this.GetHomeDataItems(),
+            () => this.GetHomeDataItems(),
             error => console.log(error),
             () => {
                 if (this.model.Id === homeItem.Id) {
@@ -92,7 +78,7 @@ export class HomeComponent implements OnInit {
         );
     }
 
-    public createCommand(evt: any) {
+    public createCommand() {
         this.keyDownEvents.next(this.model.Name);
     }
 
