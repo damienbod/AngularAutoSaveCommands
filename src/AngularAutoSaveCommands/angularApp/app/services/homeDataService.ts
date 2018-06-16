@@ -1,25 +1,25 @@
+﻿import { HttpClient, HttpHeaders } from '@angular/common/http';
 ﻿import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+
 import { Configuration } from '../app.constants';
 
 @Injectable()
 export class HomeDataService {
 
     private actionUrl: string;
-    private headers: Headers;
+    private headers: HttpHeaders;
 
-    constructor(private _http: Http, private _configuration: Configuration) {
+    constructor(private http: HttpClient, configuration: Configuration) {
 
-        this.actionUrl = `${_configuration.Server}api/home/`;
+        this.actionUrl = `${configuration.Server}api/home/`;
 
-        this.headers = new Headers();
-        this.headers.append('Content-Type', 'application/json');
-        this.headers.append('Accept', 'application/json');
+        this.headers = new HttpHeaders();
+        this.headers = this.headers.set('Content-Type', 'application/json');
+        this.headers = this.headers.set('Accept', 'application/json');
     }
 
     public GetAll = (): Observable<any> => {
-        return this._http.get(this.actionUrl).map((response: Response) => <any>response.json());
+        return this.http.get<any>(this.actionUrl, { headers: this.headers });
     }
 }

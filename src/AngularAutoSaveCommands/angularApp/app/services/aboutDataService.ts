@@ -1,7 +1,9 @@
-﻿import { Injectable } from '@angular/core';
+
+import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
+
+import { Observable } from 'rxjs';
 import { Configuration } from '../app.constants';
 
 @Injectable()
@@ -20,6 +22,6 @@ export class AboutDataService {
     }
 
     public GetAll = (): Observable<any> => {
-        return this._http.get(this.actionUrl).map((response: Response) => <any>response.json());
+        return this._http.get(this.actionUrl).pipe(map((response: Response) => <any>response.json()));
     }
 }

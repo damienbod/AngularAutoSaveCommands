@@ -1,7 +1,7 @@
+﻿import { HttpClient, HttpHeaders } from '@angular/common/http';
 ﻿import { Injectable, EventEmitter, Output } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+
 import { Configuration } from '../app.constants';
 import { CommandDto } from './CommandDto';
 
@@ -11,34 +11,34 @@ export class CommandService {
     @Output() OnUndoRedo = new EventEmitter<string>();
 
     private actionUrl: string;
-    private headers: Headers;
+    private headers: HttpHeaders;
 
-    constructor(private _http: Http, private _configuration: Configuration) {
+    constructor(private http: HttpClient, configuration: Configuration) {
 
-        this.actionUrl = `${_configuration.Server}api/command/`;
+        this.actionUrl = `${configuration.Server}api/command/`;
 
-        this.headers = new Headers();
-        this.headers.append('Content-Type', 'application/json');
-        this.headers.append('Accept', 'application/json');
+        this.headers = new HttpHeaders();
+        this.headers = this.headers.set('Content-Type', 'application/json');
+        this.headers = this.headers.set('Accept', 'application/json');
     }
 
     public Execute = (command: CommandDto): Observable<CommandDto> => {
         const url = `${this.actionUrl}execute`;
-        return this._http.post(url, command, { headers: this.headers }).map(res => res.json());
+        return this.http.post<CommandDto>(url, command, { headers: this.headers });
     }
 
     public Undo = (): Observable<CommandDto> => {
         const url = `${this.actionUrl}undo`;
-        return this._http.post(url, '', { headers: this.headers }).map(res => res.json());
+        return this.http.post<CommandDto>(url, '', { headers: this.headers });
     }
 
     public Redo = (): Observable<CommandDto> => {
         const url = `${this.actionUrl}redo`;
-        return this._http.post(url, '', { headers: this.headers }).map(res => res.json());
+        return this.http.post<CommandDto>(url, '', { headers: this.headers });
     }
 
     public GetAll = (): Observable<any> => {
-        return this._http.get(this.actionUrl).map((response: Response) => <any>response.json());
+        return this.http.get<any>(this.actionUrl, { headers: this.headers });
     }
 
     public UndoRedoUpdate = (payloadType: string) => {
