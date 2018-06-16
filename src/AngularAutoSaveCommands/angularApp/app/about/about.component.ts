@@ -39,7 +39,7 @@ export class AboutComponent implements OnInit {
         this.deboucedInput = this.keyDownEvents;
         this.deboucedInput.pipe(
             debounceTime(1000),
-            distinctUntilChanged(),)
+            distinctUntilChanged())
             .subscribe(() => {
                 this.onSubmit();
             });
