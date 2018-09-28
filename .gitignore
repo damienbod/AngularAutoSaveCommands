@@ -3,3 +3,6 @@
 /AngularAutoSaveCommands/node_modules/
 /.vs
 /AngularAutoSaveCommands/obj
+/AngularAutoSaveCommands/bin
+/AngularAutoSaveCommands/angularApp/**/*.js.map
+/AngularAutoSaveCommands/angularApp/**/*.js
