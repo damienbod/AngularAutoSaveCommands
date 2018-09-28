@@ -1,3 +1,5 @@
 
 /AngularAutoSaveCommands/wwwroot/
 /AngularAutoSaveCommands/node_modules/
+/.vs
+/AngularAutoSaveCommands/obj
