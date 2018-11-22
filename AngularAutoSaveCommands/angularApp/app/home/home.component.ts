@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     public active = false;
     public HomeDataItems: HomeData[] = [];
 
-    private deboucedInput: Observable<string>;
+    private deboucedInput: Observable<string> | undefined;
     private keyDownEvents = new Subject<string>();
 
     constructor(private _commandService: CommandService, private _homeDataService: HomeDataService) {

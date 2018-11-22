@@ -22,7 +22,7 @@ export class AboutComponent implements OnInit {
     public active = false;
     public AboutDataItems: AboutData[] = [];
 
-    private deboucedInput: Observable<string>;
+    private deboucedInput: Observable<string> | undefined;
     private keyDownEvents = new Subject<string>();
 
     constructor(private _commandService: CommandService, private _aboutDataService: AboutDataService) {
