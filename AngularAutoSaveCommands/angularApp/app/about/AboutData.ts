@@ -1,8 +1,8 @@
 ﻿export class AboutData {
 
-    public Id: number;
-    public Description: string;
-    public Deleted: boolean;
+    public Id = 0;
+    public Description = '';
+    public Deleted = false;
 
     constructor(id: number, description: string, deleted: boolean) {
 

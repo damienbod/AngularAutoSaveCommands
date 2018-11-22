@@ -16,11 +16,11 @@ import { Observable ,  Subject } from 'rxjs';
 
 export class AboutComponent implements OnInit {
 
-    public message: string;
-    public model: AboutData;
-    public submitted: boolean;
-    public active: boolean;
-    public AboutDataItems: AboutData[];
+    public message = '';
+    public model: AboutData = { Id: 0, Description: '', Deleted: false };
+    public submitted = false;
+    public active = false;
+    public AboutDataItems: AboutData[] = [];
 
     private deboucedInput: Observable<string>;
     private keyDownEvents = new Subject<string>();

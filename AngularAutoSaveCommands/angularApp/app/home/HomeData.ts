@@ -1,8 +1,8 @@
 ﻿export class HomeData {
 
-    public Id: number;
-    public Name: string;
-    public Deleted: boolean;
+    public Id = 0;
+    public Name = '';
+    public Deleted = false;
 
     constructor(id: number, name: string, deleted: boolean) {
 
