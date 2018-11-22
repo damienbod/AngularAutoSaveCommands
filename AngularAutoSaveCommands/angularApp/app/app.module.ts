@@ -14,7 +14,7 @@ import { CommandsComponent } from './commands/commands.component';
 import { CommandService } from './services/commandService';
 import { AboutDataService } from './services/aboutDataService';
 import { HomeDataService } from './services/homeDataService';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports: [

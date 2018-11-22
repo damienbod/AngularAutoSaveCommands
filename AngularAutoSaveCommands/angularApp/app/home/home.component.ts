@@ -15,12 +15,12 @@ import { Observable ,  Subject } from 'rxjs';
 export class HomeComponent implements OnInit {
 
     public message: string;
-    public model: HomeData;
-    public submitted: boolean;
-    public active: boolean;
-    public HomeDataItems: HomeData[];
+    public model: HomeData = { Id: 0, Name: '', Deleted: false };
+    public submitted = false;
+    public active = false;
+    public HomeDataItems: HomeData[] = [];
 
-    private deboucedInput: Observable<string>;
+    private deboucedInput: Observable<string> | undefined;
     private keyDownEvents = new Subject<string>();
 
     constructor(private _commandService: CommandService, private _homeDataService: HomeDataService) {

@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 
 export class HttpRequestsComponent {
 
-    public message: string;
-    public values: any[];
+    public message = '';
+    public values: any[] = [];
 
     constructor() {
         this.message = 'Hello from HttpRequestsComponent constructor';

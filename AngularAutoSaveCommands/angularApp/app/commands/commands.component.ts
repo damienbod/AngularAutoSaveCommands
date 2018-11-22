@@ -9,7 +9,7 @@ import { CommandService } from '../services/commandService';
 export class CommandsComponent implements OnInit {
 
     public message: string;
-    public Commands: any[];
+    public Commands: any[] = [];
 
     constructor(private _commandService: CommandService) {
         this.message = 'Hello from CommandsComponent constructor';

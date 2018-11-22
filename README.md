@@ -10,6 +10,8 @@ Articles in this series:
 
 ## History
 
+<b>2018-11-22:</b> Updated to Angular 7.1.0, nuget packages
+
 <b>2018-09-28:</b> Updated to Angular 6.1.9, ,NET 2.1.4
 
 <b>2018-06-16:</b> Updated to Angular 6.0.5
