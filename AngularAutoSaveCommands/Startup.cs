@@ -2,60 +2,47 @@
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using AngularAutoSaveCommands.Providers;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 using AngularAutoSaveCommands.ActionFilters;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AngularAutoSaveCommands
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             var sqlConnectionString = Configuration.GetConnectionString("DataAccessMsSqlServerProvider");
-
 
             services.AddDbContext<DomainModelMsSqlServerContext>(options =>
                 options.UseSqlServer(sqlConnectionString)
             );
 
             services.AddScoped<ValidateCommandDtoFilter>();
-
-            services.AddMvc().AddJsonOptions(options =>
-            {
-                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddScoped<ICommandDataAccessProvider, CommandDataAccessProvider>();
             services.AddScoped<ICommandHandler, CommandHandler>();
+
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                });
+            services.AddRazorPages();
+
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-
             var angularRoutes = new[] {
                  "/home",
                  "/about",
@@ -74,12 +61,22 @@ namespace AngularAutoSaveCommands
                 await next();
             });
 
-            app.UseMvc(routes =>
+            app.UseStaticFiles();
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+            app.UseCors();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
+
         }
     }
 }
