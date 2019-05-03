@@ -10,6 +10,8 @@ Articles in this series:
 
 ## History
 
+<b>2019-05-03:</b> Updated to Angular 7.2.14, nuget packages, in-process
+
 <b>2019-03-15:</b> Updated to Angular 7.2.9, nuget packages
 
 <b>2019-02-16:</b> Updated to Angular 7.2.4, ASP.NET Core 2.2 nuget packages
