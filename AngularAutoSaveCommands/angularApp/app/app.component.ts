@@ -25,8 +25,8 @@ export class AppComponent {
                 data => resultCommand = data,
                 error => console.log(error),
                 () => {
-                    this._commandService.UndoRedoUpdate(resultCommand.PayloadType);
-                    this.router.navigate(['/' + resultCommand.ActualClientRoute]);
+                    this._commandService.UndoRedoUpdate(resultCommand.payloadType);
+                    this.router.navigate(['/' + resultCommand.actualClientRoute]);
                 }
             );
     }
@@ -39,8 +39,8 @@ export class AppComponent {
                 data => resultCommand = data,
                 error => console.log(error),
                 () => {
-                    this._commandService.UndoRedoUpdate(resultCommand.PayloadType);
-                    this.router.navigate(['/' + resultCommand.ActualClientRoute]);
+                    this._commandService.UndoRedoUpdate(resultCommand.payloadType);
+                    this.router.navigate(['/' + resultCommand.actualClientRoute]);
                 }
             );
     }

@@ -1,14 +1,14 @@
 <div class="container">
     <div class="col-lg-12">
-        <h1>Selected Item: {{model.Id}}</h1>
+        <h1>Selected Item: {{model.id}}</h1>
         <form *ngIf="active" (ngSubmit)="onSubmit()" #aboutItemForm="ngForm">
 
-            <input type="hidden" class="form-control" id="id" [(ngModel)]="model.Id" name="id" #id="ngModel">
-            <input type="hidden" class="form-control" id="deleted" [(ngModel)]="model.Deleted" name="deleted" #id="ngModel">
+            <input type="hidden" class="form-control" id="id" [(ngModel)]="model.id" name="id" #id="ngModel">
+            <input type="hidden" class="form-control" id="deleted" [(ngModel)]="model.deleted" name="deleted" #id="ngModel">
 
             <div class="form-group">
                 <label for="name">Description</label>
-                <input type="text" class="form-control" id="description" required (keyup)="createCommand($event)" [(ngModel)]="model.Description" name="description" #description="ngModel">
+                <input type="text" class="form-control" id="description" required (keyup)="createCommand($event)" [(ngModel)]="model.description" name="description" #description="ngModel">
                 <div [hidden]="description.valid || description.pristine" class="alert alert-danger">
                     Description is required
                 </div>
@@ -35,8 +35,8 @@
             </thead>
             <tbody>
                 <tr style="height:20px;" *ngFor="let aboutItem of AboutDataItems">
-                    <td>{{aboutItem.Id}}</td>
-                    <td>{{aboutItem.Description}}</td>
+                    <td>{{aboutItem.id}}</td>
+                    <td>{{aboutItem.description}}</td>
                     <td>
                         <button class="btn btn-default" (click)="Edit(aboutItem)">Edit</button>
                     </td>

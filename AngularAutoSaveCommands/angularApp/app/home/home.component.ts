@@ -15,7 +15,7 @@ import { Observable ,  Subject } from 'rxjs';
 export class HomeComponent implements OnInit {
 
     public message: string;
-    public model: HomeData = { Id: 0, Name: '', Deleted: false };
+    public model: HomeData = { id: 0, name: '', deleted: false };
     public submitted = false;
     public active = false;
     public HomeDataItems: HomeData[] = [];
@@ -57,8 +57,8 @@ export class HomeComponent implements OnInit {
     }
 
     public Edit(aboutItem: HomeData) {
-        this.model.Name = aboutItem.Name;
-        this.model.Id = aboutItem.Id;
+        this.model.name = aboutItem.name;
+        this.model.id = aboutItem.id;
     }
 
     // TODO remove the get All request and update the list using the return item
@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
             () => this.GetHomeDataItems(),
             error => console.log(error),
             () => {
-                if (this.model.Id === homeItem.Id) {
+                if (this.model.id === homeItem.id) {
                     this.newHomeData();
                 }
             }
@@ -79,23 +79,23 @@ export class HomeComponent implements OnInit {
     }
 
     public createCommand() {
-        this.keyDownEvents.next(this.model.Name);
+        this.keyDownEvents.next(this.model.name);
     }
 
     public onSubmit() {
-        if (this.model.Name !== '') {
+        if (this.model.name !== '') {
             this.submitted = true;
             const myCommand = new CommandDto('ADD', 'HOME', this.model, 'home');
 
-            if (this.model.Id > 0) {
-                myCommand.CommandType = 'UPDATE';
+            if (this.model.id > 0) {
+                myCommand.commandType = 'UPDATE';
             }
 
             console.log(myCommand);
             this._commandService.Execute(myCommand)
                 .subscribe(
                 data => {
-                    this.model.Id = data.Payload.Id;
+                    this.model.id = data.payload.id;
                     this.GetHomeDataItems();
                 },
                 error => console.log(error),

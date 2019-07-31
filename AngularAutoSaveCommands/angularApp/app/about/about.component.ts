@@ -17,7 +17,7 @@ import { Observable ,  Subject } from 'rxjs';
 export class AboutComponent implements OnInit {
 
     public message = '';
-    public model: AboutData = { Id: 0, Description: '', Deleted: false };
+    public model: AboutData = { id: 0, description: '', deleted: false };
     public submitted = false;
     public active = false;
     public AboutDataItems: AboutData[] = [];
@@ -59,8 +59,8 @@ export class AboutComponent implements OnInit {
     }
 
     public Edit(aboutItem: AboutData) {
-        this.model.Description = aboutItem.Description;
-        this.model.Id = aboutItem.Id;
+        this.model.description = aboutItem.description;
+        this.model.id = aboutItem.id;
     }
 
     public Delete(aboutItem: AboutData) {
@@ -72,7 +72,7 @@ export class AboutComponent implements OnInit {
             () => this.GetAboutDataItems(),
             error => console.log(error),
             () => {
-                if (this.model.Id === aboutItem.Id) {
+                if (this.model.id === aboutItem.id) {
                     this.newAboutData();
                 }
             }
@@ -80,25 +80,25 @@ export class AboutComponent implements OnInit {
     }
 
     public createCommand() {
-        this.keyDownEvents.next(this.model.Description);
+        this.keyDownEvents.next(this.model.description);
     }
 
     // TODO remove the get All request and update the list using the return item
     public onSubmit() {
-        if (this.model.Description !== '') {
+        if (this.model.description !== '') {
             this.submitted = true;
 
             const myCommand = new CommandDto('ADD', 'ABOUT', this.model, 'about');
 
-            if (this.model.Id > 0) {
-                myCommand.CommandType = 'UPDATE';
+            if (this.model.id > 0) {
+                myCommand.commandType = 'UPDATE';
             }
 
             console.log(myCommand);
             this._commandService.Execute(myCommand)
                 .subscribe(
                 data => {
-                    this.model.Id = data.Payload.Id;
+                    this.model.id = data.payload.id;
                     this.GetAboutDataItems();
                 },
                 error => console.log(error),
