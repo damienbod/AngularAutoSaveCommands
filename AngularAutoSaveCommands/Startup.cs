@@ -32,12 +32,25 @@ namespace AngularAutoSaveCommands
             services.AddScoped<ICommandDataAccessProvider, CommandDataAccessProvider>();
             services.AddScoped<ICommandHandler, CommandHandler>();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder
+                            .AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                });
-            services.AddRazorPages();
+                }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+				
+            services.AddRazorPages().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
         }
 
@@ -61,13 +74,12 @@ namespace AngularAutoSaveCommands
                 await next();
             });
 
+            app.UseCors("AllowAllOrigins");
+
+            app.UseDefaultFiles();
             app.UseStaticFiles();
-            app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseAuthorization();
-            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {
