@@ -45,11 +45,6 @@ namespace AngularAutoSaveCommands
                     });
             });
 
-            services.AddMvc()
-                .AddNewtonsoftJson(options =>
-                       options.SerializerSettings.ContractResolver = new DefaultContractResolver())
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
                        options.SerializerSettings.ContractResolver = new DefaultContractResolver())
