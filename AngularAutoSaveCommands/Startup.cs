@@ -25,27 +25,38 @@ namespace AngularAutoSaveCommands
         {
             var sqlConnectionString = Configuration.GetConnectionString("DataAccessMsSqlServerProvider");
 
-
             services.AddDbContext<DomainModelMsSqlServerContext>(options =>
                 options.UseSqlServer(sqlConnectionString)
             );
 
             services.AddScoped<ValidateCommandDtoFilter>();
-
-            services.AddMvc().AddJsonOptions(options =>
-            {
-                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddScoped<ICommandDataAccessProvider, CommandDataAccessProvider>();
             services.AddScoped<ICommandHandler, CommandHandler>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder
+                            .AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                       options.SerializerSettings.ContractResolver = new DefaultContractResolver())
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+            services.AddRazorPages()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-
             var angularRoutes = new[] {
                  "/home",
                  "/about",
@@ -64,12 +75,21 @@ namespace AngularAutoSaveCommands
                 await next();
             });
 
-            app.UseMvc(routes =>
+            app.UseCors("AllowAllOrigins");
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
+
         }
     }
 }
