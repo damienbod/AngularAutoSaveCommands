@@ -45,10 +45,10 @@ namespace AngularAutoSaveCommands
                     });
             });
 
-            services.AddControllersWithViews()
+            services.AddControllers()
                 .AddNewtonsoftJson(options =>
                 {
-                    options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 				
             services.AddRazorPages().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);

@@ -10,6 +10,8 @@ Articles in this series:
 
 ## History
 
+<b>2019-07-31:</b> Updated to Angular 8.1.3, ASP.NET Core 3.0
+
 <b>2019-05-03:</b> Updated to Angular 7.2.14, nuget packages, in-process
 
 <b>2019-03-15:</b> Updated to Angular 7.2.9, nuget packages
