@@ -1,16 +1,16 @@
 ﻿export class CommandDto {
 
-    public commandType: string;
-    public payloadType: string;
-    public payload: any;
-    public actualClientRoute: string;
+    public CommandType: string;
+    public PayloadType: string;
+    public Payload: any;
+    public ActualClientRoute: string;
 
     constructor(commandType: string, payloadType: string, payload: any, actualClientRoute: string) {
 
-        this.commandType = commandType;
-        this.payloadType = payloadType;
-        this.payload = payload;
-        this.actualClientRoute = actualClientRoute;
+        this.CommandType = commandType;
+        this.PayloadType = payloadType;
+        this.Payload = payload;
+        this.ActualClientRoute = actualClientRoute;
 
     }
 }

@@ -1,13 +1,13 @@
 ﻿export class AboutData {
 
-    public id = 0;
-    public description = '';
-    public deleted = false;
+    public Id = 0;
+    public Description = '';
+    public Deleted = false;
 
     constructor(id: number, description: string, deleted: boolean) {
 
-        this.id = id;
-        this.description = description;
-        this.deleted = deleted;
+        this.Id = id;
+        this.Description = description;
+        this.Deleted = deleted;
     }
 }

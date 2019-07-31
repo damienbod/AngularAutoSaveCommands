@@ -1,14 +1,14 @@
 <div class="container">
     <div class="col-lg-12">
-        <h1>Selected Item: {{model.id}}</h1>
+        <h1>Selected Item: {{model.Id}}</h1>
         <form *ngIf="active" (ngSubmit)="onSubmit()" #homeItemForm="ngForm">
 
-            <input type="hidden" class="form-control" id="id" [(ngModel)]="model.id" name="id" #id="ngModel">
-            <input type="hidden" class="form-control" id="deleted" [(ngModel)]="model.deleted" name="deleted" #id="ngModel">
+            <input type="hidden" class="form-control" id="id" [(ngModel)]="model.Id" name="id" #id="ngModel">
+            <input type="hidden" class="form-control" id="deleted" [(ngModel)]="model.Deleted" name="deleted" #id="ngModel">
 
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" required  (keyup)="createCommand($event)" [(ngModel)]="model.name" name="name" #name="ngModel">
+                <input type="text" class="form-control" id="name" required  (keyup)="createCommand($event)" [(ngModel)]="model.Name" name="name" #name="ngModel">
                 <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
                     Name is required
                 </div>
@@ -35,8 +35,8 @@
         </thead>
         <tbody>
             <tr style="height:20px;" *ngFor="let homeItem of HomeDataItems">
-                <td>{{homeItem.id}}</td>
-                <td>{{homeItem.name}}</td>
+                <td>{{homeItem.Id}}</td>
+                <td>{{homeItem.Name}}</td>
                 <td>
                     <button class="btn btn-default" (click)="Edit(homeItem)">Edit</button>
                 </td>

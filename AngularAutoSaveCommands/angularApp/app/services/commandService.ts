@@ -24,7 +24,6 @@ export class CommandService {
 
     public Execute = (command: CommandDto): Observable<CommandDto> => {
         const url = `${this.actionUrl}execute`;
-        console.log(command);
         return this.http.post<CommandDto>(url, command, { headers: this.headers });
     }
 

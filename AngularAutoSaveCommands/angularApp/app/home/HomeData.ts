@@ -1,13 +1,13 @@
 ﻿export class HomeData {
 
-    public id = 0;
-    public name = '';
-    public deleted = false;
+    public Id = 0;
+    public Name = '';
+    public Deleted = false;
 
     constructor(id: number, name: string, deleted: boolean) {
 
-        this.id = id;
-        this.name = name;
-        this.deleted = deleted;
+        this.Id = id;
+        this.Name = name;
+        this.Deleted = deleted;
     }
 }
