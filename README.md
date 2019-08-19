@@ -10,7 +10,7 @@ Articles in this series:
 
 ## History
 
-<b>2019-08-19:</b> Updated to ASP.NET Core 3.0 Preview 8
+<b>2019-08-19:</b> Updated to ASP.NET Core 3.0 Preview 8, updating npm packages
 
 <b>2019-07-31:</b> Updated to ASP.NET Core 3.0 Preview 7
 
