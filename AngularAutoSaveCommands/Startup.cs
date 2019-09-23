@@ -49,10 +49,6 @@ namespace AngularAutoSaveCommands
                 .AddNewtonsoftJson(options =>
                        options.SerializerSettings.ContractResolver = new DefaultContractResolver())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
-            services.AddRazorPages()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
         }
 
         public void Configure(IApplicationBuilder app)
@@ -84,12 +80,8 @@ namespace AngularAutoSaveCommands
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
-
-        }
+        } 
     }
 }
