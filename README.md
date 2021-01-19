@@ -10,6 +10,8 @@ Articles in this series:
 
 ## History
 
+<b>2021-01-19:</b> Updated to ASP.NET Core 5, Angular CLI 11.0.9
+
 <b>2019-09-23:</b> Updated to ASP.NET Core 3.0, Angular 8.2.7
 
 <b>2019-09-01:</b> Updated npm packages
