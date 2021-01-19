@@ -1,5 +1,7 @@
 # Angular Auto-Save Commands
 
+[![.NET](https://github.com/damienbod/AngularAutoSaveCommands/workflows/.NET/badge.svg)](https://github.com/damienbod/AngularAutoSaveCommands/actions?query=workflow%3A.NET) 
+
 Articles in this series:
 
 <ol>	
