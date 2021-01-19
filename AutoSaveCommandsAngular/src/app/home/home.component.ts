@@ -88,14 +88,14 @@ export class HomeComponent implements OnInit {
             const myCommand = new CommandDto('ADD', 'HOME', this.model, 'home');
 
             if (this.model.id > 0) {
-                myCommand.CommandType = 'UPDATE';
+                myCommand.commandType = 'UPDATE';
             }
 
             console.log(myCommand);
             this._commandService.Execute(myCommand)
                 .subscribe(
                 data => {
-                    this.model.id = data.Payload.Id;
+                    this.model.id = data.payload.Id;
                     this.GetHomeDataItems();
                 },
                 error => console.log(error),

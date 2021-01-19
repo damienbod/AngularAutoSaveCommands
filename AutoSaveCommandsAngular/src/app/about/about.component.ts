@@ -91,14 +91,14 @@ export class AboutComponent implements OnInit {
             const myCommand = new CommandDto('ADD', 'ABOUT', this.model, 'about');
 
             if (this.model.id > 0) {
-                myCommand.CommandType = 'UPDATE';
+                myCommand.commandType = 'UPDATE';
             }
 
             console.log(myCommand);
             this._commandService.Execute(myCommand)
                 .subscribe(
                 data => {
-                    this.model.id = data.Payload.Id;
+                    this.model.id = data.payload.Id;
                     this.GetAboutDataItems();
                 },
                 error => console.log(error),
