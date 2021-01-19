@@ -26,7 +26,6 @@ namespace AutoSaveCommandsApi
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             var sqlConnectionString = Configuration.GetConnectionString("DataAccessMsSqlServerProvider");
@@ -39,6 +38,21 @@ namespace AutoSaveCommandsApi
             services.AddScoped<ICommandDataAccessProvider, CommandDataAccessProvider>();
             services.AddScoped<ICommandHandler, CommandHandler>();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificCorsUrls",
+                    builder =>
+                    {
+                        builder
+                            .AllowCredentials()
+                            .WithOrigins(
+                                "https://localhost:4200")
+                            .SetIsOriginAllowedToAllowWildcardSubdomains()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -46,7 +60,6 @@ namespace AutoSaveCommandsApi
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -55,6 +68,8 @@ namespace AutoSaveCommandsApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AutoSaveCommandsApi v1"));
             }
+
+            app.UseCors("AllowSpecificCorsUrls");
 
             app.UseHttpsRedirection();
 
